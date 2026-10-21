@@ -11,14 +11,14 @@ Live at <https://lukaporopat.github.io>. Static site for GitHub Pages (no build 
 | `publications.html` | MPECs crediting me (searchable), link to NASA ADS |
 | `gallery.html` | AstroBin images with a lightbox |
 | `faq.html` | Copyright & usage FAQ (all rights reserved) |
-| `cv/Luka_Poropat_CV.pdf` | The CV (add the file here) |
 
 ## Things to update by hand
 
 - **Images:** the research figures live in `assets/images/research/` (`solar.jpg`, `robotic*.jpg`); replace a
   file to change its picture.
-- **Headshot / CV:** replace `assets/images/headshot.jpg` (portrait, about 4:5) and `cv/Luka_Poropat_CV.pdf`
-  to update them.
+- **Headshot:** replace `assets/images/headshot.jpg` (portrait, about 4:5) to update it.
+- **CV:** taken off the site for now (October 2026). To bring it back, add `cv/Luka_Poropat_CV.pdf` again and
+  restore the "CV" links in the menu, under the bio and in the footer (see the Git history).
 
 ## Themes
 
