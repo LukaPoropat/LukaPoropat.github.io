@@ -1,18 +1,18 @@
 {
- "generated": "2026-10-21T10:48:44Z",
+ "generated": "2026-10-21T11:42:03Z",
  "source": "MPEC Watch (sbnmpc.astro.umd.edu/mpecwatch), Minor Planet Center MPECs",
  "name": "L.Poropat",
  "stations_scanned": 391,
  "min_station_mpecs": 150,
  "observer": {
   "rank": 112,
-  "of": 6009,
-  "count": 1125,
+  "of": 6010,
+  "count": 1126,
   "percentile": 98.15,
   "stations": [
    [
     "L01",
-    1123
+    1124
    ],
    [
     "204",
@@ -45,7 +45,7 @@
    {
     "rank": 3,
     "name": "R.Holmes",
-    "count": 18745,
+    "count": 18746,
     "stations": [
      "H21",
      "807",
@@ -112,7 +112,7 @@
    {
     "rank": 10,
     "name": "P.Birtwhistle",
-    "count": 7167,
+    "count": 7168,
     "stations": [
      "J95",
      "932",
@@ -208,7 +208,7 @@
    {
     "rank": 20,
     "name": "F.Losse",
-    "count": 4594,
+    "count": 4595,
     "stations": [
      "I93",
      "958"
@@ -314,7 +314,7 @@
    {
     "rank": 112,
     "name": "L.Poropat",
-    "count": 1125,
+    "count": 1126,
     "stations": [
      "L01",
      "204",
@@ -424,7 +424,7 @@
    {
     "rank": 5,
     "name": "F.C.Shelly",
-    "count": 37592,
+    "count": 37593,
     "stations": [
      "I52",
      "G96",
@@ -474,7 +474,7 @@
    {
     "rank": 10,
     "name": "D.Rankin",
-    "count": 27520,
+    "count": 27521,
     "stations": [
      "I52",
      "G96",
@@ -743,7 +743,7 @@
    {
     "metric": "Follow-up",
     "rank": 3,
-    "of": 988,
+    "of": 991,
     "count": 7434
    },
    {
@@ -767,7 +767,7 @@
    {
     "metric": "Comet follow-up",
     "rank": 1,
-    "of": 614,
+    "of": 620,
     "count": 241
    }
   ],
@@ -776,7 +776,7 @@
     "category": "Top MPEC Contributors",
     "window": "Last 5 years",
     "rank": 7,
-    "count": 3764
+    "count": 3762
    },
    {
     "category": "Top MPEC Contributors",
@@ -788,13 +788,13 @@
     "category": "Top MPEC-ed Follow-up Observatories",
     "window": "Last 1 year",
     "rank": 6,
-    "count": 527
+    "count": 525
    },
    {
     "category": "Top MPEC-ed Follow-up Observatories",
     "window": "Last 5 years",
     "rank": 3,
-    "count": 3552
+    "count": 3550
    },
    {
     "category": "Top MPEC-ed Follow-up Observatories",
