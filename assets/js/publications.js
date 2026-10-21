@@ -16,6 +16,7 @@
 			'PHAg18': 'PHA (H > 18)', 'PHAl18': 'PHA, large (H < 18)', 'Unusual': 'Unusual orbit', 'Comet': 'Comet', '': 'Other' }
 	};
 	var fmt = function (n) { return Number(n).toLocaleString('en-US'); };
+	var safeUrl = function (u) { return /^https:\/\//.test(u || '') ? u : 'https://www.minorplanetcenter.net/mpec/RecentMPECs.html'; };
 	var niceDate = function (d) { var p = d.split('-'); return T.date(p[0], T.months[+p[1] - 1], +p[2]); };
 	function el(tag, attrs, text) {
 		var e = document.createElement(tag);
@@ -55,7 +56,7 @@
 		picks.sort(function (a, b) { return interstellar(b) - interstellar(a); });  // interstellar first, then newest
 		picks.slice(0, 40).forEach(function (m) {
 			var p = el('p', { class: 'ds-ref' });
-			var a = el('a', { href: m.u, target: '_blank', rel: 'noopener' });
+			var a = el('a', { href: safeUrl(m.u), target: '_blank', rel: 'noopener' });
 			var icon = el('i', { class: interstellar(m) ? 'fa-solid fa-star' : m.ty === 'Comet' ? 'fa-solid fa-meteor' : 'fa-solid fa-triangle-exclamation', 'aria-hidden': 'true' });
 			a.append(icon, el('strong', null, 'MPEC ' + m.id), document.createTextNode(': ' + prettyTitle(m.t) + '. ' + T.circular + ', ' + niceDate(m.d) + '.'));
 			p.appendChild(a);
@@ -82,7 +83,7 @@
 			tbody.replaceChildren();
 			list.slice(state.page * per, state.page * per + per).forEach(function (m) {
 				var tr = el('tr');
-				var c = el('td'); c.appendChild(el('a', { href: m.u, target: '_blank', rel: 'noopener' }, 'MPEC ' + m.id));
+				var c = el('td'); c.appendChild(el('a', { href: safeUrl(m.u), target: '_blank', rel: 'noopener' }, 'MPEC ' + m.id));
 				var o = el('td', null, prettyTitle(m.t));
 				if (m.ff) { o.append(' '); o.appendChild(el('span', { class: 'badge-ff', title: T.badgeTitle }, T.badge)); }
 				tr.append(c, o, el('td', null, m.d), el('td', null, typeName(m.ty)));

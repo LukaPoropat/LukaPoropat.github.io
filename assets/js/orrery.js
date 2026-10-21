@@ -1,11 +1,12 @@
 // Interactive 3D map of every asteroid and comet observed (data/observations.json).
 // Orbits come from JPL SBDB osculating elements; positions are propagated with Kepler's
 // equation (two-body, good to a few degrees over years, which is plenty for a map).
-import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { Line2 } from 'three/addons/lines/Line2.js';
-import { LineMaterial } from 'three/addons/lines/LineMaterial.js';
-import { LineGeometry } from 'three/addons/lines/LineGeometry.js';
+// Three.js r170 is self-hosted in assets/vendor/three (from the npm package, integrity-checked).
+import * as THREE from '../vendor/three/three.module.min.js';
+import { OrbitControls } from '../vendor/three/addons/controls/OrbitControls.js';
+import { Line2 } from '../vendor/three/addons/lines/Line2.js';
+import { LineMaterial } from '../vendor/three/addons/lines/LineMaterial.js';
+import { LineGeometry } from '../vendor/three/addons/lines/LineGeometry.js';
 
 const DEG = Math.PI / 180;
 const TAU = Math.PI * 2;

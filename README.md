@@ -54,6 +54,19 @@ the new data and publishes the site, so the statistics, the 3D map and the rank 
 own. It also publishes the site after every push to `main`, and you can start it by hand from the
 *Actions* tab (*Update data and publish → Run workflow*).
 
+## Security
+
+- Every page carries a Content-Security-Policy (`<meta http-equiv="Content-Security-Policy">`): scripts may
+  only come from this site and inline scripts are blocked, so keep JavaScript in `assets/js/` files. Adding
+  a new outside source (a font, a stylesheet) means adding its origin to the policy on every page.
+- Three.js (r170) is self-hosted in `assets/vendor/three/`, taken from the npm package (checksum-verified),
+  so no third-party server can change the code that runs on the site. The Font Awesome stylesheet is pinned
+  with a Subresource Integrity hash; Bootstrap's already was.
+- Links read from the data files are only used if they are `https://`.
+- The workflow runs with read-only permissions; only its commit step gets a write token, and the download
+  scripts never see it. The repository only allows GitHub's own actions, and `main` can't be force-pushed
+  or deleted.
+
 ## Preview locally
 
 ```bash
@@ -67,8 +80,8 @@ the browser to re-check every file on each load, so a normal reload always shows
 
 1. Create an empty GitHub repository named `<your-username>.github.io`.
 2. In its *Settings → Pages → Build and deployment*, set *Source* to **GitHub Actions**.
-3. In *Settings → Actions → General → Workflow permissions*, choose *Read and write permissions*
-   so the weekly update can commit the new data.
+3. Leave *Settings → Actions → General → Workflow permissions* at the default (*Read*): the workflow
+   asks for exactly what each job needs (only its final commit step can write).
 4. Push this folder to the `main` branch. The push publishes the site at
    `https://<your-username>.github.io`; from then on it refreshes itself every Monday.
    (If you pushed before step 2, re-run the workflow from the *Actions* tab.)
