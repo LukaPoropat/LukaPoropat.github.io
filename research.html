@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="color-scheme" content="light">
+	<script>try{var q=new URLSearchParams(location.search).get('theme'),s=localStorage.getItem('theme'),t=q||s||'nasa';document.documentElement.setAttribute('data-theme',t);document.documentElement.style.colorScheme=t==='dark'?'dark':'light'}catch(e){}</script>
+	<title>Research - Luka Poropat</title>
+	<meta name="description" content="Research by Luka Poropat at Višnjan Observatory: near-Earth object follow-up and astrometry, solar physics and high-resolution solar imaging with daytime seeing measurements, and robotic observatory software.">
+	<meta name="author" content="Luka Poropat">
+	<link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Poppins:wght@300;400;450;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer">
+	<link href="assets/css/main.css" rel="stylesheet">
+</head>
+<body>
+	<a class="skip-link" href="#main">Skip to content</a>
+	<header class="ds-header">
+		<div class="container">
+			<nav class="ds-logo" aria-label="Main">
+				<a href="./">Home</a>
+				<a href="research.html" aria-current="page">Research</a>
+				<a href="observations.html">Observations</a>
+				<a href="publications.html">Publications</a>
+				<a href="gallery.html">Gallery</a>
+				<a href="cv/Luka_Poropat_CV.pdf" target="_blank" rel="noopener">CV</a>
+			</nav>
+		</div>
+	</header>
+
+	<main id="main">
+	<section class="ds-projects-section">
+		<div class="container">
+			<h1>Research</h1>
+
+			<!-- NEOs -->
+			<div class="row">
+				<div class="col-12 col-lg-7">
+					<span class="ds-eyebrow">Planetary defence</span>
+					<h3 class="ds-topic">Near-Earth object follow-up &amp; discovery</h3>
+					<p>
+						Most newly found near-Earth objects (NEOs) are seen on just one night by a large survey before they
+						fade or move out of reach. They are posted on the Minor Planet Center's
+						<a href="https://www.minorplanetcenter.net/iau/NEO/toconfirm_tabular.html" target="_blank" rel="noopener">NEO Confirmation Page</a>
+						(NEOCP), and an orbit can only be secured if other observatories measure them again within hours.
+						That is my main job: with the 1.0-m f/2.9 telescope at Tičan (MPC code L01) I recover NEOCP candidates,
+						measure their positions (astrometry) and report them to the Minor Planet Center, often as the first
+						station to confirm a new object. Along the way we also co-discover new NEOs.
+					</p>
+					<p>
+						Since 2017 Višnjan has become one of the most productive follow-up stations in the world. According to
+						<a href="https://sbnmpc.astro.umd.edu/mpecwatch/byStation/station_L01.html" target="_blank" rel="noopener">MPEC Watch</a>,
+						in <span data-bind="rank.fu.year" data-raw>2025</span> L01 was
+						<strong data-bind="rank.fu.rank" data-ordinal>5th</strong> in the world for discovery follow-up circulars and
+						<strong data-bind="rank.fu.europe_rank" data-ordinal>1st</strong> in Europe. My own observations appear in
+						<strong data-bind="rank.observer.count">1,125</strong> Minor Planet Electronic Circulars, placing me
+						<strong>#<span data-bind="rank.observer.rank">112</span></strong> among
+						<span data-bind="rank.observer.of">6,009</span> individual observers credited in MPECs since 1993.
+					</p>
+					<p>
+						Among the <span data-bind="obs.summary.objects">1,118</span> objects I have observed are
+						<span data-bind="obs.summary.objects_by_category.comet">31</span> comets, including the interstellar comet
+						<strong>3I/ATLAS</strong>, which we measured on the night of its discovery
+						(1 July 2025, <a href="https://www.minorplanetcenter.net/mpec/K25/K25N12.html" target="_blank" rel="noopener">MPEC 2025-N12</a>),
+						<span data-bind="obs.summary.objects_by_category.pha">13</span> potentially hazardous asteroids, and
+						metre-sized bodies such as 2025 PU1 (H = 31.4). Every one of them is plotted in an interactive
+						<a href="observations.html#orrery">3D map of the Solar System</a>, together with statistics and the method
+						behind the ranking.
+					</p>
+				</div>
+				<div class="col-12 col-lg-5">
+					<figure>
+						<a href="observations.html#orrery"><img class="ds-figure-shadow" src="assets/images/orrery-teaser.jpg" alt="3D map of the orbits of all asteroids and comets observed by Luka Poropat" data-optional></a>
+						<figcaption>Orbits of the asteroids and comets I have observed from L01, coloured by type.
+							<a href="observations.html#orrery">Open the interactive map</a>.</figcaption>
+					</figure>
+				</div>
+			</div>
+
+			<!-- Sun -->
+			<div class="row" id="solar">
+				<div class="col-12 col-lg-7">
+					<span class="ds-eyebrow">Solar physics</span>
+					<h3 class="ds-topic">Solar physics &amp; high-resolution solar imaging</h3>
+					<p>
+						During the day the observatory's work continues on the Sun. Image quality depends on the air above
+						the telescope, so I measure the daytime seeing at Višnjan
+						Observatory with a solar scintillation monitor, and I keep developing new ideas for high-resolution
+						imaging, making the most of the remarkably steady air over the northern Adriatic.
+					</p>
+				</div>
+				<div class="col-12 col-lg-5">
+					<figure>
+						<img class="ds-figure-shadow" src="assets/images/research/solar.jpg" alt="Sunspot region imaged at high resolution from Višnjan" data-optional>
+						<figcaption>High-resolution view of a solar active region from Višnjan.</figcaption>
+					</figure>
+				</div>
+			</div>
+
+			<!-- Robotic observatory -->
+			<div class="row" id="robotic">
+				<div class="col-12 col-lg-7">
+					<span class="ds-eyebrow">Robotic observatory commissioning</span>
+					<h3 class="ds-topic">Robotic observatory software</h3>
+					<p>
+						I develop robotic observatory software, and I implement new software and hardware by running a fully
+						remote robotic observatory at Tičan.
+					</p>
+					<p>
+						Since December 2023 I have been responsible for its technical integration and commissioning:
+						integrating, configuring and validating the optical, mechanical, network, storage and control-system
+						components so that they operate together as one robust platform, and developing the procedures for
+						remote operation, fault monitoring, system recovery and safe unattended operation. The software stack
+						spans N.I.N.A., MaxIm DL, Tycho Tracker, PixInsight, Zabbix, Grafana and observatory-specific scripts.
+					</p>
+					<p>A technical review paper describing the observatory is coming soon.</p>
+					<figure>
+						<a href="assets/images/research/robotic-outreach.jpg"><img class="ds-figure-shadow" src="assets/images/research/robotic-outreach.jpg" alt="Luka Poropat presenting the robotic observatory to a crowd of visitors at sunset" loading="lazy"></a>
+						<figcaption>Presenting the robotic observatory to visitors.</figcaption>
+					</figure>
+				</div>
+				<div class="col-12 col-lg-5">
+					<div class="photo-pair">
+						<figure>
+							<a href="assets/images/research/robotic.jpg"><img class="ds-figure-shadow" src="assets/images/research/robotic.jpg" alt="The robotic observatory at Tičan with its roof open and the telescope on its pier" loading="lazy"></a>
+							<figcaption>The fully remote robotic observatory at Tičan, roof open.</figcaption>
+						</figure>
+						<figure>
+							<a href="assets/images/research/robotic-telescope.jpg"><img class="ds-figure-shadow" src="assets/images/research/robotic-telescope.jpg" alt="Close-up of the robotic telescope with its cameras, focuser and control electronics" loading="lazy"></a>
+							<figcaption>The telescope and its instrument package.</figcaption>
+						</figure>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	</main>
+
+	<footer class="ds-footer">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-12 col-md-3 text-start">Email: <a href="mailto:luka@astro.hr">luka@astro.hr</a></div>
+				<div class="col-12 col-md-6">
+					<ul class="ds-social-link">
+						<li><a class="ds-text-icon" href="https://ui.adsabs.harvard.edu/search/q=author%3A%22Poropat%2C%20L%22%20bibstem%3AMPEC&sort=date%20desc%2C%20bibcode%20desc" aria-label="NASA ADS" target="_blank" rel="noopener">NASA ADS</a></li>
+						<li><a class="ds-text-icon" href="cv/Luka_Poropat_CV.pdf" aria-label="CV" target="_blank" rel="noopener">CV</a></li>
+						<li><a href="https://instagram.com/luka.poropat" aria-label="Instagram" target="_blank" rel="noopener"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
+						<li><a href="https://www.flickr.com/photos/204693295@N06/" data-social="flickr" aria-label="Flickr" target="_blank" rel="noopener"><i class="fa-brands fa-flickr" aria-hidden="true"></i></a></li>
+						<li><a href="https://app.astrobin.com/u/AstroLux" aria-label="AstroBin" target="_blank" rel="noopener"><i class="fa-solid fa-camera-retro" aria-hidden="true"></i></a></li>
+					</ul>
+					<p class="copy">© <span data-year>2026</span> Luka Poropat. All rights reserved. · <a href="faq.html">Copyright &amp; usage FAQ</a></p>
+				</div>
+				<div class="col-12 col-md-3 text-end">
+					Observatory: <a href="https://www.google.com/maps/search/?api=1&query=Vi%C5%A1njan%20Observatory%20Ti%C4%8Dan" target="_blank" rel="noopener">Višnjan Observatory<br>Tičan, Istria, Croatia</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<script src="assets/js/site.js" defer></script>
+</body>
+</html>
