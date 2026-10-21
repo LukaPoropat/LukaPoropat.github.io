@@ -13,10 +13,10 @@ Live at <https://lukaporopat.github.io>. Static site for GitHub Pages (no build 
 | `faq.html` | Copyright & usage FAQ (all rights reserved) |
 | `cv/Luka_Poropat_CV.pdf` | The CV (add the file here) |
 
-## Things to add by hand
+## Things to update by hand
 
-- **Optional figure:** `assets/images/research/solar.jpg` (a solar image) appears in the solar section once
-  added; until then it stays hidden.
+- **Images:** the research figures live in `assets/images/research/` (`solar.jpg`, `robotic*.jpg`); replace a
+  file to change its picture.
 - **Headshot / CV:** replace `assets/images/headshot.jpg` (portrait, about 4:5) and `cv/Luka_Poropat_CV.pdf`
   to update them.
 
