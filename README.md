@@ -1,6 +1,6 @@
 # Luka Poropat — personal website
 
-Live at <https://astrolp-vo.github.io>. Static site for GitHub Pages (no build step), styled after
+Live at <https://lukaporopat.github.io>. Static site for GitHub Pages (no build step), styled after
 [ia-chow.github.io](https://ia-chow.github.io/).
 
 | Page | What's on it |
