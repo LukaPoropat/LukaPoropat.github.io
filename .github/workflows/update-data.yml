@@ -85,7 +85,13 @@ jobs:
           persist-credentials: false
 
       - name: Collect the site files
-        run: rsync -a --exclude .git --exclude .github --exclude .claude --exclude tools/.cache ./ "$RUNNER_TEMP/site/"
+        run: |
+          rsync -a --exclude .git --exclude .github --exclude .claude --exclude tools/.cache ./ "$RUNNER_TEMP/site/"
+          # Versioned URLs for our own CSS/JS (?v=<commit>), so a normal reload picks up a new deploy
+          # instead of a copy the browser kept (GitHub Pages lets browsers cache files for 10 minutes).
+          v="$(git rev-parse --short HEAD)"
+          find "$RUNNER_TEMP/site" -name '*.html' -exec sed -i -E "s#((src|href)=\"[./]*assets/(js|css)/[A-Za-z0-9_-]+\.(js|css))\"#\1?v=$v\"#g" {} +
+          sed -i "s#from './orrery.js'#from './orrery.js?v=$v'#" "$RUNNER_TEMP/site/assets/js/observations.js"
 
       - uses: actions/configure-pages@v5
 
