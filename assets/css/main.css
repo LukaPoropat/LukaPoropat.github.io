@@ -402,6 +402,36 @@ html:not([data-theme="light"]):not([data-theme="logbook"]) .theme-toggle, html:n
 @media (min-width: 1200px) {
 	.ds-logo a { font-size: 2rem; padding: 0 1.3rem; }
 }
+/* Wide monitors (16:9, 1920 x 1080 and up): the pages span the screen instead of a centred 1320px column. */
+@media (min-width: 1400px) {
+	.container { max-width: 2400px; padding-left: 4vw; padding-right: 4vw; }
+	.row { --bs-gutter-x: 3rem; }
+	/* home: portrait against the right edge, sized so the whole introduction fits on one screen */
+	.ds-banner .row { align-items: center; }
+	.ds-banner figure { max-width: none; padding-left: 0; }
+	.ds-banner figure img { display: block; margin-left: auto; width: min(100%, max(360px, calc((100vh - 14rem) * .8)), 640px); }
+	/* research: solar image no taller than the orrery picture above it */
+	#solar figure { max-width: max(526px, 75%); margin-left: auto; }
+	/* research, robotic observatory: text on top, then the visitor photo and the two observatory portraits
+	   side by side at one height (column widths follow the 16:9 and 3:4 photos) */
+	#robotic { display: grid; grid-template-columns: minmax(0, 64fr) minmax(0, 27fr) minmax(0, 27fr); column-gap: 1.5rem; margin-left: 0; margin-right: 0; }
+	#robotic > div, #robotic .photo-pair { display: contents; }
+	#robotic > div > :not(figure) { grid-column: 1 / -1; max-width: 58%; margin-bottom: 0; }
+	#robotic > div > p + p { margin-top: 1rem; }
+	#robotic figure { margin-top: 1rem; }
+	#robotic .photo-pair figure { max-width: none; }
+	#robotic figure figcaption { font-size: 1rem; line-height: 1.4rem; }
+	/* observations: a taller 3D map */
+	.orrery { height: min(82vh, 1100px); }
+	/* publications: comet and PHA circulars in two columns */
+	#highlights-list { columns: 2; column-gap: 3rem; }
+	#highlights-list > * { break-inside: avoid; margin-top: 0; }
+	/* FAQ: title and introduction on the left, the questions on the right */
+	.container:has(> .faq) { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); grid-template-rows: auto 1fr; column-gap: 5rem; align-items: start; }
+	.container:has(> .faq) > .faq { grid-column: 2; grid-row: 1 / span 2; }
+}
+@media (min-width: 1800px) { .gallery-grid { columns: 4 300px; } }  /* thumbnails are 640px wide */
+@media (min-width: 2200px) { html { font-size: clamp(16px, .7vw, 18px); } }  /* 2560 x 1440 and up: type grows a little with the screen */
 @media (max-width: 991px) {
 	.ds-logo a { font-size: 1.35rem; padding: 0 .8rem; }
 	.ds-banner-hed { font-size: 3.2rem; line-height: 4rem; }
