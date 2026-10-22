@@ -11,7 +11,7 @@
 		mpecs: ['MPEC', 'MPECs'], objects: ['object', 'objects'],
 		asTable: 'Show as table', asChart: 'Show as chart',
 		topWorld: 'Show world top 25', aroundMe: 'Show observers around me',
-		kpiMpecs: 'MPECs crediting me', kpiMpecsSub: function (a, b) { return a + ' as observer, ' + b + ' as measurer'; },
+		kpiMpecs: 'MPECs crediting me',
 		kpiObjects: 'Objects observed', kpiObjectsSub: function (n) { return n + ' with orbits on the map'; },
 		kpiNea: 'Near-Earth asteroids', kpiNeaSub: function (n) { return 'incl. ' + fmt(n) + ' potentially hazardous'; },
 		kpiComets: 'Comets', kpiFirst: 'First to follow up', kpiFirstSub: 'MPECs where L01 confirmed first',
@@ -238,7 +238,7 @@
 		var phas = count(function (o) { return o.cat === 'pha'; });
 		var comets = count(function (o) { return o.cat === 'comet'; });
 		var host = document.getElementById('obs-kpis');
-		kpi(host, T.kpiMpecs, fmt(S.mpecs), T.kpiMpecsSub(fmt(S.mpecs_as_observer), fmt(S.mpecs_as_measurer)));
+		kpi(host, T.kpiMpecs, fmt(S.mpecs));  // one total: measuring counts as observing
 		kpi(host, T.kpiObjects, fmt(S.objects), T.kpiObjectsSub(fmt(S.with_orbit)));
 		kpi(host, T.kpiNea, fmt(neas), T.kpiNeaSub(phas));
 		kpi(host, T.kpiComets, fmt(comets));
