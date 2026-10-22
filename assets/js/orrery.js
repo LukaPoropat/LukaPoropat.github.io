@@ -24,7 +24,7 @@ const L = HR ? {
 	interstellar: 'Međuzvjezdani komet', firstObs: 'prvi put opažen', firstSeen: 'Prvi put opažen ',
 	pause: 'Pauza', play: 'Pokreni', noData: 'Podaci o opažanjima nisu se mogli učitati.',
 	noWebgl: 'WebGL nije dostupan u ovom pregledniku.',
-	aria: (n) => `3D karta Sunčevog sustava: putanje asteroida i kometa opaženih sa Zvjezdarnice Višnjan (ukupno ${n}).`,
+	aria: (n) => `3D karta Sunčevog sustava: putanje asteroida i kometa promatranih i mjerenih sa Zvjezdarnice Višnjan (ukupno ${n}).`,
 	hazard: ' · potencijalno opasan', m1: 'Ukupna mag. M1', H: 'Aps. magnituda H', diam: 'Promjer', measured: 'izmjereno',
 	a: 'Velika poluos', q: 'Perihel q', e: 'Ekscentricitet', i: 'Inklinacija', P: 'Ophodno vrijeme', yr: 'god.',
 	moid: 'MOID sa Zemljom', first: 'Prvi put opažen', last: 'Zadnji put opažen', ff: 'Potvrda', ffVal: 'prva stanica koja je potvrdila',

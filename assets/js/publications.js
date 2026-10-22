@@ -13,12 +13,12 @@
 	var T = HR ? {
 		months: ['siječnja', 'veljače', 'ožujka', 'travnja', 'svibnja', 'lipnja', 'srpnja', 'kolovoza', 'rujna', 'listopada', 'studenoga', 'prosinca'],
 		date: function (y, m, d) { return d + '. ' + m + ' ' + y + '.'; },
-		circular: 'Elektronička okružnica Centra za male planete',
-		kFirst: 'Prvi u potvrdi', kFirstSub: 'okružnice u kojima je Višnjan prvi potvrdio objekt',
+		circular: 'MPEC cirkular Centra za mala tijela Sunčeva sustava',
+		kFirst: 'Prvi u potvrdi', kFirstSub: 'cirkulari u kojima je Višnjan prvi potvrdio objekt',
 		kMpecs: 'MPEC-ovi u kojima sam naveden',
 		badgeLong: 'prva potvrda', badge: '1.', badgeTitle: 'Višnjan je prvi potvrdio ovaj objekt',
 		more: function (n) { return 'Još ' + n + ' u potpunom popisu ispod.'; }, none: 'Još nema.',
-		count: function (n) { return fmt(n) + ' ' + plural(n, ['okružnica', 'okružnice', 'okružnica']); }, prev: '‹ Prethodna', next: 'Sljedeća ›',
+		count: function (n) { return fmt(n) + ' ' + plural(n, ['cirkular', 'cirkulara', 'cirkulara']); }, prev: '‹ Prethodna', next: 'Sljedeća ›',
 		page: function (a, b) { return 'Stranica ' + a + ' od ' + b; }, comet: 'Komet ',
 		TYPES: { 'NEA (H>22)': 'NEA, mali (H > 22)', 'NEA (18>H>22)': 'NEA, srednji (H 18–22)', 'NEAl18': 'NEA, veliki (H < 18)',
 			'PHAg18': 'PHA (H > 18)', 'PHAl18': 'PHA, veliki (H < 18)', 'Unusual': 'Neobična putanja', 'Comet': 'Komet', '': 'Ostalo' }

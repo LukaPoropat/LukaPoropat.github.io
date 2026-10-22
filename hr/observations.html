@@ -7,7 +7,7 @@
 	<meta name="color-scheme" content="light">
 	<script src="../assets/js/theme-init.js"></script>
 	<title>Opažanja - Luka Poropat</title>
-	<meta name="description" content="3D karta svih asteroida i kometa koje je Luka Poropat opazio sa Zvjezdarnice Višnjan (MPC L01), statistika opažanja i njegov svjetski poredak među opažačima navedenima u MPEC-ovima.">
+	<meta name="description" content="3D karta svih asteroida i kometa koje je Luka Poropat promatrao i mjerio sa Zvjezdarnice Višnjan (MPC L01), statistika opažanja i njegov svjetski poredak među opažačima navedenima u MPEC-ovima.">
 	<meta name="author" content="Luka Poropat">
 	<link rel="canonical" href="https://lukaporopat.github.io/hr/observations.html">
 	<link rel="alternate" hreflang="en" href="https://lukaporopat.github.io/observations.html">
@@ -17,10 +17,10 @@
 	<meta property="og:locale" content="hr_HR">
 	<meta property="og:type" content="website">
 	<meta property="og:title" content="Opažanja - Luka Poropat">
-	<meta property="og:description" content="3D karta svih asteroida i kometa koje je Luka Poropat opazio sa Zvjezdarnice Višnjan (MPC L01), statistika opažanja i njegov svjetski poredak među opažačima navedenima u MPEC-ovima.">
+	<meta property="og:description" content="3D karta svih asteroida i kometa koje je Luka Poropat promatrao i mjerio sa Zvjezdarnice Višnjan (MPC L01), statistika opažanja i njegov svjetski poredak među opažačima navedenima u MPEC-ovima.">
 	<meta property="og:url" content="https://lukaporopat.github.io/hr/observations.html">
 	<meta property="og:image" content="https://lukaporopat.github.io/assets/images/orrery-teaser.jpg">
-	<meta property="og:image:alt" content="3D karta putanja asteroida i kometa koje je opazio Luka Poropat">
+	<meta property="og:image:alt" content="3D karta putanja asteroida i kometa koje je promatrao i mjerio Luka Poropat">
 	<meta name="twitter:card" content="summary_large_image">
 	<link rel="icon" href="../assets/images/favicon.svg" type="image/svg+xml">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,8 +49,8 @@
 		<div class="container">
 			<h1>Opažanja</h1>
 			<p class="ds-lead">
-				Svaki asteroid i komet koji sam izmjerio teleskopom promjera 1,0 m Zvjezdarnice Višnjan na Tičanu
-				(MPC kod L01) i koji je Centar za male planete IAU-a objavio s mojim imenom u elektroničkoj okružnici (MPEC).
+				Svaki asteroid i komet koji sam promatrao i mjerio teleskopom promjera 1,0 m Zvjezdarnice Višnjan na Tičanu
+				(MPC kod L01) i koji je Centar za mala tijela Sunčeva sustava IAU-a objavio s mojim imenom u MPEC cirkularu.
 			</p>
 
 			<!-- ================= poredak ================= -->
@@ -61,14 +61,14 @@
 					<div class="rank-figure">#<span data-bind="rank.observer.rank">112</span></div>
 					<div class="rank-caption">
 						od <strong data-bind="rank.observer.of">6.009</strong> opažača pojedinaca navedenih u MPEC-ovima od 1993.
-						· broj okružnica: <strong data-bind="rank.observer.count">1.125</strong>
+						· broj MPEC cirkulara: <strong data-bind="rank.observer.count">1.125</strong>
 						· među najboljih <strong><span data-bind="rank.observer.top">2</span> %</strong>.
 					</div>
 					<div class="rank-meter" aria-hidden="true"><span id="rank-marker" style="left:1.8%"></span></div>
 					<div class="rank-meter-labels" aria-hidden="true"><span>#1</span><span>#<span data-bind="rank.observer.of">6.009</span></span></div>
 				</div>
 				<div>
-					<div class="kpi-label" style="font-family:var(--sans)">Zvjezdarnica Višnjan (L01), okružnice s potvrdnim opažanjima otkrića u <span data-bind="rank.fu.year" data-raw>2025</span>.</div>
+					<div class="kpi-label" style="font-family:var(--sans)">Zvjezdarnica Višnjan (L01), MPEC cirkulari otkrića u <span data-bind="rank.fu.year" data-raw>2025</span>.</div>
 					<div class="kpi-row">
 						<div class="kpi">
 							<div class="kpi-label">Svijet</div>
@@ -78,7 +78,7 @@
 						<div class="kpi">
 							<div class="kpi-label">Europa</div>
 							<div class="kpi-value" data-bind="rank.fu.europe_rank" data-ordinal>1.</div>
-							<div class="kpi-sub">najviše okružnica s potvrdnim opažanjima od svih europskih zvjezdarnica</div>
+							<div class="kpi-sub">najviše MPEC cirkulara otkrića od svih europskih zvjezdarnica</div>
 						</div>
 					</div>
 				</div>
@@ -98,12 +98,12 @@
 				<div class="col-12 col-lg-5">
 					<p class="source-note" style="font-size:.9rem; line-height:1.45rem">
 						<strong>Kako se to računa.</strong> <a href="https://sbnmpc.astro.umd.edu/mpecwatch/" target="_blank" rel="noopener">MPEC Watch</a>
-						(Q. Ye i T. Hibbitts, UMD/SBN) analizira svaku elektroničku okružnicu i za svaki kod zvjezdarnice broji
-						u koliko je okružnica pojedina osoba navedena kao opažač. Te brojeve zbrajam za sve zvjezdarnice s
+						(Q. Ye i T. Hibbitts, UMD/SBN) analizira svaki MPEC cirkular i za svaki kod zvjezdarnice broji
+						u koliko je cirkulara pojedina osoba navedena kao opažač. Te brojeve zbrajam za sve zvjezdarnice s
 						najmanje <span data-bind="rank.min_station_mpecs">150</span> MPEC-ova (njih
 						<span data-bind="rank.stations_scanned">391</span>) i rangiram svakog pojedinca (izjednačeni dijele mjesto;
-						„timovi” pregleda neba i nepoznati opažači su izostavljeni). Poredak Višnjana broji MPEC-ove s potvrdnim
-						opažanjima po zvjezdarnici u tablici MPEC Watcha za posljednju punu godinu.
+						„timovi” survey teleskopa i nepoznati opažači su izostavljeni). Poredak Višnjana broji MPEC cirkulare
+						otkrića po zvjezdarnici u tablici MPEC Watcha za posljednju punu godinu.
 						Ažurirano <span id="rank-date">2026-10-20</span>; skripta je u
 						<a href="../tools/observer_rank.py"><code>tools/observer_rank.py</code></a>.
 					</p>
@@ -111,9 +111,9 @@
 			</div>
 
 			<!-- ================= 3D karta ================= -->
-			<h2 id="orrery"><span class="ds-eyebrow">Interaktivno</span>Sve što sam opazio ili izmjerio i što je objavljeno kao MPEC, u 3D-u</h2>
+			<h2 id="orrery"><span class="ds-eyebrow">Interaktivno</span>Sve što sam promatrao ili mjerio i što je objavljeno kao MPEC, u 3D-u</h2>
 			<p>
-				Svaka linija je putanja asteroida ili kometa koji sam opazio, prema JPL-ovoj bazi malih tijela; točke
+				Svaka linija je putanja asteroida ili kometa koji sam promatrao i mjerio, prema JPL-ovoj bazi malih tijela; točke
 				pokazuju gdje se objekti nalaze na datum ispod. Povucite za rotaciju, kliknite kartu i pomičite kotačić
 				(ili raširite prste) za zumiranje te kliknite bilo koju točku za pojedinosti. Kad je karta u fokusu,
 				strelice je rotiraju, + i − zumiraju, a razmaknica pokreće ili zaustavlja animaciju.
@@ -175,7 +175,7 @@
 					<div class="col-12 col-lg-7">
 						<div class="chart-card" id="chart-years">
 							<h3>MPEC-ovi u kojima sam naveden, po godinama</h3>
-							<p class="chart-sub">Okružnice u kojima sam naveden kao opažač ili mjeritelj za L01</p>
+							<p class="chart-sub">MPEC cirkulari u kojima sam naveden kao opažač ili mjeritelj za L01</p>
 							<div class="chart-body"></div>
 							<div class="chart-actions"><button type="button" data-table-toggle>Prikaži kao tablicu</button></div>
 						</div>
@@ -194,7 +194,7 @@
 			</div>
 
 			<!-- ================= tablica objekata ================= -->
-			<h2 id="objects"><span class="ds-eyebrow">Podaci</span>Svi opaženi objekti</h2>
+			<h2 id="objects"><span class="ds-eyebrow">Podaci</span>Svi objekti koje sam promatrao i mjerio</h2>
 			<div class="viz-root">
 				<div class="table-tools">
 					<input type="search" id="obj-search" placeholder="Traži oznaku ili ime" aria-label="Traži objekte">
