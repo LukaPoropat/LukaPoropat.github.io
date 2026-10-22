@@ -1,18 +1,21 @@
 // Gallery page: AstroBin images from data/gallery.json in a grid, with a lightbox.
 (function () {
 	'use strict';
+	var HR = document.documentElement.lang === 'hr';
+	var ROOT = document.documentElement.getAttribute('data-root') || '';
 	var grid = document.getElementById('gallery');
 	var box = document.getElementById('lightbox');
 	var img = box.querySelector('img');
 	var items = [];
 	var current = 0;
-	var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-	function nice(d) { var p = d.split('-'); return months[+p[1] - 1] + ' ' + p[0]; }
+	var months = HR ? ['siječanj', 'veljača', 'ožujak', 'travanj', 'svibanj', 'lipanj', 'srpanj', 'kolovoz', 'rujan', 'listopad', 'studeni', 'prosinac']
+		: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+	function nice(d) { var p = d.split('-'); return months[+p[1] - 1] + ' ' + p[0] + (HR ? '.' : ''); }
 
 	function show(i) {
 		current = (i + items.length) % items.length;
 		var it = items[current];
-		img.src = it.src;
+		img.src = ROOT + it.src;
 		img.alt = it.title;
 		box.querySelector('.lb-title').textContent = it.title;
 		box.querySelector('.lb-date').textContent = nice(it.date);
@@ -29,14 +32,14 @@
 		if (e.key === 'ArrowLeft') show(current - 1);
 	});
 
-	fetch('data/gallery.json').then(function (r) { return r.json(); }).then(function (list) {
+	fetch(ROOT + 'data/gallery.json').then(function (r) { return r.json(); }).then(function (list) {
 		items = list;
 		list.forEach(function (it, i) {
 			var b = document.createElement('button');
 			b.type = 'button';
 			b.className = 'gallery-item';
 			var im = document.createElement('img');
-			im.src = it.thumb;
+			im.src = ROOT + it.thumb;
 			im.alt = it.title;
 			im.loading = 'lazy';
 			im.width = 640;

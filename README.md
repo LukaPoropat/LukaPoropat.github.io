@@ -54,6 +54,17 @@ the new data and publishes the site, so the statistics, the 3D map and the rank 
 own. It also publishes the site after every push to `main`, and you can start it by hand from the
 *Actions* tab (*Update data and publish → Run workflow*).
 
+## Languages
+
+English is the default. Every page has a Croatian copy in `hr/` with the same file name, and the "HR" /
+"EN" button next to the theme switch opens the same page (and section) in the other language. Croatian
+pages start with `<html lang="hr" data-root="../">`: the scripts read `lang` for their wording, number
+formats (1.125; 0,42 AJ) and Croatian plural forms, and `data-root` to find `assets/` and `data/`, so both
+languages share one copy of the scripts, styles, images and data. Each page links its other-language twin
+(`hreflang`), and the sitemap lists both.
+
+When you change the text of an English page, make the same change in its `hr/` twin.
+
 ## Security
 
 - Every page carries a Content-Security-Policy (`<meta http-equiv="Content-Security-Policy">`): scripts may

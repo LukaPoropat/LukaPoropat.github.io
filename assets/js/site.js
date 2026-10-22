@@ -1,10 +1,18 @@
-// Shared page behaviour: footer year, theme switch, headshot fallback, live numbers.
+// Shared page behaviour: footer year, theme + language switches, headshot fallback, live numbers.
 // Elements with data-bind="rank.observer.count" (etc.) are filled from data/*.json;
 // the numbers written in the HTML stay as the fallback when the JSON can't load.
+// Croatian pages live in hr/ and carry <html lang="hr" data-root="../">.
 (function () {
 	'use strict';
 
 	var html = document.documentElement;
+	var HR = html.lang === 'hr';
+	var ROOT = html.getAttribute('data-root') || '';
+	var T = HR ? {
+		toDark: 'Prebaci na tamnu temu', toLight: 'Prebaci na svijetlu temu', otherLang: 'English version'
+	} : {
+		toDark: 'Switch to dark theme', toLight: 'Switch to light theme', otherLang: 'Hrvatska verzija'
+	};
 
 	document.querySelectorAll('[data-year]').forEach(function (el) {
 		el.textContent = new Date().getFullYear();
@@ -23,7 +31,7 @@
 		function paint() {
 			var isDark = html.dataset.theme === 'dark';
 			btn.innerHTML = isDark ? '<i class="fa-solid fa-sun" aria-hidden="true"></i>' : '<i class="fa-solid fa-moon" aria-hidden="true"></i>';
-			btn.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
+			btn.setAttribute('aria-label', isDark ? T.toLight : T.toDark);
 			btn.title = btn.getAttribute('aria-label');
 		}
 		btn.addEventListener('click', function () {
@@ -36,6 +44,23 @@
 		paint();
 		document.body.appendChild(btn);
 	})();
+
+	// Language switch next to it: English is native; "HR" opens the same page in hr/, "EN" goes back.
+	if (!html.hasAttribute('data-no-lang')) {
+		var file = location.pathname.split('/').pop();
+		if (!/\.html$/.test(file)) file = '';
+		var lang = document.createElement('a');
+		lang.className = 'lang-toggle';
+		var target = function () { lang.href = (HR ? ROOT : 'hr/') + file + location.hash; };
+		target();
+		window.addEventListener('hashchange', target);  // keep the section (#solar, #robotic) when switching
+		lang.textContent = HR ? 'EN' : 'HR';
+		lang.hreflang = HR ? 'en' : 'hr';
+		lang.lang = HR ? 'en' : 'hr';
+		lang.setAttribute('aria-label', T.otherLang);
+		lang.title = T.otherLang;
+		document.body.appendChild(lang);
+	}
 
 	// Portrait: use assets/images/headshot.jpg when present, otherwise an astrophoto.
 	document.querySelectorAll('img[data-fallback]').forEach(function (img) {
@@ -69,8 +94,9 @@
 	var bound = document.querySelectorAll('[data-bind]');
 	if (!bound.length) return;
 
-	var fmt = function (n) { return typeof n === 'number' ? n.toLocaleString('en-US') : n; };
+	var fmt = function (n) { return typeof n === 'number' ? n.toLocaleString(HR ? 'hr-HR' : 'en-US') : n; };
 	var ordinal = function (n) {
+		if (HR) return n + '.';
 		var s = ['th', 'st', 'nd', 'rd'], v = n % 100;
 		return n + (s[(v - 20) % 10] || s[v] || s[0]);
 	};
@@ -102,12 +128,12 @@
 	var getJSON = function (url) {
 		return fetch(url, { cache: 'no-cache' }).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
 	};
-	Promise.all([getJSON('data/rank.json'), wantsObs ? getJSON('data/observations.json') : null]).then(function (res) {
+	Promise.all([getJSON(ROOT + 'data/rank.json'), wantsObs ? getJSON(ROOT + 'data/observations.json') : null]).then(function (res) {
 		var data = { rank: res[0], obs: res[1] };
 		bound.forEach(function (el) {
 			var v = lookup(data, el.dataset.bind);
 			if (v === undefined || v === null) return;
-			// data-ordinal: 5 -> "5th"; data-raw: no thousands separator (years)
+			// data-ordinal: 5 -> "5th" ("5." in Croatian); data-raw: no thousands separator (years)
 			el.textContent = el.hasAttribute('data-ordinal') ? ordinal(v) : el.hasAttribute('data-raw') ? String(v) : fmt(v);
 		});
 	});

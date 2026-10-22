@@ -1,8 +1,28 @@
 // Publications page: highlight list (comets and PHAs) and the searchable MPEC table.
+// Text follows <html lang> (English or Croatian); data paths follow data-root.
 (function () {
 	'use strict';
-	var plural = function (n, forms) { return n === 1 ? forms[0] : forms[1]; };  // [one, other]
-	var T = {
+	var HR = document.documentElement.lang === 'hr';
+	var ROOT = document.documentElement.getAttribute('data-root') || '';
+	// Croatian noun forms depend on the number: [one, few (2-4), many]; English: [one, other]
+	var plural = function (n, forms) {
+		if (!HR) return n === 1 ? forms[0] : forms[forms.length - 1];
+		var a = n % 10, b = n % 100;
+		return a === 1 && b !== 11 ? forms[0] : a >= 2 && a <= 4 && (b < 12 || b > 14) ? forms[1] : forms[2];
+	};
+	var T = HR ? {
+		months: ['siječnja', 'veljače', 'ožujka', 'travnja', 'svibnja', 'lipnja', 'srpnja', 'kolovoza', 'rujna', 'listopada', 'studenoga', 'prosinca'],
+		date: function (y, m, d) { return d + '. ' + m + ' ' + y + '.'; },
+		circular: 'Elektronička okružnica Centra za male planete',
+		kFirst: 'Prvi u potvrdi', kFirstSub: 'okružnice u kojima je Višnjan prvi potvrdio objekt',
+		kMpecs: 'MPEC-ovi u kojima sam naveden',
+		badgeLong: 'prva potvrda', badge: '1.', badgeTitle: 'Višnjan je prvi potvrdio ovaj objekt',
+		more: function (n) { return 'Još ' + n + ' u potpunom popisu ispod.'; }, none: 'Još nema.',
+		count: function (n) { return fmt(n) + ' ' + plural(n, ['okružnica', 'okružnice', 'okružnica']); }, prev: '‹ Prethodna', next: 'Sljedeća ›',
+		page: function (a, b) { return 'Stranica ' + a + ' od ' + b; }, comet: 'Komet ',
+		TYPES: { 'NEA (H>22)': 'NEA, mali (H > 22)', 'NEA (18>H>22)': 'NEA, srednji (H 18–22)', 'NEAl18': 'NEA, veliki (H < 18)',
+			'PHAg18': 'PHA (H > 18)', 'PHAl18': 'PHA, veliki (H < 18)', 'Unusual': 'Neobična putanja', 'Comet': 'Komet', '': 'Ostalo' }
+	} : {
 		months: ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.'],
 		date: function (y, m, d) { return y + ' ' + m + ' ' + d; },
 		circular: 'Minor Planet Electronic Circular',
@@ -15,7 +35,7 @@
 		TYPES: { 'NEA (H>22)': 'NEA, small (H > 22)', 'NEA (18>H>22)': 'NEA, medium (H 18–22)', 'NEAl18': 'NEA, large (H < 18)',
 			'PHAg18': 'PHA (H > 18)', 'PHAl18': 'PHA, large (H < 18)', 'Unusual': 'Unusual orbit', 'Comet': 'Comet', '': 'Other' }
 	};
-	var fmt = function (n) { return Number(n).toLocaleString('en-US'); };
+	var fmt = function (n) { return Number(n).toLocaleString(HR ? 'hr-HR' : 'en-US'); };
 	var safeUrl = function (u) { return /^https:\/\//.test(u || '') ? u : 'https://www.minorplanetcenter.net/mpec/RecentMPECs.html'; };
 	var niceDate = function (d) { var p = d.split('-'); return T.date(p[0], T.months[+p[1] - 1], +p[2]); };
 	function el(tag, attrs, text) {
@@ -41,7 +61,7 @@
 		return t;
 	}
 
-	fetch('data/observations.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (data) {
+	fetch(ROOT + 'data/observations.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (data) {
 		var mpecs = data.mpecs, S = data.summary;
 		var host = document.getElementById('pub-kpis');
 		kpi(host, T.kFirst, fmt(S.first_followups), T.kFirstSub);
@@ -58,7 +78,7 @@
 			var p = el('p', { class: 'ds-ref' });
 			var a = el('a', { href: safeUrl(m.u), target: '_blank', rel: 'noopener' });
 			var icon = el('i', { class: interstellar(m) ? 'fa-solid fa-star' : m.ty === 'Comet' ? 'fa-solid fa-meteor' : 'fa-solid fa-triangle-exclamation', 'aria-hidden': 'true' });
-			a.append(icon, el('strong', null, 'MPEC ' + m.id), document.createTextNode(': ' + prettyTitle(m.t) + '. ' + T.circular + ', ' + niceDate(m.d) + '.'));
+			a.append(icon, el('strong', null, 'MPEC ' + m.id), document.createTextNode(': ' + prettyTitle(m.t) + '. ' + T.circular + ', ' + niceDate(m.d) + (HR ? '' : '.')));
 			p.appendChild(a);
 			if (m.ff) { p.append(' '); p.appendChild(el('span', { class: 'badge-ff', title: T.badgeTitle }, T.badgeLong)); }
 			hl.appendChild(p);

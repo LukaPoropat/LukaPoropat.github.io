@@ -16,25 +16,55 @@ const R_MAX = 45;               // AU: open / very long orbits are drawn out to 
 const J2000 = 2451545.0;
 const LD_PER_AU = 389.17;
 
+// Page language (<html lang>) and path back to the site root (Croatian pages live in hr/).
+const HR = document.documentElement.lang === 'hr';
+const ROOT = document.documentElement.getAttribute('data-root') || '';
+const L = HR ? {
+	au: 'AJ', nea: 'Asteroidi blizu Zemlje', pha: 'Potencijalno opasni', comet: 'Kometi', other: 'Ostalo',
+	interstellar: 'Međuzvjezdani komet', firstObs: 'prvi put opažen', firstSeen: 'Prvi put opažen ',
+	pause: 'Pauza', play: 'Pokreni', noData: 'Podaci o opažanjima nisu se mogli učitati.',
+	noWebgl: 'WebGL nije dostupan u ovom pregledniku.',
+	aria: (n) => `3D karta Sunčevog sustava: putanje asteroida i kometa opaženih sa Zvjezdarnice Višnjan (ukupno ${n}).`,
+	hazard: ' · potencijalno opasan', m1: 'Ukupna mag. M1', H: 'Aps. magnituda H', diam: 'Promjer', measured: 'izmjereno',
+	a: 'Velika poluos', q: 'Perihel q', e: 'Ekscentricitet', i: 'Inklinacija', P: 'Ophodno vrijeme', yr: 'god.',
+	moid: 'MOID sa Zemljom', first: 'Prvi put opažen', last: 'Zadnji put opažen', ff: 'Potvrda', ffVal: 'prva stanica koja je potvrdila',
+	mpecs: (n) => `MPEC-ovi (${n}): `,
+	CLASS: { APO: 'Asteroid blizu Zemlje (Apollo)', ATE: 'Asteroid blizu Zemlje (Aten)', AMO: 'Asteroid blizu Zemlje (Amor)',
+		IEO: 'Asteroid blizu Zemlje (Atira)', MCA: 'Presijeca Marsovu putanju', IMB: 'Asteroid unutarnjeg glavnog pojasa',
+		MBA: 'Asteroid glavnog pojasa', OMB: 'Asteroid vanjskog glavnog pojasa', TJN: 'Jupiterov trojanac', CEN: 'Kentaur',
+		TNO: 'Transneptunski objekt', PAA: 'Parabolični asteroid', HYA: 'Hiperbolični asteroid', AST: 'Asteroid',
+		JFc: 'Komet Jupiterove obitelji', JFC: 'Komet Jupiterove obitelji', HTC: 'Komet Halleyjeva tipa', ETc: 'Komet Enckeova tipa',
+		CTc: 'Komet Chironova tipa', COM: 'Dugoperiodični komet', PAR: 'Parabolični komet', HYP: 'Hiperbolični komet' }
+} : {
+	au: 'AU', nea: 'Near-Earth asteroids', pha: 'Potentially hazardous', comet: 'Comets', other: 'Other',
+	interstellar: 'Interstellar comet', firstObs: 'first observed', firstSeen: 'First seen ',
+	pause: 'Pause', play: 'Play', noData: 'Could not load the observation data.',
+	noWebgl: 'WebGL is not available in this browser.',
+	aria: (n) => `3D map of the Solar System showing the orbits of ${n} asteroids and comets observed from Višnjan Observatory.`,
+	hazard: ' · potentially hazardous', m1: 'Total mag. M1', H: 'Abs. magnitude H', diam: 'Diameter', measured: 'measured',
+	a: 'Semi-major axis', q: 'Perihelion q', e: 'Eccentricity', i: 'Inclination', P: 'Period', yr: 'yr',
+	moid: 'Earth MOID', first: 'First observed', last: 'Last observed', ff: 'Follow-up', ffVal: 'first station to confirm',
+	mpecs: (n) => `MPECs (${n}): `,
+	CLASS: { APO: 'Apollo near-Earth asteroid', ATE: 'Aten near-Earth asteroid', AMO: 'Amor near-Earth asteroid',
+		IEO: 'Atira near-Earth asteroid', MCA: 'Mars-crosser', IMB: 'Inner main-belt asteroid', MBA: 'Main-belt asteroid',
+		OMB: 'Outer main-belt asteroid', TJN: 'Jupiter trojan', CEN: 'Centaur', TNO: 'Trans-Neptunian object',
+		PAA: 'Parabolic asteroid', HYA: 'Hyperbolic asteroid', AST: 'Asteroid', JFc: 'Jupiter-family comet',
+		JFC: 'Jupiter-family comet', HTC: 'Halley-type comet', ETc: 'Encke-type comet', CTc: 'Chiron-type comet',
+		COM: 'Long-period comet', PAR: 'Parabolic comet', HYP: 'Hyperbolic comet' }
+};
+
 // Validated categorical slots (dark surface) + neutral for "other".
 const CATS = {
-	nea: { label: 'Near-Earth asteroids', color: '#3987e5' },
-	pha: { label: 'Potentially hazardous', color: '#c93838' },
-	comet: { label: 'Comets', color: '#c98500' },
-	other: { label: 'Other', color: '#8a8f98' },
+	nea: { label: L.nea, color: '#3987e5' },
+	pha: { label: L.pha, color: '#c93838' },
+	comet: { label: L.comet, color: '#c98500' },
+	other: { label: L.other, color: '#8a8f98' },
 };
 const CAT_OF = { apollo: 'nea', aten: 'nea', amor: 'nea', atira: 'nea', pha: 'pha', comet: 'comet', other: 'other' };
 const ALIAS = { 'C/2025 N1 (ATLAS)': '3I/ATLAS (C/2025 N1)' };  // interstellar objects get their nI/ name
 const displayName = (o) => { const n = (o.name || o.id).replace(/^\((.*)\)$/, '$1'); return ALIAS[n] || n; };
-const classLabel = (o) => (o.e > 1.2 ? 'Interstellar comet' : CLASS_NAMES[o.cls] || CATS[o.group].label);
-const CLASS_NAMES = {
-	APO: 'Apollo near-Earth asteroid', ATE: 'Aten near-Earth asteroid', AMO: 'Amor near-Earth asteroid',
-	IEO: 'Atira near-Earth asteroid', MCA: 'Mars-crosser', IMB: 'Inner main-belt asteroid', MBA: 'Main-belt asteroid',
-	OMB: 'Outer main-belt asteroid', TJN: 'Jupiter trojan', CEN: 'Centaur', TNO: 'Trans-Neptunian object',
-	PAA: 'Parabolic asteroid', HYA: 'Hyperbolic asteroid', AST: 'Asteroid', JFc: 'Jupiter-family comet',
-	JFC: 'Jupiter-family comet', HTC: 'Halley-type comet', ETc: 'Encke-type comet', CTc: 'Chiron-type comet',
-	COM: 'Long-period comet', PAR: 'Parabolic comet', HYP: 'Hyperbolic comet',
-};
+const classLabel = (o) => (o.e > 1.2 ? L.interstellar : CLASS_NAMES[o.cls] || CATS[o.group].label);
+const CLASS_NAMES = L.CLASS;
 
 // JPL "Keplerian elements for approximate positions of the major planets" (1800-2050):
 // a [AU], e, I, L, long. perihelion, long. node [deg] at J2000 and their rates per century.
@@ -168,18 +198,18 @@ function glowTexture() {
 }
 
 // ---------------------------------------------------------------- viewer
-export async function mountOrrery(root, dataUrl = 'data/observations.json') {
+export async function mountOrrery(root, dataUrl = ROOT + 'data/observations.json') {
 	const $ = (sel) => root.querySelector(sel);
 	const canvasHost = $('.canvas-host');
 	let data;
 	try {
 		data = await fetch(dataUrl, { cache: 'no-cache' }).then((r) => r.json());
 	} catch (err) {
-		$('.loading').textContent = 'Could not load the observation data.';
+		$('.loading').textContent = L.noData;
 		return;
 	}
 	const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-	if (!renderer.getContext()) { $('.loading').textContent = 'WebGL is not available in this browser.'; return; }
+	if (!renderer.getContext()) { $('.loading').textContent = L.noWebgl; return; }
 	$('.loading').remove();
 	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 	canvasHost.appendChild(renderer.domElement);
@@ -223,7 +253,7 @@ export async function mountOrrery(root, dataUrl = 'data/observations.json') {
 		o.year = (o.first || '').slice(0, 4);
 	});
 	root.querySelector('canvas').setAttribute('aria-label',
-		`3D map of the Solar System showing the orbits of ${objs.length} asteroids and comets observed from Višnjan Observatory.`);
+		L.aria(objs.length));
 
 	// --- background stars
 	{
@@ -346,7 +376,7 @@ export async function mountOrrery(root, dataUrl = 'data/observations.json') {
 		visible.forEach((k, j) => { tmpC.set(CATS[objs[k].group].color); ptsCol.set([tmpC.r, tmpC.g, tmpC.b], 3 * j); });
 		ptsGeom.attributes.color.needsUpdate = true;
 		ptsGeom.setDrawRange(0, visible.length);
-		$('.count-visible').textContent = visible.length.toLocaleString('en-US');
+		$('.count-visible').textContent = visible.length.toLocaleString(HR ? 'hr-HR' : 'en-US');
 		updatePositions();
 	}
 
@@ -375,7 +405,7 @@ export async function mountOrrery(root, dataUrl = 'data/observations.json') {
 		b.type = 'button'; b.className = 'chip'; b.setAttribute('aria-pressed', 'true');
 		const sw = document.createElement('span'); sw.className = 'sw'; sw.style.background = c.color;
 		const t = document.createElement('span'); t.textContent = c.label;
-		const cnt = document.createElement('span'); cnt.className = 'n'; cnt.textContent = n.toLocaleString('en-US');
+		const cnt = document.createElement('span'); cnt.className = 'n'; cnt.textContent = n.toLocaleString(HR ? 'hr-HR' : 'en-US');
 		b.append(sw, t, cnt);
 		b.addEventListener('click', () => {
 			state.cats[key] = !state.cats[key];
@@ -387,7 +417,7 @@ export async function mountOrrery(root, dataUrl = 'data/observations.json') {
 
 	const yearSel = $('select.year');
 	[...new Set(objs.map((o) => o.year))].filter(Boolean).sort().forEach((y) => {
-		const opt = document.createElement('option'); opt.value = y; opt.textContent = 'First seen ' + y; yearSel.appendChild(opt);
+		const opt = document.createElement('option'); opt.value = y; opt.textContent = L.firstSeen + y + (HR ? '.' : ''); yearSel.appendChild(opt);
 	});
 	yearSel.addEventListener('change', () => { state.year = yearSel.value; applyFilters(); });
 	$('input.ff').addEventListener('change', (e) => { state.ffOnly = e.target.checked; applyFilters(); });
@@ -433,7 +463,7 @@ export async function mountOrrery(root, dataUrl = 'data/observations.json') {
 	const playBtn = $('button.play');
 	const setPlay = (on) => {
 		state.playing = on;
-		playBtn.innerHTML = on ? '<i class="fa-solid fa-pause" aria-hidden="true"></i> Pause' : '<i class="fa-solid fa-play" aria-hidden="true"></i> Play';
+		playBtn.innerHTML = on ? `<i class="fa-solid fa-pause" aria-hidden="true"></i> ${L.pause}` : `<i class="fa-solid fa-play" aria-hidden="true"></i> ${L.play}`;
 	};
 	setPlay(state.playing);
 	playBtn.addEventListener('click', () => setPlay(!state.playing));
@@ -503,7 +533,7 @@ export async function mountOrrery(root, dataUrl = 'data/observations.json') {
 			const o = objs[k];
 			tip.replaceChildren();
 			const s = document.createElement('strong'); s.textContent = displayName(o);
-			const d = document.createElement('span'); d.textContent = `${classLabel(o)} · first observed ${o.first}`;
+			const d = document.createElement('span'); d.textContent = `${classLabel(o)} · ${L.firstObs} ${o.first}`;
 			tip.append(s, d);
 			tip.style.display = 'block';
 			tip.style.left = Math.min(x + 14, renderer.domElement.clientWidth - tip.offsetWidth - 8) + 'px';
@@ -522,6 +552,7 @@ export async function mountOrrery(root, dataUrl = 'data/observations.json') {
 	});
 	panel.querySelector('.close').addEventListener('click', () => select(-1));
 
+	const num = (x, n) => (HR ? x.toFixed(n).replace('.', ',') : x.toFixed(n));
 	function row(dl, label, value) {
 		if (value == null || value === '') return;
 		const dt = document.createElement('dt'); dt.textContent = label;
@@ -539,22 +570,22 @@ export async function mountOrrery(root, dataUrl = 'data/observations.json') {
 		const cls = panel.querySelector('.cls'); cls.replaceChildren();
 		const dot = document.createElement('span'); dot.className = 'dot'; dot.style.background = CATS[o.group].color;
 		const ct = document.createElement('span');
-		ct.textContent = classLabel(o) + (o.cat === 'pha' ? ' · potentially hazardous' : '');
+		ct.textContent = classLabel(o) + (o.cat === 'pha' ? L.hazard : '');
 		cls.append(dot, ct);
 		const dl = panel.querySelector('dl'); dl.replaceChildren();
-		if (o.H != null) row(dl, o.group === 'comet' ? 'Total mag. M1' : 'Abs. magnitude H', o.H.toFixed(1));
-		if (o.H != null && o.group !== 'comet') row(dl, 'Diameter', o.diam ? `${o.diam} km (measured)` : sizeRange(o.H));
-		if (o.a != null && o.e < 1) row(dl, 'Semi-major axis', o.a.toFixed(3) + ' AU');
-		row(dl, 'Perihelion q', o.q.toFixed(3) + ' AU');
-		row(dl, 'Eccentricity', o.e.toFixed(3));
-		row(dl, 'Inclination', o.i.toFixed(2) + '°');
-		if (o.a != null && o.e < 1) row(dl, 'Period', (Math.pow(o.a, 1.5)).toFixed(2) + ' yr');
-		if (o.moid != null) row(dl, 'Earth MOID', `${o.moid.toFixed(4)} AU (${(o.moid * LD_PER_AU).toFixed(1)} LD)`);
-		row(dl, 'First observed', o.first);
-		if (o.last && o.last !== o.first) row(dl, 'Last observed', o.last);
-		if (o.ff) row(dl, 'Follow-up', 'first station to confirm');
+		if (o.H != null) row(dl, o.group === 'comet' ? L.m1 : L.H, num(o.H, 1));
+		if (o.H != null && o.group !== 'comet') row(dl, L.diam, o.diam ? `${o.diam} km (${L.measured})` : sizeRange(o.H));
+		if (o.a != null && o.e < 1) row(dl, L.a, num(o.a, 3) + ' ' + L.au);
+		row(dl, L.q, num(o.q, 3) + ' ' + L.au);
+		row(dl, L.e, num(o.e, 3));
+		row(dl, L.i, num(o.i, 2) + '°');
+		if (o.a != null && o.e < 1) row(dl, L.P, num(Math.pow(o.a, 1.5), 2) + ' ' + L.yr);
+		if (o.moid != null) row(dl, L.moid, `${num(o.moid, 4)} ${L.au} (${num(o.moid * LD_PER_AU, 1)} LD)`);
+		row(dl, L.first, o.first);
+		if (o.last && o.last !== o.first) row(dl, L.last, o.last);
+		if (o.ff) row(dl, L.ff, L.ffVal);
 		const m = panel.querySelector('.mpecs'); m.replaceChildren();
-		const lbl = document.createElement('div'); lbl.textContent = `MPECs (${o.mpecs.length}): `;
+		const lbl = document.createElement('div'); lbl.textContent = L.mpecs(o.mpecs.length);
 		m.appendChild(lbl);
 		o.mpecs.slice(0, 10).forEach((id, n) => {
 			const a = document.createElement('a');

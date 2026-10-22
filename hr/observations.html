@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="hr" data-root="../">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="color-scheme" content="light">
+	<script src="../assets/js/theme-init.js"></script>
+	<title>Opažanja - Luka Poropat</title>
+	<meta name="description" content="3D karta svih asteroida i kometa koje je Luka Poropat opazio sa Zvjezdarnice Višnjan (MPC L01), statistika opažanja i njegov svjetski poredak među opažačima navedenima u MPEC-ovima.">
+	<meta name="author" content="Luka Poropat">
+	<link rel="canonical" href="https://lukaporopat.github.io/hr/observations.html">
+	<link rel="alternate" hreflang="en" href="https://lukaporopat.github.io/observations.html">
+	<link rel="alternate" hreflang="hr" href="https://lukaporopat.github.io/hr/observations.html">
+	<link rel="alternate" hreflang="x-default" href="https://lukaporopat.github.io/observations.html">
+	<meta property="og:site_name" content="Luka Poropat">
+	<meta property="og:locale" content="hr_HR">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Opažanja - Luka Poropat">
+	<meta property="og:description" content="3D karta svih asteroida i kometa koje je Luka Poropat opazio sa Zvjezdarnice Višnjan (MPC L01), statistika opažanja i njegov svjetski poredak među opažačima navedenima u MPEC-ovima.">
+	<meta property="og:url" content="https://lukaporopat.github.io/hr/observations.html">
+	<meta property="og:image" content="https://lukaporopat.github.io/assets/images/orrery-teaser.jpg">
+	<meta property="og:image:alt" content="3D karta putanja asteroida i kometa koje je opazio Luka Poropat">
+	<meta name="twitter:card" content="summary_large_image">
+	<link rel="icon" href="../assets/images/favicon.svg" type="image/svg+xml">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Poppins:wght@300;400;450;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+	<link href="../assets/css/main.css" rel="stylesheet">
+</head>
+<body>
+	<a class="skip-link" href="#main">Preskoči na sadržaj</a>
+	<header class="ds-header">
+		<div class="container">
+			<nav class="ds-logo" aria-label="Glavna navigacija">
+				<a href="./">Početna</a>
+				<a href="research.html">Istraživanje</a>
+				<a href="observations.html" aria-current="page">Opažanja</a>
+				<a href="publications.html">Publikacije</a>
+				<a href="gallery.html">Galerija</a>
+			</nav>
+		</div>
+	</header>
+
+	<main id="main">
+	<section class="ds-projects-section">
+		<div class="container">
+			<h1>Opažanja</h1>
+			<p class="ds-lead">
+				Svaki asteroid i komet koji sam izmjerio teleskopom promjera 1,0 m Zvjezdarnice Višnjan na Tičanu
+				(MPC kod L01) i koji je Centar za male planete IAU-a objavio s mojim imenom u elektroničkoj okružnici (MPEC).
+			</p>
+
+			<!-- ================= poredak ================= -->
+			<h2 id="rank"><span class="ds-eyebrow">Svjetski poredak</span>Gdje se nalazim</h2>
+			<div class="rank-hero viz-root">
+				<div class="rank-card">
+					<div class="kpi-label">Poredak opažača pojedinaca, svih vremena</div>
+					<div class="rank-figure">#<span data-bind="rank.observer.rank">112</span></div>
+					<div class="rank-caption">
+						od <strong data-bind="rank.observer.of">6.009</strong> opažača pojedinaca navedenih u MPEC-ovima od 1993.
+						· broj okružnica: <strong data-bind="rank.observer.count">1.125</strong>
+						· među najboljih <strong><span data-bind="rank.observer.top">2</span> %</strong>.
+					</div>
+					<div class="rank-meter" aria-hidden="true"><span id="rank-marker" style="left:1.8%"></span></div>
+					<div class="rank-meter-labels" aria-hidden="true"><span>#1</span><span>#<span data-bind="rank.observer.of">6.009</span></span></div>
+				</div>
+				<div>
+					<div class="kpi-label" style="font-family:var(--sans)">Zvjezdarnica Višnjan (L01), okružnice s potvrdnim opažanjima otkrića u <span data-bind="rank.fu.year" data-raw>2025</span>.</div>
+					<div class="kpi-row">
+						<div class="kpi">
+							<div class="kpi-label">Svijet</div>
+							<div class="kpi-value" data-bind="rank.fu.rank" data-ordinal>5.</div>
+							<div class="kpi-sub">među zvjezdarnicama s potvrdnim opažanjima (ukupno <span data-bind="rank.fu.of">337</span>) · MPEC-ova: <span data-bind="rank.fu.count">615</span></div>
+						</div>
+						<div class="kpi">
+							<div class="kpi-label">Europa</div>
+							<div class="kpi-value" data-bind="rank.fu.europe_rank" data-ordinal>1.</div>
+							<div class="kpi-sub">najviše okružnica s potvrdnim opažanjima od svih europskih zvjezdarnica</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row" style="margin-top:1.5rem">
+				<div class="col-12 col-lg-7">
+					<h3 class="ds-topic" style="margin-top:0">Opažači oko mene na ljestvici</h3>
+					<div class="table-responsive">
+						<table class="data-table" id="rank-table">
+							<thead><tr><th class="num">Mjesto</th><th>Opažač</th><th class="num">MPEC-ovi</th><th>Glavne stanice</th></tr></thead>
+							<tbody></tbody>
+						</table>
+					</div>
+					<div class="chart-actions" style="margin-top:.5rem"><button type="button" class="ds-btn" id="rank-toggle">Prikaži svjetskih top 25</button></div>
+				</div>
+				<div class="col-12 col-lg-5">
+					<p class="source-note" style="font-size:.9rem; line-height:1.45rem">
+						<strong>Kako se to računa.</strong> <a href="https://sbnmpc.astro.umd.edu/mpecwatch/" target="_blank" rel="noopener">MPEC Watch</a>
+						(Q. Ye i T. Hibbitts, UMD/SBN) analizira svaku elektroničku okružnicu i za svaki kod zvjezdarnice broji
+						u koliko je okružnica pojedina osoba navedena kao opažač. Te brojeve zbrajam za sve zvjezdarnice s
+						najmanje <span data-bind="rank.min_station_mpecs">150</span> MPEC-ova (njih
+						<span data-bind="rank.stations_scanned">391</span>) i rangiram svakog pojedinca (izjednačeni dijele mjesto;
+						„timovi” pregleda neba i nepoznati opažači su izostavljeni). Poredak Višnjana broji MPEC-ove s potvrdnim
+						opažanjima po zvjezdarnici u tablici MPEC Watcha za posljednju punu godinu.
+						Ažurirano <span id="rank-date">2026-10-20</span>; skripta je u
+						<a href="../tools/observer_rank.py"><code>tools/observer_rank.py</code></a>.
+					</p>
+				</div>
+			</div>
+
+			<!-- ================= 3D karta ================= -->
+			<h2 id="orrery"><span class="ds-eyebrow">Interaktivno</span>Sve što sam opazio ili izmjerio i što je objavljeno kao MPEC, u 3D-u</h2>
+			<p>
+				Svaka linija je putanja asteroida ili kometa koji sam opazio, prema JPL-ovoj bazi malih tijela; točke
+				pokazuju gdje se objekti nalaze na datum ispod. Povucite za rotaciju, kliknite kartu i pomičite kotačić
+				(ili raširite prste) za zumiranje te kliknite bilo koju točku za pojedinosti. Kad je karta u fokusu,
+				strelice je rotiraju, + i − zumiraju, a razmaknica pokreće ili zaustavlja animaciju.
+			</p>
+			<div class="orrery" id="orrery-root">
+				<div class="canvas-host"></div>
+				<div class="label-layer" aria-hidden="true"></div>
+				<div class="loading">Učitavanje putanja…</div>
+				<div class="zoom-hint" aria-hidden="true">Kliknite kartu ili držite Ctrl / ⌘ za zumiranje kotačićem</div>
+				<div class="hud hud-top">
+					<div class="chips" style="display:flex;flex-wrap:wrap;gap:.4rem" aria-label="Prikaži ili sakrij vrste objekata"></div>
+					<select class="year" aria-label="Filtriraj po godini prvog opažanja"><option value="all">Sve godine</option></select>
+					<input type="search" list="orrery-objects" placeholder="Pronađi objekt…" aria-label="Pronađi objekt">
+					<datalist id="orrery-objects"></datalist>
+				</div>
+				<div class="tip"></div>
+				<aside class="panel" aria-live="polite">
+					<button type="button" class="close" aria-label="Zatvori pojedinosti">×</button>
+					<h4></h4>
+					<div class="cls"></div>
+					<dl></dl>
+					<div class="mpecs"></div>
+					<div style="margin-top:.6rem;font-size:.8rem"><a class="sbdb" target="_blank" rel="noopener">JPL-ova baza malih tijela</a> · <a class="mpc" target="_blank" rel="noopener">MPC</a></div>
+				</aside>
+				<div class="hud hud-bottom">
+					<button type="button" class="play">Pokreni</button>
+					<button type="button" class="today">Danas</button>
+					<span class="date" aria-live="off">—</span>
+					<input class="time" type="range" aria-label="Prikazani datum">
+					<select class="speed" aria-label="Brzina reprodukcije">
+						<option value="1">1 dan / s</option>
+						<option value="7" selected>1 tjedan / s</option>
+						<option value="30">1 mjesec / s</option>
+						<option value="91">3 mjeseca / s</option>
+						<option value="365">1 godina / s</option>
+					</select>
+					<span>
+						<button type="button" data-view="inner">Unutarnji</button>
+						<button type="button" data-view="belt">Pojas</button>
+						<button type="button" data-view="outer">Vanjski</button>
+						<button type="button" data-view="top">Odozgo</button>
+					</span>
+					<label><input class="orbits" type="checkbox" checked> Putanje</label>
+					<label><input class="ff" type="checkbox"> Samo prve potvrde</label>
+					<span style="margin-left:auto;color:#8b96a6;font-size:.78rem">prikazano: <span class="count-visible">0</span></span>
+				</div>
+			</div>
+			<p class="orrery-caption">
+				Položaji se računaju iz Keplerova gibanja dvaju tijela prema oskulacijskim elementima svakog objekta,
+				dovoljno točno da pokažu gdje se objekti nalaze, ali ne i za usmjeravanje teleskopa. Kometi na vrlo dugim
+				ili otvorenim putanjama iscrtani su do 45 AJ. Potpun popis nalazi se u <a href="#objects">tablici ispod</a>.
+			</p>
+
+			<!-- ================= statistika ================= -->
+			<h2 id="stats"><span class="ds-eyebrow">Statistika</span>U brojkama</h2>
+			<div class="viz-root">
+				<div class="kpi-row" id="obs-kpis"></div>
+				<div class="row">
+					<div class="col-12 col-lg-7">
+						<div class="chart-card" id="chart-years">
+							<h3>MPEC-ovi u kojima sam naveden, po godinama</h3>
+							<p class="chart-sub">Okružnice u kojima sam naveden kao opažač ili mjeritelj za L01</p>
+							<div class="chart-body"></div>
+							<div class="chart-actions"><button type="button" data-table-toggle>Prikaži kao tablicu</button></div>
+						</div>
+					</div>
+					<div class="col-12 col-lg-5">
+						<div class="chart-card" id="chart-classes">
+							<h3>Objekti po vrsti putanje</h3>
+							<p class="chart-sub">Različiti objekti; boje odgovaraju 3D karti</p>
+							<div class="chart-body"></div>
+							<div class="chart-actions"><button type="button" data-table-toggle>Prikaži kao tablicu</button></div>
+						</div>
+					</div>
+				</div>
+				<div class="facts" id="facts"></div>
+				<p class="source-note" id="data-note"></p>
+			</div>
+
+			<!-- ================= tablica objekata ================= -->
+			<h2 id="objects"><span class="ds-eyebrow">Podaci</span>Svi opaženi objekti</h2>
+			<div class="viz-root">
+				<div class="table-tools">
+					<input type="search" id="obj-search" placeholder="Traži oznaku ili ime" aria-label="Traži objekte">
+					<select id="obj-class" aria-label="Filtriraj po vrsti">
+						<option value="all">Sve vrste</option>
+						<option value="nea">Asteroidi blizu Zemlje</option>
+						<option value="pha">Potencijalno opasni</option>
+						<option value="comet">Kometi</option>
+						<option value="other">Ostalo</option>
+					</select>
+					<span class="count" id="obj-count"></span>
+				</div>
+				<div class="table-responsive">
+					<table class="data-table" id="obj-table">
+						<thead><tr>
+							<th><button type="button" data-sort="name">Objekt</button></th>
+							<th><button type="button" data-sort="cls">Razred</button></th>
+							<th class="num"><button type="button" data-sort="H">H</button></th>
+							<th class="num"><button type="button" data-sort="moid">MOID sa Zemljom (AJ)</button></th>
+							<th><button type="button" data-sort="first">Prvi put opažen</button></th>
+							<th class="num"><button type="button" data-sort="n">MPEC-ovi</button></th>
+						</tr></thead>
+						<tbody></tbody>
+					</table>
+				</div>
+				<div class="pager" id="obj-pager"></div>
+			</div>
+		</div>
+	</section>
+	</main>
+
+	<div class="chart-tip" id="chart-tip" role="tooltip"></div>
+
+	<footer class="ds-footer">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-12 col-md-3 text-start">E-pošta: <a href="mailto:luka@astro.hr">luka@astro.hr</a></div>
+				<div class="col-12 col-md-6">
+					<ul class="ds-social-link">
+						<li><a class="ds-text-icon" href="https://ui.adsabs.harvard.edu/search/q=author%3A%22Poropat%2C%20L%22%20bibstem%3AMPEC&sort=date%20desc%2C%20bibcode%20desc" aria-label="NASA ADS" target="_blank" rel="noopener">NASA ADS</a></li>
+						<li><a href="https://instagram.com/luka.poropat" aria-label="Instagram" target="_blank" rel="noopener"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
+						<li><a href="https://www.flickr.com/photos/204693295@N06/" data-social="flickr" aria-label="Flickr" target="_blank" rel="noopener"><i class="fa-brands fa-flickr" aria-hidden="true"></i></a></li>
+						<li><a href="https://app.astrobin.com/u/AstroLux" aria-label="AstroBin" target="_blank" rel="noopener"><i class="fa-solid fa-camera-retro" aria-hidden="true"></i></a></li>
+					</ul>
+					<p class="copy">© <span data-year>2026</span> Luka Poropat. Sva prava pridržana. · <a href="faq.html">Autorska prava i korištenje</a></p>
+				</div>
+				<div class="col-12 col-md-3 text-end">
+					Zvjezdarnica: <a href="https://www.google.com/maps/search/?api=1&query=Vi%C5%A1njan%20Observatory%20Ti%C4%8Dan" target="_blank" rel="noopener">Zvjezdarnica Višnjan<br>Tičan, Istra, Hrvatska</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<script src="../assets/js/site.js" defer></script>
+	<script type="module" src="../assets/js/observations.js"></script>
+	<script src="../assets/js/stats.js" defer></script>
+</body>
+</html>
