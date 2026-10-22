@@ -199,15 +199,14 @@ def title_designation(title):
 
 # ---------------------------------------------------------------- JPL SBDB
 ORBIT_MAX_AGE = 30 * 86400  # re-fetch cached orbits monthly: young orbits improve and objects get numbered
-ERROR_MAX_AGE = 6 * 86400   # failed lookups are retried on the next weekly run
 
 
 def sbdb(des, cache, refresh=False):
     path = os.path.join(cache, "sbdb", re.sub(r"[^\w\-]", "_", des) + ".json")
     old = json.load(open(path, encoding="utf-8")) if os.path.exists(path) else None
-    if old is not None and not refresh:
-        if time.time() - os.path.getmtime(path) < (ERROR_MAX_AGE if "error" in old else ORBIT_MAX_AGE):
-            return old
+    # a failed lookup (network trouble, rate limit) is never trusted: it is tried again on every run
+    if old is not None and not refresh and "error" not in old and time.time() - os.path.getmtime(path) < ORBIT_MAX_AGE:
+        return old
     url = SBDB + "?" + urllib.parse.urlencode({"sstr": des, "phys-par": "1"})
     try:
         data = json.loads(fetch(url))
@@ -335,11 +334,26 @@ def main():
                 obj["type"] = rec["ty"]
     print(f"{len(mine)} MPECs credit {args.surname}; {len(objects)} distinct objects")
 
-    rows = {}  # keyed by JPL's designation, so renamed objects (A/2022 T1 -> C/2022 T1) merge
-    for k, (des, obj) in enumerate(sorted(objects.items(), key=lambda kv: kv[1]["first"]), start=1):
-        orb = orbit_record(sbdb(des, args.cache, args.refresh_orbits))
+    # orbits from JPL; lookups that fail (busy server, rate limit) get a second try after a pause
+    orbit_data = {}
+    for k, des in enumerate(sorted(objects, key=lambda d: objects[d]["first"]), start=1):
+        orbit_data[des] = sbdb(des, args.cache, args.refresh_orbits)
         if k % 100 == 0:
             print(f"  orbits {k}/{len(objects)}")
+    failed = [des for des, data in orbit_data.items() if "error" in data]
+    if failed:
+        print(f"  {len(failed)} orbit lookups failed; trying them again in 60 s")
+        time.sleep(60)
+        for des in failed:
+            orbit_data[des] = sbdb(des, args.cache, refresh=True)
+            time.sleep(1)
+        still = [des for des in failed if "error" in orbit_data[des]]
+        if still:
+            print("  still no orbit (next run tries again): " + ", ".join(still), file=sys.stderr)
+
+    rows = {}  # keyed by JPL's designation, so renamed objects (A/2022 T1 -> C/2022 T1) merge
+    for des, obj in sorted(objects.items(), key=lambda kv: kv[1]["first"]):
+        orb = orbit_record(orbit_data[des])
         key = (orb or {}).get("full") or des
         if key in rows:
             row = rows[key]
