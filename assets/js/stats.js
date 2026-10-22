@@ -19,7 +19,7 @@
 		mpecs: ['MPEC', 'MPEC-a', 'MPEC-ova'], objects: ['objekt', 'objekta', 'objekata'],
 		asTable: 'Prikaži kao tablicu', asChart: 'Prikaži kao grafikon',
 		topWorld: 'Prikaži svjetskih top 25', aroundMe: 'Prikaži opažače oko mene',
-		kpiMpecs: 'MPEC-ovi u kojima sam naveden', kpiMpecsSub: function (a, b) { return a + ' kao opažač, ' + b + ' kao mjeritelj'; },
+		kpiMpecs: 'MPEC-ovi u kojima sam naveden',
 		kpiObjects: 'Opaženi objekti', kpiObjectsSub: function (n) { return n + ' s putanjom na karti'; },
 		kpiNea: 'Asteroidi blizu Zemlje', kpiNeaSub: function (n) { return 'uklj. ' + fmt(n) + ' ' + plural(n, ['potencijalno opasan', 'potencijalno opasna', 'potencijalno opasnih']); },
 		kpiComets: 'Kometi', kpiFirst: 'Prvi u potvrdi', kpiFirstSub: 'MPEC-ovi u kojima je L01 prvi potvrdio objekt',
