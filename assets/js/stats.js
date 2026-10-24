@@ -20,6 +20,7 @@
 		asTable: 'Prikaži kao tablicu', asChart: 'Prikaži kao grafikon',
 		topWorld: 'Prikaži svjetskih top 200', aroundMe: 'Prikaži opažače oko mene',
 		topTitle: 'Svjetski top 200', aroundTitle: 'Opažači oko mene na ljestvici',
+		periodLabel: 'Razdoblje:', periods: { month: '1 mjesec', quarter: '3 mjeseca' },
 		moveTitle: function (d, date) {
 			if (d === null) return 'izvan prvih 400 na dan ' + date;
 			if (d === 0) return 'bez promjene u odnosu na ' + date;
@@ -59,6 +60,7 @@
 		asTable: 'Show as table', asChart: 'Show as chart',
 		topWorld: 'Show world top 200', aroundMe: 'Show observers around me',
 		topTitle: 'World top 200', aroundTitle: 'Observers ranked around me',
+		periodLabel: 'Change over:', periods: { month: '1 month', quarter: '3 months' },
 		moveTitle: function (d, date) {
 			if (d === null) return 'not in the top 400 on ' + date;
 			if (d === 0) return 'no change since ' + date;
@@ -270,28 +272,45 @@
 		document.getElementById('rank-marker').style.left = (100 * (o.rank - 1) / (o.of - 1)).toFixed(2) + '%';
 		document.getElementById('rank-date').textContent = rank.generated.slice(0, 10);
 		var table = document.getElementById('rank-table'), tbody = table.querySelector('tbody');
-		var since = o.compared_to;  // last month's ranking, for the arrows
-		table.classList.toggle('no-move', !since);
-		if (since) document.getElementById('rank-legend').textContent = T.moveLegend(since, o.compared_reconstructed);
-		var showingTop = false;
-		// ▲ green: moved up, ▼ red: moved down, – grey: same place as a month ago
+		// arrows against earlier rankings (1 and 3 months ago, whichever exist); the longest is shown first
+		var comps = o.compare || [], comp = comps[comps.length - 1];
+		table.classList.toggle('no-move', !comp);
+		var showingTop = false, shown = o.neighbours;
+		// ▲ green: moved up, ▼ red: moved down, – grey: same place as then
 		function move(r) {
 			var td = el('td', { class: 'move' });
-			if (!since || r.prev === undefined) return td;
-			var d = r.prev === null ? null : r.prev - r.rank;
+			var then = comp && r.prev ? r.prev[comp.period] : undefined;
+			if (then === undefined) return td;
+			var d = then === null ? null : then - r.rank;
 			var kind = d === null || d > 0 ? 'up' : d < 0 ? 'down' : 'same';
 			var text = d === null ? '▲ ' + T.moveNew : d > 0 ? '▲ ' + d : d < 0 ? '▼ ' + (-d) : '–';
-			td.append(el('span', { class: 'mv mv-' + kind, title: T.moveTitle(d, since), 'aria-hidden': 'true' }, text),
-				el('span', { class: 'visually-hidden' }, T.moveTitle(d, since)));
+			td.append(el('span', { class: 'mv mv-' + kind, title: T.moveTitle(d, comp.date), 'aria-hidden': 'true' }, text),
+				el('span', { class: 'visually-hidden' }, T.moveTitle(d, comp.date)));
 			return td;
 		}
 		function fill(list) {
+			shown = list;
+			if (comp) document.getElementById('rank-legend').textContent = T.moveLegend(comp.date, comp.reconstructed);
 			tbody.replaceChildren();
 			list.forEach(function (r) {
 				var tr = el('tr', r.name === rank.name ? { class: 'is-me' } : null);
 				tr.append(el('td', { class: 'num' }, r.rank), move(r), el('td', null, person(r.name)),
 					el('td', { class: 'num' }, fmt(r.count)), el('td', null, r.stations.join(', ')));
 				tbody.appendChild(tr);
+			});
+		}
+		// "Change over: [1 month] [3 months]"
+		var picker = document.getElementById('rank-period');
+		if (comps.length > 1) {
+			picker.append(el('span', null, T.periodLabel));
+			comps.forEach(function (c) {
+				var b = el('button', { type: 'button', 'aria-pressed': String(c === comp) }, T.periods[c.period] || c.period);
+				b.addEventListener('click', function () {
+					comp = c;
+					picker.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+					fill(shown);
+				});
+				picker.appendChild(b);
 			});
 		}
 		fill(o.neighbours);

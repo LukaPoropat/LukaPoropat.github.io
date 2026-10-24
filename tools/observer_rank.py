@@ -13,8 +13,8 @@ name them as observer or measurer. This script:
      observatory's placings, and the tail of each sufficiently active station page (HTTP Range)
      for the stations each ranked person observes from,
   3. writes data/rank.json for the website, and keeps a snapshot of the top of the observer
-     ranking in data/rank_history.json, so the page can show who moved up or down in the last
-     month (compared with the newest snapshot that is at least four weeks old).
+     ranking in data/rank_history.json, so the page can show who moved up or down over the last
+     month and the last three months (compared with the newest snapshot at least 4 / 12 weeks old).
 
 Usage:
     python tools/observer_rank.py --name L.Poropat --station L01
@@ -38,7 +38,8 @@ JAHN_PEOPLE = "https://mpec.jostjahn.de/MPECS-STAT-PEOPLE-MPECS.tsv"
 UA = {"User-Agent": "luka-poropat-website-stats/1.0 (personal site; contact via site)"}
 NOT_PEOPLE = re.compile(r"\b(unknown|collaboration|team|survey|project|staff|observers|students|queue|service)\b", re.I)
 TOP = 200            # observers listed in the world table
-SNAPSHOT_KEEP = 400  # observers kept in each snapshot (enough to rank the top 200 a month ago)
+SNAPSHOT_KEEP = 400  # observers kept in each snapshot (enough to rank the top 200 months ago)
+PERIODS = (("month", 28), ("quarter", 84))  # compare with the newest snapshot at least this many days old
 
 
 def fetch(url, byte_range=None, retries=4):
@@ -287,13 +288,16 @@ def main():
         "stations_scanned": len(per_station),
         "min_station_mpecs": args.min_mpecs,
     }
-    # last month's observer ranking: the newest snapshot that is at least four weeks old
+    # earlier observer rankings: for each period, the newest snapshot at least that old
     history_path = os.path.join(os.path.dirname(os.path.abspath(args.out)), "rank_history.json")
     history = json.load(open(history_path, encoding="utf-8")) if os.path.exists(history_path) else {}
     today = dt.date.fromisoformat(result["generated"][:10])
-    older = sorted(d for d in history if d <= (today - dt.timedelta(days=28)).isoformat())
-    base = older[-1] if older else None
-    before = ranks_of(history[base]["counts"])[1] if base else None
+    bases = {}
+    for period, days in PERIODS:
+        older = sorted(d for d in history if d <= (today - dt.timedelta(days=days)).isoformat())
+        if older:
+            bases[period] = older[-1]
+    before = {period: ranks_of(history[d]["counts"])[1] for period, d in bases.items()}
 
     for role, label, mw_role in (("obs", "observer", "observers"), ("mea", "measurer", "measurers")):
         ordered, ranks = rank_people(people, role)
@@ -303,12 +307,12 @@ def main():
             continue
         where = stations_by_person(per_station, mw_role)
         pos = next(i for i, (n, _) in enumerate(ordered) if n == me)
-        compare = before if role == "obs" else None
+        compare = before if role == "obs" else {}
 
         def row(n, c):
             r = {"rank": ranks[n], "name": n, "count": c, "stations": where.get(key(n), [])[:3]}
-            if compare is not None:
-                r["prev"] = compare.get(n)  # None: not among the top SNAPSHOT_KEEP a month ago
+            if compare:  # rank then, per period; None: not among that snapshot's top SNAPSHOT_KEEP
+                r["prev"] = {period: old.get(n) for period, old in compare.items()}
             return r
 
         result[label] = {
@@ -320,9 +324,10 @@ def main():
             "top": [row(n, c) for n, c in ordered[:TOP if role == "obs" else 25]],
             "neighbours": [row(n, c) for n, c in ordered[max(0, pos - 5): pos + 6]],
         }
-        if compare is not None:
-            result[label]["compared_to"] = base
-            result[label]["compared_reconstructed"] = bool(history[base].get("reconstructed"))
+        if compare:
+            result[label]["compare"] = [{"period": period, "date": bases[period],
+                                         "reconstructed": bool(history[bases[period]].get("reconstructed"))}
+                                        for period, _ in PERIODS if period in bases]
         if role == "obs":
             history[today.isoformat()] = {"counts": snapshot_counts(dict(ordered))}
     result["station"] = {"code": args.station,

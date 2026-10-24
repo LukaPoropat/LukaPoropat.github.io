@@ -266,6 +266,10 @@ figure { margin: 0; }
 .mv-same { color: var(--ink-3); }
 .rank-legend, .ds-projects-section p.rank-legend { font-family: var(--sans); font-size: .8rem; line-height: 1.25rem; color: var(--ink-3); margin: .5rem 0 0; }
 .rank-legend:empty { display: none; }
+.rank-period { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; margin: 0 0 .6rem; font-family: var(--sans); font-size: .8rem; color: var(--ink-2); }
+.rank-period:empty { display: none; }
+.rank-period button { border: 1px solid var(--axis); background: var(--card); color: var(--ink); border-radius: 999px; padding: .2rem .75rem; font: inherit; }
+.rank-period button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 .table-responsive.is-long { max-height: 36rem; overflow-y: auto; }  /* the world top 200 scrolls in a box */
 .table-responsive.is-long thead th { position: sticky; top: 0; z-index: 1; background: var(--surface); }
 .table-tools { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; margin: 1rem 0 .5rem; font-family: var(--sans); font-size: .9rem; color: var(--ink); }
