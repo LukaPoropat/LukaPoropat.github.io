@@ -270,7 +270,6 @@
 		if (!rank || !rank.observer) return;
 		var o = rank.observer;
 		document.getElementById('rank-marker').style.left = (100 * (o.rank - 1) / (o.of - 1)).toFixed(2) + '%';
-		document.getElementById('rank-date').textContent = rank.generated.slice(0, 10);
 		var table = document.getElementById('rank-table'), tbody = table.querySelector('tbody');
 		// arrows against earlier rankings (1 and 3 months ago, whichever exist); the longest is shown first
 		var comps = o.compare || [], comp = comps[comps.length - 1];
