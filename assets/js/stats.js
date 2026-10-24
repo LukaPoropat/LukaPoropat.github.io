@@ -245,7 +245,6 @@
 		if (!rank || !rank.observer) return;
 		var o = rank.observer;
 		document.getElementById('rank-marker').style.left = (100 * (o.rank - 1) / (o.of - 1)).toFixed(2) + '%';
-		document.getElementById('rank-date').textContent = rank.generated.slice(0, 10);
 		var tbody = document.querySelector('#rank-table tbody');
 		var showingTop = false;
 		function fill(list) {
