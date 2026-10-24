@@ -18,7 +18,18 @@
 		au: 'AJ', mpecWatch: 'MPEC Watcha', jahn: 'MPEC statistike Josta Jahna', year: 'Godina', klass: 'Razred', colMpecs: 'Broj MPEC-ova', colObjects: 'Broj objekata', toDate: 'do sada',
 		mpecs: ['MPEC', 'MPEC-a', 'MPEC-ova'], objects: ['objekt', 'objekta', 'objekata'],
 		asTable: 'Prikaži kao tablicu', asChart: 'Prikaži kao grafikon',
-		topWorld: 'Prikaži svjetskih top 25', aroundMe: 'Prikaži opažače oko mene',
+		topWorld: 'Prikaži svjetskih top 200', aroundMe: 'Prikaži opažače oko mene',
+		topTitle: 'Svjetski top 200', aroundTitle: 'Opažači oko mene na ljestvici',
+		moveTitle: function (d, date) {
+			if (d === null) return 'izvan prvih 400 na dan ' + date;
+			if (d === 0) return 'bez promjene u odnosu na ' + date;
+			return (d > 0 ? 'napredak od ' : 'pad od ') + Math.abs(d) + ' mjesta u odnosu na ' + date;
+		},
+		moveNew: 'novo',
+		moveLegend: function (date, rebuilt) {
+			return '▲ napredak · ▼ pad · – bez promjene, u usporedbi s poretkom na dan ' + date +
+				(rebuilt ? ' (rekonstruiranim iz MPEC cirkulara objavljenih nakon toga)' : '') + '.';
+		},
 		kpiMpecs: 'MPEC-ovi u kojima sam naveden',
 		kpiObjects: 'Promatrani i mjereni objekti', kpiObjectsSub: function (n) { return n + ' s putanjom na karti'; },
 		kpiNea: 'Asteroidi blizu Zemlje', kpiNeaSub: function (n) { return 'uklj. ' + fmt(n) + ' ' + plural(n, ['potencijalno opasan', 'potencijalno opasna', 'potencijalno opasnih']); },
@@ -46,7 +57,19 @@
 		au: 'AU', mpecWatch: 'MPEC Watch', jahn: 'Jost Jahn\'s MPEC statistics', year: 'Year', klass: 'Class', colMpecs: 'MPECs', colObjects: 'Objects', toDate: 'to date',
 		mpecs: ['MPEC', 'MPECs'], objects: ['object', 'objects'],
 		asTable: 'Show as table', asChart: 'Show as chart',
-		topWorld: 'Show world top 25', aroundMe: 'Show observers around me',
+		topWorld: 'Show world top 200', aroundMe: 'Show observers around me',
+		topTitle: 'World top 200', aroundTitle: 'Observers ranked around me',
+		moveTitle: function (d, date) {
+			if (d === null) return 'not in the top 400 on ' + date;
+			if (d === 0) return 'no change since ' + date;
+			var n = Math.abs(d);
+			return (d > 0 ? 'up ' : 'down ') + n + (n === 1 ? ' place' : ' places') + ' since ' + date;
+		},
+		moveNew: 'new',
+		moveLegend: function (date, rebuilt) {
+			return '▲ moved up · ▼ moved down · – no change, compared with the ranking on ' + date +
+				(rebuilt ? ' (rebuilt from the MPECs published since)' : '') + '.';
+		},
 		kpiMpecs: 'MPECs crediting me',
 		kpiObjects: 'Objects observed', kpiObjectsSub: function (n) { return n + ' with orbits on the map'; },
 		kpiNea: 'Near-Earth asteroids', kpiNeaSub: function (n) { return 'incl. ' + fmt(n) + ' potentially hazardous'; },
@@ -246,13 +269,27 @@
 		var o = rank.observer;
 		document.getElementById('rank-marker').style.left = (100 * (o.rank - 1) / (o.of - 1)).toFixed(2) + '%';
 		document.getElementById('rank-date').textContent = rank.generated.slice(0, 10);
-		var tbody = document.querySelector('#rank-table tbody');
+		var table = document.getElementById('rank-table'), tbody = table.querySelector('tbody');
+		var since = o.compared_to;  // last month's ranking, for the arrows
+		table.classList.toggle('no-move', !since);
+		if (since) document.getElementById('rank-legend').textContent = T.moveLegend(since, o.compared_reconstructed);
 		var showingTop = false;
+		// ▲ green: moved up, ▼ red: moved down, – grey: same place as a month ago
+		function move(r) {
+			var td = el('td', { class: 'move' });
+			if (!since || r.prev === undefined) return td;
+			var d = r.prev === null ? null : r.prev - r.rank;
+			var kind = d === null || d > 0 ? 'up' : d < 0 ? 'down' : 'same';
+			var text = d === null ? '▲ ' + T.moveNew : d > 0 ? '▲ ' + d : d < 0 ? '▼ ' + (-d) : '–';
+			td.append(el('span', { class: 'mv mv-' + kind, title: T.moveTitle(d, since), 'aria-hidden': 'true' }, text),
+				el('span', { class: 'visually-hidden' }, T.moveTitle(d, since)));
+			return td;
+		}
 		function fill(list) {
 			tbody.replaceChildren();
 			list.forEach(function (r) {
 				var tr = el('tr', r.name === rank.name ? { class: 'is-me' } : null);
-				tr.append(el('td', { class: 'num' }, r.rank), el('td', null, person(r.name)),
+				tr.append(el('td', { class: 'num' }, r.rank), move(r), el('td', null, person(r.name)),
 					el('td', { class: 'num' }, fmt(r.count)), el('td', null, r.stations.join(', ')));
 				tbody.appendChild(tr);
 			});
@@ -262,7 +299,10 @@
 		btn.addEventListener('click', function () {
 			showingTop = !showingTop;
 			fill(showingTop ? o.top : o.neighbours);
+			table.parentNode.classList.toggle('is-long', showingTop);  // 200 rows scroll inside the box
+			table.parentNode.scrollTop = 0;
 			btn.textContent = showingTop ? T.aroundMe : T.topWorld;
+			document.getElementById('rank-title').textContent = showingTop ? T.topTitle : T.aroundTitle;
 		});
 	}
 

@@ -12,7 +12,9 @@ name them as observer or measurer. This script:
   2. reads MPEC Watch (https://sbnmpc.astro.umd.edu/mpecwatch/, Q. Ye & T. Hibbitts) for the
      observatory's placings, and the tail of each sufficiently active station page (HTTP Range)
      for the stations each ranked person observes from,
-  3. writes data/rank.json for the website.
+  3. writes data/rank.json for the website, and keeps a snapshot of the top of the observer
+     ranking in data/rank_history.json, so the page can show who moved up or down in the last
+     month (compared with the newest snapshot that is at least four weeks old).
 
 Usage:
     python tools/observer_rank.py --name L.Poropat --station L01
@@ -35,6 +37,8 @@ BASE = "https://sbnmpc.astro.umd.edu/mpecwatch/"
 JAHN_PEOPLE = "https://mpec.jostjahn.de/MPECS-STAT-PEOPLE-MPECS.tsv"
 UA = {"User-Agent": "luka-poropat-website-stats/1.0 (personal site; contact via site)"}
 NOT_PEOPLE = re.compile(r"\b(unknown|collaboration|team|survey|project|staff|observers|students|queue|service)\b", re.I)
+TOP = 200            # observers listed in the world table
+SNAPSHOT_KEEP = 400  # observers kept in each snapshot (enough to rank the top 200 a month ago)
 
 
 def fetch(url, byte_range=None, retries=4):
@@ -79,14 +83,24 @@ def jahn_people(cache_dir):
     return out
 
 
-def rank_people(people, role):
-    ordered = sorted(((p["name"], p[role]) for p in people if p[role] > 0), key=lambda kv: (-kv[1], kv[0]))
+def ranks_of(counts):
+    """{name: count} -> list ordered by count, and competition ranks (ties share a rank)."""
+    ordered = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))
     ranks, prev, rank = {}, None, 0
     for pos, (name, n) in enumerate(ordered, start=1):
         if n != prev:
             rank, prev = pos, n
         ranks[name] = rank
     return ordered, ranks
+
+
+def rank_people(people, role):
+    return ranks_of({p["name"]: p[role] for p in people if p[role] > 0})
+
+
+def snapshot_counts(counts):
+    """The part of a ranking worth keeping for later comparisons: the top SNAPSHOT_KEEP observers."""
+    return dict(ranks_of({n: c for n, c in counts.items() if c > 0})[0][:SNAPSHOT_KEEP])
 
 
 # ---------------------------------------------------------------- MPEC Watch: stations
@@ -273,6 +287,14 @@ def main():
         "stations_scanned": len(per_station),
         "min_station_mpecs": args.min_mpecs,
     }
+    # last month's observer ranking: the newest snapshot that is at least four weeks old
+    history_path = os.path.join(os.path.dirname(os.path.abspath(args.out)), "rank_history.json")
+    history = json.load(open(history_path, encoding="utf-8")) if os.path.exists(history_path) else {}
+    today = dt.date.fromisoformat(result["generated"][:10])
+    older = sorted(d for d in history if d <= (today - dt.timedelta(days=28)).isoformat())
+    base = older[-1] if older else None
+    before = ranks_of(history[base]["counts"])[1] if base else None
+
     for role, label, mw_role in (("obs", "observer", "observers"), ("mea", "measurer", "measurers")):
         ordered, ranks = rank_people(people, role)
         me = args.person
@@ -281,9 +303,13 @@ def main():
             continue
         where = stations_by_person(per_station, mw_role)
         pos = next(i for i, (n, _) in enumerate(ordered) if n == me)
+        compare = before if role == "obs" else None
 
         def row(n, c):
-            return {"rank": ranks[n], "name": n, "count": c, "stations": where.get(key(n), [])[:3]}
+            r = {"rank": ranks[n], "name": n, "count": c, "stations": where.get(key(n), [])[:3]}
+            if compare is not None:
+                r["prev"] = compare.get(n)  # None: not among the top SNAPSHOT_KEEP a month ago
+            return r
 
         result[label] = {
             "rank": ranks[me],
@@ -291,9 +317,14 @@ def main():
             "count": dict(ordered)[me],
             "percentile": round(100 * (1 - (ranks[me] - 1) / len(ordered)), 2),
             "stations": where.get(key(me), []),
-            "top": [row(n, c) for n, c in ordered[:25]],
+            "top": [row(n, c) for n, c in ordered[:TOP if role == "obs" else 25]],
             "neighbours": [row(n, c) for n, c in ordered[max(0, pos - 5): pos + 6]],
         }
+        if compare is not None:
+            result[label]["compared_to"] = base
+            result[label]["compared_reconstructed"] = bool(history[base].get("reconstructed"))
+        if role == "obs":
+            history[today.isoformat()] = {"counts": snapshot_counts(dict(ordered))}
     result["station"] = {"code": args.station,
                          "name": next((s["Observatory"] for s in stations if s["Code"] == args.station), ""),
                          "ranks": station_ranks(stations, args.station)}
@@ -312,6 +343,10 @@ def main():
     os.makedirs(os.path.dirname(os.path.abspath(args.out)), exist_ok=True)
     with open(args.out, "w", encoding="utf-8") as f:
         json.dump(result, f, indent=1, ensure_ascii=False)
+    keep_from = (today - dt.timedelta(days=200)).isoformat()  # about half a year of weekly snapshots
+    with open(history_path, "w", encoding="utf-8") as f:
+        json.dump({d: v for d, v in sorted(history.items()) if d >= keep_from}, f, ensure_ascii=False,
+                  separators=(",", ":"))
     obs = result["observer"]
     print(f"{args.person}: observer rank #{obs['rank']} of {obs['of']} ({obs['count']} MPECs)")
     print("wrote", os.path.abspath(args.out))

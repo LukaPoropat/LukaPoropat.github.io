@@ -48,6 +48,8 @@
 	--series-2: #e34948;        /* potentially hazardous asteroids (red) */
 	--series-3: #eda100;        /* comets (yellow) */
 	--series-other: #9a9890;    /* everything else */
+	--up: #1a7f37;              /* rank went up (green) */
+	--down: #c62828;            /* rank went down (red) */
 
 	--sans: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
 	--serif: 'EB Garamond', Georgia, serif;
@@ -85,6 +87,8 @@
 	--series-2: #c93838;
 	--series-3: #c98500;
 	--series-other: #8a8f98;
+	--up: #3fb950;
+	--down: #ff7b72;
 }
 
 /* Earlier navy look (preview with ?theme=light): navy + sky blue, Poppins headings. */
@@ -253,6 +257,17 @@ figure { margin: 0; }
 .data-table td.num, .data-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
 .data-table tr.is-me td { background: var(--highlight); font-weight: 600; }
 .data-table a { color: var(--link); }
+/* rank movement over the last month: green up, red down, grey unchanged */
+.data-table td.move { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.data-table.no-move .move, .data-table.no-move .move-h { display: none; }
+.mv { font-weight: 600; font-size: .8rem; }
+.mv-up { color: var(--up); }
+.mv-down { color: var(--down); }
+.mv-same { color: var(--ink-3); }
+.rank-legend, .ds-projects-section p.rank-legend { font-family: var(--sans); font-size: .8rem; line-height: 1.25rem; color: var(--ink-3); margin: .5rem 0 0; }
+.rank-legend:empty { display: none; }
+.table-responsive.is-long { max-height: 36rem; overflow-y: auto; }  /* the world top 200 scrolls in a box */
+.table-responsive.is-long thead th { position: sticky; top: 0; z-index: 1; background: var(--surface); }
 .table-tools { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; margin: 1rem 0 .5rem; font-family: var(--sans); font-size: .9rem; color: var(--ink); }
 .table-tools input[type=search], .table-tools select { border: 1px solid var(--axis); border-radius: 8px; padding: .45rem .7rem; font: inherit; min-width: 220px; background: var(--card); color: var(--ink); }
 .table-tools .count { color: var(--ink-3); margin-left: auto; }

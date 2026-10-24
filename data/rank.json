@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-24T17:36:07Z",
+ "generated": "2026-10-24T17:48:12Z",
  "source": "Jost Jahn's MPEC statistics (mpec.jostjahn.de) for the personal rank; MPEC Watch (sbnmpc.astro.umd.edu/mpecwatch) for observatory placings and stations",
  "name": "L. Poropat",
  "stations_scanned": 391,
@@ -22,7 +22,8 @@
     "stations": [
      "F51",
      "F52"
-    ]
+    ],
+    "prev": 1
    },
    {
     "rank": 2,
@@ -32,7 +33,8 @@
      "H21",
      "807",
      "H55"
-    ]
+    ],
+    "prev": 2
    },
    {
     "rank": 3,
@@ -41,7 +43,8 @@
     "stations": [
      "F51",
      "F52"
-    ]
+    ],
+    "prev": 3
    },
    {
     "rank": 4,
@@ -50,7 +53,8 @@
     "stations": [
      "F51",
      "F52"
-    ]
+    ],
+    "prev": 4
    },
    {
     "rank": 5,
@@ -60,7 +64,8 @@
      "F51",
      "F52",
      "675"
-    ]
+    ],
+    "prev": 6
    },
    {
     "rank": 6,
@@ -69,7 +74,8 @@
     "stations": [
      "F51",
      "F52"
-    ]
+    ],
+    "prev": 5
    },
    {
     "rank": 7,
@@ -79,7 +85,8 @@
      "L01",
      "L01",
      "620"
-    ]
+    ],
+    "prev": 7
    },
    {
     "rank": 8,
@@ -89,7 +96,8 @@
      "H01",
      "807",
      "290"
-    ]
+    ],
+    "prev": 8
    },
    {
     "rank": 9,
@@ -99,7 +107,8 @@
      "807",
      "H21",
      "V00"
-    ]
+    ],
+    "prev": 9
    },
    {
     "rank": 10,
@@ -109,7 +118,8 @@
      "J95",
      "F65",
      "932"
-    ]
+    ],
+    "prev": 10
    },
    {
     "rank": 11,
@@ -119,7 +129,8 @@
      "G96",
      "I52",
      "703"
-    ]
+    ],
+    "prev": 11
    },
    {
     "rank": 12,
@@ -129,7 +140,8 @@
      "F51",
      "F52",
      "568"
-    ]
+    ],
+    "prev": 12
    },
    {
     "rank": 13,
@@ -139,7 +151,8 @@
      "I52",
      "G96",
      "703"
-    ]
+    ],
+    "prev": 13
    },
    {
     "rank": 14,
@@ -148,7 +161,8 @@
     "stations": [
      "H01",
      "H01"
-    ]
+    ],
+    "prev": 15
    },
    {
     "rank": 15,
@@ -157,7 +171,8 @@
     "stations": [
      "F51",
      "F52"
-    ]
+    ],
+    "prev": 14
    },
    {
     "rank": 16,
@@ -166,7 +181,8 @@
     "stations": [
      "H36",
      "734"
-    ]
+    ],
+    "prev": 16
    },
    {
     "rank": 17,
@@ -176,7 +192,8 @@
      "204",
      "M21",
      "Q62"
-    ]
+    ],
+    "prev": 17
    },
    {
     "rank": 18,
@@ -185,7 +202,8 @@
     "stations": [
      "033",
      "K19"
-    ]
+    ],
+    "prev": 18
    },
    {
     "rank": 19,
@@ -195,7 +213,8 @@
      "F51",
      "F52",
      "608"
-    ]
+    ],
+    "prev": 19
    },
    {
     "rank": 20,
@@ -204,7 +223,8 @@
     "stations": [
      "I93",
      "958"
-    ]
+    ],
+    "prev": 20
    },
    {
     "rank": 21,
@@ -214,7 +234,8 @@
      "I52",
      "G96",
      "V00"
-    ]
+    ],
+    "prev": 21
    },
    {
     "rank": 22,
@@ -223,7 +244,8 @@
     "stations": [
      "F51",
      "F52"
-    ]
+    ],
+    "prev": 22
    },
    {
     "rank": 23,
@@ -233,7 +255,8 @@
      "I52",
      "G96",
      "V06"
-    ]
+    ],
+    "prev": 23
    },
    {
     "rank": 24,
@@ -243,7 +266,8 @@
      "I52",
      "G96",
      "V06"
-    ]
+    ],
+    "prev": 24
    },
    {
     "rank": 25,
@@ -251,7 +275,1809 @@
     "count": 4048,
     "stations": [
      "033"
-    ]
+    ],
+    "prev": 25
+   },
+   {
+    "rank": 26,
+    "name": "P. Bacci",
+    "count": 3954,
+    "stations": [
+     "104",
+     "B33",
+     "B09"
+    ],
+    "prev": 28
+   },
+   {
+    "rank": 27,
+    "name": "P. R. Holvorcem",
+    "count": 3941,
+    "stations": [
+     "926",
+     "860",
+     "I77"
+    ],
+    "prev": 26
+   },
+   {
+    "rank": 28,
+    "name": "T. Dukes",
+    "count": 3938,
+    "stations": [
+     "F52",
+     "F51"
+    ],
+    "prev": 27
+   },
+   {
+    "rank": 29,
+    "name": "M. Schwartz",
+    "count": 3872,
+    "stations": [
+     "926"
+    ],
+    "prev": 29
+   },
+   {
+    "rank": 30,
+    "name": "M. Blythe",
+    "count": 3769,
+    "stations": [
+     "704",
+     "G45",
+     "P07"
+    ],
+    "prev": 30
+   },
+   {
+    "rank": 31,
+    "name": "E. Pettarin",
+    "count": 3750,
+    "stations": [
+     "595",
+     "L01"
+    ],
+    "prev": 32
+   },
+   {
+    "rank": 32,
+    "name": "M. Bezpalko",
+    "count": 3743,
+    "stations": [
+     "704"
+    ],
+    "prev": 31
+   },
+   {
+    "rank": 33,
+    "name": "M. Tichý",
+    "count": 3681,
+    "stations": [
+     "246",
+     "046",
+     "246"
+    ],
+    "prev": 33
+   },
+   {
+    "rank": 34,
+    "name": "S. Melnikov",
+    "count": 3674,
+    "stations": [
+     "033"
+    ],
+    "prev": 34
+   },
+   {
+    "rank": 35,
+    "name": "A. C. Gilmore",
+    "count": 3461,
+    "stations": [
+     "474"
+    ],
+    "prev": 35
+   },
+   {
+    "rank": 36,
+    "name": "C. Hoegner",
+    "count": 3455,
+    "stations": [
+     "033"
+    ],
+    "prev": 36
+   },
+   {
+    "rank": 37,
+    "name": "K. W. Wierzchos",
+    "count": 3428,
+    "stations": [
+     "I52",
+     "G96",
+     "703"
+    ],
+    "prev": 37
+   },
+   {
+    "rank": 38,
+    "name": "T. H. Bressi",
+    "count": 3323,
+    "stations": [
+     "291",
+     "691",
+     "695"
+    ],
+    "prev": 38
+   },
+   {
+    "rank": 39,
+    "name": "M. Maestripieri",
+    "count": 3215,
+    "stations": [
+     "104"
+    ],
+    "prev": 40
+   },
+   {
+    "rank": 40,
+    "name": "B. Gibson",
+    "count": 3205,
+    "stations": [
+     "F51",
+     "F52"
+    ],
+    "prev": 39
+   },
+   {
+    "rank": 41,
+    "name": "P. Dupouy",
+    "count": 3129,
+    "stations": [
+     "958"
+    ],
+    "prev": 41
+   },
+   {
+    "rank": 42,
+    "name": "P. M. Kilmartin",
+    "count": 3004,
+    "stations": [
+     "474"
+    ],
+    "prev": 42
+   },
+   {
+    "rank": 43,
+    "name": "A. R. Gibbs",
+    "count": 2836,
+    "stations": [
+     "G96",
+     "I52",
+     "703"
+    ],
+    "prev": 43
+   },
+   {
+    "rank": 44,
+    "name": "R. Wainscoat",
+    "count": 2827,
+    "stations": [
+     "568",
+     "T14"
+    ],
+    "prev": 45
+   },
+   {
+    "rank": 45,
+    "name": "J. Herman",
+    "count": 2820,
+    "stations": [
+     "F52",
+     "F51"
+    ],
+    "prev": 44
+   },
+   {
+    "rank": 46,
+    "name": "F. Shelly",
+    "count": 2758,
+    "stations": [
+     "704"
+    ],
+    "prev": 46
+   },
+   {
+    "rank": 47,
+    "name": "J. E. McGaha",
+    "count": 2606,
+    "stations": [
+     "854",
+     "651"
+    ],
+    "prev": 47
+   },
+   {
+    "rank": 48,
+    "name": "J. Tonry",
+    "count": 2587,
+    "stations": [
+     "T08",
+     "T05",
+     "W68"
+    ],
+    "prev": 48
+   },
+   {
+    "rank": 48,
+    "name": "L. Denneau",
+    "count": 2587,
+    "stations": [
+     "T08",
+     "T05",
+     "W68"
+    ],
+    "prev": 48
+   },
+   {
+    "rank": 50,
+    "name": "H. Weiland",
+    "count": 2560,
+    "stations": [
+     "T08",
+     "T05",
+     "W68"
+    ],
+    "prev": 50
+   },
+   {
+    "rank": 51,
+    "name": "L. Manguso",
+    "count": 2437,
+    "stations": [
+     "704"
+    ],
+    "prev": 51
+   },
+   {
+    "rank": 52,
+    "name": "G. Galli",
+    "count": 2420,
+    "stations": [
+     "203",
+     "M21",
+     "204"
+    ],
+    "prev": 52
+   },
+   {
+    "rank": 53,
+    "name": "R. Huber",
+    "count": 2390,
+    "stations": [
+     "704"
+    ],
+    "prev": 53
+   },
+   {
+    "rank": 54,
+    "name": "M. Micheli",
+    "count": 2376,
+    "stations": [
+     "Z84",
+     "J04",
+     "568"
+    ],
+    "prev": 54
+   },
+   {
+    "rank": 55,
+    "name": "D. Torres",
+    "count": 2308,
+    "stations": [
+     "704"
+    ],
+    "prev": 55
+   },
+   {
+    "rank": 56,
+    "name": "E. J. Christensen",
+    "count": 2285,
+    "stations": [
+     "G96",
+     "I52",
+     "703"
+    ],
+    "prev": 56
+   },
+   {
+    "rank": 57,
+    "name": "A. Boattini",
+    "count": 2259,
+    "stations": [
+     "G96",
+     "703",
+     "104"
+    ],
+    "prev": 57
+   },
+   {
+    "rank": 58,
+    "name": "J. V. Scotti",
+    "count": 2221,
+    "stations": [
+     "291",
+     "691",
+     "695"
+    ],
+    "prev": 58
+   },
+   {
+    "rank": 59,
+    "name": "R. A. Mastaler",
+    "count": 2218,
+    "stations": [
+     "291",
+     "V00",
+     "691"
+    ],
+    "prev": 59
+   },
+   {
+    "rank": 60,
+    "name": "R. E. Hill",
+    "count": 2214,
+    "stations": [
+     "G96",
+     "703",
+     "I52"
+    ],
+    "prev": 60
+   },
+   {
+    "rank": 61,
+    "name": "J. K. Hogan",
+    "count": 2047,
+    "stations": [
+     "G96",
+     "I52",
+     "703"
+    ],
+    "prev": 61
+   },
+   {
+    "rank": 62,
+    "name": "J. Tichá",
+    "count": 2025,
+    "stations": [
+     "246",
+     "046"
+    ],
+    "prev": 62
+   },
+   {
+    "rank": 63,
+    "name": "Y. Ikari",
+    "count": 2005,
+    "stations": [
+     "900"
+    ],
+    "prev": 63
+   },
+   {
+    "rank": 64,
+    "name": "K. Sárneczky",
+    "count": 1967,
+    "stations": [
+     "K88",
+     "461",
+     "413"
+    ],
+    "prev": 64
+   },
+   {
+    "rank": 65,
+    "name": "L. Horn",
+    "count": 1923,
+    "stations": [
+     "807"
+    ],
+    "prev": 65
+   },
+   {
+    "rank": 66,
+    "name": "C. Jacques",
+    "count": 1909,
+    "stations": [
+     "Y00",
+     "Y05",
+     "I77"
+    ],
+    "prev": 66
+   },
+   {
+    "rank": 67,
+    "name": "J. B. Fazekas",
+    "count": 1841,
+    "stations": [
+     "I52",
+     "G96",
+     "V06"
+    ],
+    "prev": 67
+   },
+   {
+    "rank": 68,
+    "name": "R. Kracke",
+    "count": 1821,
+    "stations": [
+     "704"
+    ],
+    "prev": 68
+   },
+   {
+    "rank": 69,
+    "name": "F. B. Zoltowski",
+    "count": 1803,
+    "stations": [
+     "858",
+     "426"
+    ],
+    "prev": 69
+   },
+   {
+    "rank": 70,
+    "name": "H. Sato",
+    "count": 1760,
+    "stations": [
+     "H06",
+     "Q62",
+     "Q23"
+    ],
+    "prev": 70
+   },
+   {
+    "rank": 71,
+    "name": "M. Hartmann",
+    "count": 1751,
+    "stations": [
+     "033"
+    ],
+    "prev": 71
+   },
+   {
+    "rank": 72,
+    "name": "R. J. Wainscoat",
+    "count": 1726,
+    "stations": [
+     "568"
+    ],
+    "prev": 72
+   },
+   {
+    "rank": 73,
+    "name": "U. Laux",
+    "count": 1688,
+    "stations": [
+     "033"
+    ],
+    "prev": 73
+   },
+   {
+    "rank": 74,
+    "name": "J. B. de Vanssay",
+    "count": 1683,
+    "stations": [
+     "958",
+     "W96"
+    ],
+    "prev": 74
+   },
+   {
+    "rank": 75,
+    "name": "G. Spitz",
+    "count": 1678,
+    "stations": [
+     "704",
+     "G45",
+     "P07"
+    ],
+    "prev": 75
+   },
+   {
+    "rank": 76,
+    "name": "L. Hudin",
+    "count": 1646,
+    "stations": [
+     "L04",
+     "L04",
+     "950"
+    ],
+    "prev": 79
+   },
+   {
+    "rank": 77,
+    "name": "J. A. Johnson",
+    "count": 1626,
+    "stations": [
+     "I52",
+     "G96",
+     "703"
+    ],
+    "prev": 76
+   },
+   {
+    "rank": 78,
+    "name": "K. Kadota",
+    "count": 1610,
+    "stations": [
+     "349"
+    ],
+    "prev": 77
+   },
+   {
+    "rank": 79,
+    "name": "V. F. Carvajal",
+    "count": 1595,
+    "stations": [
+     "I52",
+     "G96",
+     "V00"
+    ],
+    "prev": 80
+   },
+   {
+    "rank": 80,
+    "name": "T. Lister",
+    "count": 1589,
+    "stations": [
+     "W86",
+     "K91",
+     "K93"
+    ],
+    "prev": 78
+   },
+   {
+    "rank": 81,
+    "name": "R. Naves",
+    "count": 1560,
+    "stations": [
+     "213",
+     "J47",
+     "A02"
+    ],
+    "prev": 81
+   },
+   {
+    "rank": 82,
+    "name": "D. T. Durig",
+    "count": 1519,
+    "stations": [
+     "850",
+     "V21"
+    ],
+    "prev": 82
+   },
+   {
+    "rank": 83,
+    "name": "E. Prosperi",
+    "count": 1492,
+    "stations": [
+     "160",
+     "A71",
+     "G00"
+    ],
+    "prev": 83
+   },
+   {
+    "rank": 84,
+    "name": "M. Shao",
+    "count": 1476,
+    "stations": [
+     "U74",
+     "654",
+     "U68"
+    ],
+    "prev": 84
+   },
+   {
+    "rank": 84,
+    "name": "N. Saini",
+    "count": 1476,
+    "stations": [
+     "U74",
+     "654",
+     "U68"
+    ],
+    "prev": 84
+   },
+   {
+    "rank": 84,
+    "name": "R. Trahan",
+    "count": 1476,
+    "stations": [
+     "U74",
+     "654",
+     "U68"
+    ],
+    "prev": 84
+   },
+   {
+    "rank": 87,
+    "name": "T. Burdullis",
+    "count": 1442,
+    "stations": [
+     "568",
+     "T14"
+    ],
+    "prev": 87
+   },
+   {
+    "rank": 88,
+    "name": "S. Foglia",
+    "count": 1438,
+    "stations": [
+     "203",
+     "147",
+     "Q62"
+    ],
+    "prev": 88
+   },
+   {
+    "rank": 89,
+    "name": "A. D. Grauer",
+    "count": 1429,
+    "stations": [
+     "G96",
+     "703",
+     "I52"
+    ],
+    "prev": 89
+   },
+   {
+    "rank": 90,
+    "name": "M. Jaeger",
+    "count": 1409,
+    "stations": [
+     "160",
+     "A71",
+     "G00"
+    ],
+    "prev": 93
+   },
+   {
+    "rank": 91,
+    "name": "L. Wells",
+    "count": 1408,
+    "stations": [
+     "568",
+     "T14"
+    ],
+    "prev": 91
+   },
+   {
+    "rank": 91,
+    "name": "R. S. McMillan",
+    "count": 1408,
+    "stations": [
+     "291",
+     "691",
+     "695"
+    ],
+    "prev": 90
+   },
+   {
+    "rank": 93,
+    "name": "T. A. Pruyne",
+    "count": 1398,
+    "stations": [
+     "G96",
+     "I52",
+     "703"
+    ],
+    "prev": 92
+   },
+   {
+    "rank": 94,
+    "name": "L. Hutton",
+    "count": 1396,
+    "stations": [
+     "807"
+    ],
+    "prev": 95
+   },
+   {
+    "rank": 95,
+    "name": "J. Young",
+    "count": 1382,
+    "stations": [
+     "673"
+    ],
+    "prev": 94
+   },
+   {
+    "rank": 96,
+    "name": "E. Guido",
+    "count": 1343,
+    "stations": [
+     "473",
+     "H06",
+     "160"
+    ],
+    "prev": 96
+   },
+   {
+    "rank": 97,
+    "name": "R. H. McNaught",
+    "count": 1333,
+    "stations": [
+     "E12",
+     "413",
+     "E12"
+    ],
+    "prev": 97
+   },
+   {
+    "rank": 98,
+    "name": "A. F. Tubbiolo",
+    "count": 1311,
+    "stations": [
+     "291",
+     "691",
+     "695"
+    ],
+    "prev": 98
+   },
+   {
+    "rank": 99,
+    "name": "D. J. Tholen",
+    "count": 1303,
+    "stations": [
+     "568",
+     "T12",
+     "T09"
+    ],
+    "prev": 98
+   },
+   {
+    "rank": 100,
+    "name": "M. Tombelli",
+    "count": 1260,
+    "stations": [
+     "K83",
+     "104",
+     "108"
+    ],
+    "prev": 101
+   },
+   {
+    "rank": 101,
+    "name": "J. G. Ries",
+    "count": 1258,
+    "stations": [
+     "711"
+    ],
+    "prev": 100
+   },
+   {
+    "rank": 102,
+    "name": "F. Ursache",
+    "count": 1251,
+    "stations": [
+     "M45",
+     "950"
+    ],
+    "prev": 109
+   },
+   {
+    "rank": 103,
+    "name": "L. Conversi",
+    "count": 1225,
+    "stations": [
+     "Z84",
+     "J04",
+     "309"
+    ],
+    "prev": 103
+   },
+   {
+    "rank": 104,
+    "name": "E. Magnier",
+    "count": 1222,
+    "stations": [
+     "F51",
+     "F52"
+    ],
+    "prev": 102
+   },
+   {
+    "rank": 104,
+    "name": "M. T. Read",
+    "count": 1222,
+    "stations": [
+     "291",
+     "691"
+    ],
+    "prev": 104
+   },
+   {
+    "rank": 106,
+    "name": "H. Flewelling",
+    "count": 1217,
+    "stations": [
+     "T08",
+     "T14",
+     "T05"
+    ],
+    "prev": 105
+   },
+   {
+    "rank": 107,
+    "name": "M. Hicks",
+    "count": 1193,
+    "stations": [
+     "644",
+     "608",
+     "673"
+    ],
+    "prev": 106
+   },
+   {
+    "rank": 108,
+    "name": "K. Lawrence",
+    "count": 1189,
+    "stations": [
+     "644",
+     "608",
+     "675"
+    ],
+    "prev": 107
+   },
+   {
+    "rank": 109,
+    "name": "D. Cromer",
+    "count": 1188,
+    "stations": [
+     "734"
+    ],
+    "prev": 110
+   },
+   {
+    "rank": 110,
+    "name": "A. Heinze",
+    "count": 1185,
+    "stations": [
+     "T08",
+     "T05",
+     "568"
+    ],
+    "prev": 108
+   },
+   {
+    "rank": 111,
+    "name": "L. Poropat",
+    "count": 1175,
+    "stations": [
+     "L01",
+     "595",
+     "204"
+    ],
+    "prev": 114
+   },
+   {
+    "rank": 112,
+    "name": "P. Ruiz",
+    "count": 1165,
+    "stations": [
+     "J04"
+    ],
+    "prev": 111
+   },
+   {
+    "rank": 113,
+    "name": "A. Serrano",
+    "count": 1151,
+    "stations": [
+     "G96",
+     "I52",
+     "703"
+    ],
+    "prev": 115
+   },
+   {
+    "rank": 114,
+    "name": "D. Goodin",
+    "count": 1150,
+    "stations": [
+     "734"
+    ],
+    "prev": 113
+   },
+   {
+    "rank": 115,
+    "name": "S. Adams",
+    "count": 1141,
+    "stations": [
+     "704"
+    ],
+    "prev": 112
+   },
+   {
+    "rank": 116,
+    "name": "F. Ocaña",
+    "count": 1120,
+    "stations": [
+     "Z84",
+     "J04",
+     "F65"
+    ],
+    "prev": 116
+   },
+   {
+    "rank": 117,
+    "name": "R. G. Matheny",
+    "count": 1101,
+    "stations": [
+     "G96",
+     "I52",
+     "703"
+    ],
+    "prev": 117
+   },
+   {
+    "rank": 118,
+    "name": "G. Sostero",
+    "count": 1098,
+    "stations": [
+     "473",
+     "H06",
+     "160"
+    ],
+    "prev": 118
+   },
+   {
+    "rank": 119,
+    "name": "M. Urbanik",
+    "count": 1074,
+    "stations": [
+     "G02",
+     "Q62",
+     "H06"
+    ],
+    "prev": 120
+   },
+   {
+    "rank": 120,
+    "name": "R. Bacci",
+    "count": 1071,
+    "stations": [
+     "K63",
+     "104",
+     "B09"
+    ],
+    "prev": 119
+   },
+   {
+    "rank": 121,
+    "name": "A. Testa",
+    "count": 1066,
+    "stations": [
+     "587",
+     "204"
+    ],
+    "prev": 121
+   },
+   {
+    "rank": 122,
+    "name": "E. Pimentel",
+    "count": 1053,
+    "stations": [
+     "Y00",
+     "I77",
+     "Y05"
+    ],
+    "prev": 122
+   },
+   {
+    "rank": 123,
+    "name": "J. Pittichová",
+    "count": 1051,
+    "stations": [
+     "673",
+     "568",
+     "675"
+    ],
+    "prev": 124
+   },
+   {
+    "rank": 124,
+    "name": "S. Pravdo",
+    "count": 1023,
+    "stations": [
+     "644",
+     "608",
+     "566"
+    ],
+    "prev": 123
+   },
+   {
+    "rank": 125,
+    "name": "G. J. Garradd",
+    "count": 1004,
+    "stations": [
+     "E12",
+     "422",
+     "413"
+    ],
+    "prev": 125
+   },
+   {
+    "rank": 126,
+    "name": "B. Haeusler",
+    "count": 997,
+    "stations": [
+     "K87",
+     "U52",
+     "B82"
+    ],
+    "prev": 126
+   },
+   {
+    "rank": 127,
+    "name": "R. Valentine",
+    "count": 972,
+    "stations": [
+     "734"
+    ],
+    "prev": 130
+   },
+   {
+    "rank": 128,
+    "name": "A. Hidas",
+    "count": 971,
+    "stations": [
+     "E23"
+    ],
+    "prev": 127
+   },
+   {
+    "rank": 129,
+    "name": "S. Watters",
+    "count": 968,
+    "stations": [
+     "F51",
+     "F52",
+     "705"
+    ],
+    "prev": 127
+   },
+   {
+    "rank": 130,
+    "name": "S. Prosperi",
+    "count": 954,
+    "stations": [
+     "160",
+     "A71",
+     "G00"
+    ],
+    "prev": 129
+   },
+   {
+    "rank": 131,
+    "name": "D. Abreu",
+    "count": 947,
+    "stations": [
+     "J04"
+    ],
+    "prev": 131
+   },
+   {
+    "rank": 131,
+    "name": "R. Siverd",
+    "count": 947,
+    "stations": [
+     "W68",
+     "T05",
+     "T08"
+    ],
+    "prev": 131
+   },
+   {
+    "rank": 133,
+    "name": "F. Kugel",
+    "count": 941,
+    "stations": [
+     "A77",
+     "J43",
+     "511"
+    ],
+    "prev": 134
+   },
+   {
+    "rank": 134,
+    "name": "B. M. Africano",
+    "count": 937,
+    "stations": [
+     "I52",
+     "G96",
+     "703"
+    ],
+    "prev": 133
+   },
+   {
+    "rank": 135,
+    "name": "R. Kresken",
+    "count": 927,
+    "stations": [
+     "Z84",
+     "J04",
+     "611"
+    ],
+    "prev": 135
+   },
+   {
+    "rank": 136,
+    "name": "C. Zhai",
+    "count": 916,
+    "stations": [
+     "654",
+     "U68",
+     "I41"
+    ],
+    "prev": 136
+   },
+   {
+    "rank": 137,
+    "name": "W. Hasubick",
+    "count": 915,
+    "stations": [
+     "215"
+    ],
+    "prev": 137
+   },
+   {
+    "rank": 138,
+    "name": "G. Wells",
+    "count": 909,
+    "stations": [
+     "Z80",
+     "247"
+    ],
+    "prev": 138
+   },
+   {
+    "rank": 139,
+    "name": "A. Maury",
+    "count": 884,
+    "stations": [
+     "W94",
+     "W96",
+     "X10"
+    ],
+    "prev": 139
+   },
+   {
+    "rank": 140,
+    "name": "A. Baransky",
+    "count": 861,
+    "stations": [
+     "585",
+     "B18"
+    ],
+    "prev": 140
+   },
+   {
+    "rank": 141,
+    "name": "C. Gerhard",
+    "count": 858,
+    "stations": [
+     "K74",
+     "C95"
+    ],
+    "prev": 143
+   },
+   {
+    "rank": 142,
+    "name": "J. Jahn",
+    "count": 849,
+    "stations": [
+     "C95",
+     "H06",
+     "Q62"
+    ],
+    "prev": 141
+   },
+   {
+    "rank": 143,
+    "name": "J.Ticha",
+    "count": 846,
+    "stations": [
+     "246",
+     "046"
+    ],
+    "prev": 142
+   },
+   {
+    "rank": 144,
+    "name": "D. D. Balam",
+    "count": 842,
+    "stations": [
+     "658"
+    ],
+    "prev": 148
+   },
+   {
+    "rank": 145,
+    "name": "A. Milner",
+    "count": 840,
+    "stations": [
+     "704"
+    ],
+    "prev": 144
+   },
+   {
+    "rank": 145,
+    "name": "J. Paige",
+    "count": 840,
+    "stations": [
+     "704",
+     "G45",
+     "P07"
+    ],
+    "prev": 144
+   },
+   {
+    "rank": 145,
+    "name": "P. Festler",
+    "count": 840,
+    "stations": [
+     "704",
+     "G45",
+     "P07"
+    ],
+    "prev": 144
+   },
+   {
+    "rank": 145,
+    "name": "R. Brungard",
+    "count": 840,
+    "stations": [
+     "704",
+     "G45",
+     "P07"
+    ],
+    "prev": 144
+   },
+   {
+    "rank": 149,
+    "name": "W. Vollmann",
+    "count": 832,
+    "stations": [
+     "160",
+     "A71",
+     "E16"
+    ],
+    "prev": 149
+   },
+   {
+    "rank": 150,
+    "name": "P. C. Sherrod",
+    "count": 828,
+    "stations": [
+     "H45",
+     "H41"
+    ],
+    "prev": 150
+   },
+   {
+    "rank": 151,
+    "name": "C. Wipper",
+    "count": 824,
+    "stations": [
+     "568",
+     "T14"
+    ],
+    "prev": 151
+   },
+   {
+    "rank": 152,
+    "name": "H. Stange",
+    "count": 822,
+    "stations": [
+     "704"
+    ],
+    "prev": 152
+   },
+   {
+    "rank": 152,
+    "name": "M. McCleary",
+    "count": 822,
+    "stations": [
+     "704"
+    ],
+    "prev": 152
+   },
+   {
+    "rank": 154,
+    "name": "D. Husar",
+    "count": 811,
+    "stations": [
+     "M49",
+     "C95",
+     "221"
+    ],
+    "prev": 154
+   },
+   {
+    "rank": 155,
+    "name": "J. E. Rogers",
+    "count": 797,
+    "stations": [
+     "U52",
+     "670",
+     "675"
+    ],
+    "prev": 156
+   },
+   {
+    "rank": 156,
+    "name": "S. Gajdos",
+    "count": 794,
+    "stations": [
+     "118"
+    ],
+    "prev": 155
+   },
+   {
+    "rank": 157,
+    "name": "H. Watanabe",
+    "count": 789,
+    "stations": [
+     "Q06",
+     "247"
+    ],
+    "prev": 161
+   },
+   {
+    "rank": 158,
+    "name": "A. Aletti",
+    "count": 780,
+    "stations": [
+     "M21",
+     "204",
+     "L01"
+    ],
+    "prev": 159
+   },
+   {
+    "rank": 159,
+    "name": "E. F. Helin",
+    "count": 779,
+    "stations": [
+     "644",
+     "608",
+     "566"
+    ],
+    "prev": 157
+   },
+   {
+    "rank": 160,
+    "name": "F. Manca",
+    "count": 759,
+    "stations": [
+     "587",
+     "204"
+    ],
+    "prev": 158
+   },
+   {
+    "rank": 161,
+    "name": "M. Honkova",
+    "count": 757,
+    "stations": [
+     "246",
+     "046"
+    ],
+    "prev": 160
+   },
+   {
+    "rank": 162,
+    "name": "M. Kocer",
+    "count": 742,
+    "stations": [
+     "246",
+     "046"
+    ],
+    "prev": 162
+   },
+   {
+    "rank": 163,
+    "name": "R. Thicksten",
+    "count": 741,
+    "stations": [
+     "644",
+     "608"
+    ],
+    "prev": 163
+   },
+   {
+    "rank": 164,
+    "name": "J. Camarasa",
+    "count": 734,
+    "stations": [
+     "B49",
+     "N56",
+     "L81"
+    ],
+    "prev": 164
+   },
+   {
+    "rank": 164,
+    "name": "J.-F. Soulier",
+    "count": 734,
+    "stations": [
+     "C10",
+     "L27",
+     "W96"
+    ],
+    "prev": 165
+   },
+   {
+    "rank": 166,
+    "name": "T. Seki",
+    "count": 723,
+    "stations": [
+     "372"
+    ],
+    "prev": 166
+   },
+   {
+    "rank": 167,
+    "name": "T. Beuden",
+    "count": 716,
+    "stations": [
+     "I52",
+     "G96",
+     "703"
+    ],
+    "prev": 167
+   },
+   {
+    "rank": 168,
+    "name": "K. Hills",
+    "count": 709,
+    "stations": [
+     "D90",
+     "J22"
+    ],
+    "prev": 169
+   },
+   {
+    "rank": 169,
+    "name": "P. Choi",
+    "count": 706,
+    "stations": [
+     "654"
+    ],
+    "prev": 168
+   },
+   {
+    "rank": 170,
+    "name": "J. Kistler",
+    "count": 685,
+    "stations": [
+     "704"
+    ],
+    "prev": 170
+   },
+   {
+    "rank": 171,
+    "name": "S. M. Larson",
+    "count": 674,
+    "stations": [
+     "G96",
+     "703",
+     "V37"
+    ],
+    "prev": 171
+   },
+   {
+    "rank": 172,
+    "name": "E. Gomez",
+    "count": 672,
+    "stations": [
+     "W86",
+     "K92",
+     "K91"
+    ],
+    "prev": 172
+   },
+   {
+    "rank": 173,
+    "name": "D. Woodworth",
+    "count": 668,
+    "stations": [
+     "568",
+     "T14"
+    ],
+    "prev": 172
+   },
+   {
+    "rank": 174,
+    "name": "J. Thiel",
+    "count": 659,
+    "stations": [
+     "F51",
+     "F52"
+    ],
+    "prev": 174
+   },
+   {
+    "rank": 174,
+    "name": "S. Greenstreet",
+    "count": 659,
+    "stations": [
+     "W86",
+     "K92",
+     "W85"
+    ],
+    "prev": 175
+   },
+   {
+    "rank": 176,
+    "name": "Z. Moravec",
+    "count": 646,
+    "stations": [
+     "046",
+     "K62",
+     "246"
+    ],
+    "prev": 176
+   },
+   {
+    "rank": 177,
+    "name": "Y. Ramanjooloo",
+    "count": 643,
+    "stations": [
+     "T12",
+     "568"
+    ],
+    "prev": 187
+   },
+   {
+    "rank": 178,
+    "name": "F. Bellini",
+    "count": 642,
+    "stations": [
+     "M21",
+     "204"
+    ],
+    "prev": 186
+   },
+   {
+    "rank": 178,
+    "name": "M. Emmerich",
+    "count": 642,
+    "stations": [
+     "A17",
+     "247"
+    ],
+    "prev": 177
+   },
+   {
+    "rank": 178,
+    "name": "S. Melchert",
+    "count": 642,
+    "stations": [
+     "A17",
+     "247"
+    ],
+    "prev": 177
+   },
+   {
+    "rank": 181,
+    "name": "S. S. Sheppard",
+    "count": 638,
+    "stations": [
+     "568",
+     "304",
+     "807"
+    ],
+    "prev": 179
+   },
+   {
+    "rank": 182,
+    "name": "E. Bryssinck",
+    "count": 637,
+    "stations": [
+     "B96",
+     "H10",
+     "H06"
+    ],
+    "prev": 180
+   },
+   {
+    "rank": 183,
+    "name": "S. Kahale",
+    "count": 632,
+    "stations": [
+     "F51"
+    ],
+    "prev": 181
+   },
+   {
+    "rank": 184,
+    "name": "A. Nakamura",
+    "count": 631,
+    "stations": [
+     "360"
+    ],
+    "prev": 181
+   },
+   {
+    "rank": 185,
+    "name": "R. Ligustri",
+    "count": 627,
+    "stations": [
+     "235",
+     "H06",
+     "Q62"
+    ],
+    "prev": 183
+   },
+   {
+    "rank": 186,
+    "name": "T. McVey",
+    "count": 626,
+    "stations": [
+     "704",
+     "G45",
+     "P07"
+    ],
+    "prev": 184
+   },
+   {
+    "rank": 187,
+    "name": "V. Gonano",
+    "count": 624,
+    "stations": [
+     "473",
+     "H06",
+     "H10"
+    ],
+    "prev": 185
+   },
+   {
+    "rank": 188,
+    "name": "A. Asami",
+    "count": 614,
+    "stations": [
+     "300",
+     "355",
+     "P93"
+    ],
+    "prev": 188
+   },
+   {
+    "rank": 189,
+    "name": "G. Attard",
+    "count": 611,
+    "stations": [
+     "W94",
+     "X10",
+     "W95"
+    ],
+    "prev": 191
+   },
+   {
+    "rank": 190,
+    "name": "C. Rinner",
+    "count": 610,
+    "stations": [
+     "A77",
+     "J43",
+     "958"
+    ],
+    "prev": 189
+   },
+   {
+    "rank": 191,
+    "name": "A. Mantero",
+    "count": 606,
+    "stations": [
+     "C77",
+     "B04"
+    ],
+    "prev": 190
+   },
+   {
+    "rank": 192,
+    "name": "A. Diepvens",
+    "count": 604,
+    "stations": [
+     "C23"
+    ],
+    "prev": 193
+   },
+   {
+    "rank": 193,
+    "name": "B. Lutkenhoner",
+    "count": 601,
+    "stations": [
+     "G40",
+     "W88",
+     "Q62"
+    ],
+    "prev": 192
+   },
+   {
+    "rank": 194,
+    "name": "T. Felber",
+    "count": 598,
+    "stations": [
+     "G34"
+    ],
+    "prev": 194
+   },
+   {
+    "rank": 195,
+    "name": "G. Ventre",
+    "count": 592,
+    "stations": [
+     "L06",
+     "587"
+    ],
+    "prev": 194
+   },
+   {
+    "rank": 196,
+    "name": "L. Sarounova",
+    "count": 587,
+    "stations": [
+     "557",
+     "611"
+    ],
+    "prev": 196
+   },
+   {
+    "rank": 197,
+    "name": "L. Donato",
+    "count": 586,
+    "stations": [
+     "473",
+     "H06",
+     "H10"
+    ],
+    "prev": 197
+   },
+   {
+    "rank": 198,
+    "name": "P. Sicoli",
+    "count": 582,
+    "stations": [
+     "587"
+    ],
+    "prev": 198
+   },
+   {
+    "rank": 198,
+    "name": "Q.-Z. Ye",
+    "count": 582,
+    "stations": [
+     "I41",
+     "D35",
+     "G37"
+    ],
+    "prev": 199
+   },
+   {
+    "rank": 200,
+    "name": "S. Okumura",
+    "count": 576,
+    "stations": [
+     "300",
+     "P93"
+    ],
+    "prev": 200
    }
   ],
   "neighbours": [
@@ -263,7 +2089,8 @@
      "T08",
      "T14",
      "T05"
-    ]
+    ],
+    "prev": 105
    },
    {
     "rank": 107,
@@ -273,7 +2100,8 @@
      "644",
      "608",
      "673"
-    ]
+    ],
+    "prev": 106
    },
    {
     "rank": 108,
@@ -283,7 +2111,8 @@
      "644",
      "608",
      "675"
-    ]
+    ],
+    "prev": 107
    },
    {
     "rank": 109,
@@ -291,7 +2120,8 @@
     "count": 1188,
     "stations": [
      "734"
-    ]
+    ],
+    "prev": 110
    },
    {
     "rank": 110,
@@ -301,7 +2131,8 @@
      "T08",
      "T05",
      "568"
-    ]
+    ],
+    "prev": 108
    },
    {
     "rank": 111,
@@ -311,7 +2142,8 @@
      "L01",
      "595",
      "204"
-    ]
+    ],
+    "prev": 114
    },
    {
     "rank": 112,
@@ -319,7 +2151,8 @@
     "count": 1165,
     "stations": [
      "J04"
-    ]
+    ],
+    "prev": 111
    },
    {
     "rank": 113,
@@ -329,7 +2162,8 @@
      "G96",
      "I52",
      "703"
-    ]
+    ],
+    "prev": 115
    },
    {
     "rank": 114,
@@ -337,7 +2171,8 @@
     "count": 1150,
     "stations": [
      "734"
-    ]
+    ],
+    "prev": 113
    },
    {
     "rank": 115,
@@ -345,7 +2180,8 @@
     "count": 1141,
     "stations": [
      "704"
-    ]
+    ],
+    "prev": 112
    },
    {
     "rank": 116,
@@ -355,9 +2191,12 @@
      "Z84",
      "J04",
      "F65"
-    ]
+    ],
+    "prev": 116
    }
-  ]
+  ],
+  "compared_to": "2026-09-24",
+  "compared_reconstructed": true
  },
  "measurer": {
   "rank": 290,
