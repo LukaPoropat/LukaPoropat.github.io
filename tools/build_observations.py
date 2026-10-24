@@ -497,9 +497,17 @@ def main():
         "objects": out_objects,
     }
     out_path = os.path.join(data_dir, "observations.json")
+    print(json.dumps(summary, indent=1))
+    # a run that found nothing new leaves the file alone (only "generated" would change), so the daily
+    # workflow has nothing to commit and doesn't republish the site
+    old = json.load(open(out_path, encoding="utf-8")) if os.path.exists(out_path) else None
+    same = old is not None and {k: v for k, v in old.items() if k != "generated"} == \
+        {k: v for k, v in json.loads(json.dumps(result)).items() if k != "generated"}
+    if same:
+        print("nothing new;", out_path, "left as it is")
+        return
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(result, f, separators=(",", ":"), ensure_ascii=False)
-    print(json.dumps(summary, indent=1))
     print("wrote", out_path)
 
 
