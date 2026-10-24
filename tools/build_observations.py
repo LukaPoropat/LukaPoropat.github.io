@@ -36,6 +36,7 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 MPECWATCH = "https://sbnmpc.astro.umd.edu/mpecwatch/byStation/station_{}.html"
 JAHN = "https://mpec.jostjahn.de/person-data/{}.js"
 MPC_MPEC = re.compile(r"^https://(www\.)?minorplanetcenter\.net/mpec/K\d\d/K\d\d[0-9A-Za-z]+\.html$")
+MPEC_ID = re.compile(r"^\d{4}-[A-Z]\d+$")  # e.g. 2026-U49
 SBDB = "https://ssd-api.jpl.nasa.gov/sbdb.api"
 UA = {"User-Agent": "luka-poropat-website-stats/1.0 (personal site data build)"}
 B62 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
@@ -110,7 +111,7 @@ def jahn_list(person, station, cache):
             continue
         for row in rows:
             mpec, url, title, stations, date = row[0], row[1], row[2], row[4], row[6]
-            if station in stations and re.match(r"^\d{4}-[A-Z]\d+$", mpec) and MPC_MPEC.match(url):
+            if station in stations and MPEC_ID.match(mpec) and MPC_MPEC.match(url):
                 out[mpec] = {"id": mpec, "title": title, "url": url, "date": date,
                              "discovery": None, "first_followup": None, "type": "", "src": "jahn"}
     return list(out.values())
@@ -120,6 +121,8 @@ def jahn_list(person, station, cache):
 def mpec_text(mpec_id, url, cache):
     # Cache by MPEC number: packed names such as K22Ua1 (U361) and K22UA1 (U101) differ only
     # in case and collide on case-insensitive file systems (Windows, macOS).
+    if not MPEC_ID.match(mpec_id):  # the numbers come from other sites' lists and become file names
+        raise ValueError(f"not an MPEC number: {mpec_id!r}")
     path = os.path.join(cache, "mpec", mpec_id + ".txt")
     if os.path.exists(path):
         return open(path, encoding="utf-8").read()

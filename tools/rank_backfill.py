@@ -40,7 +40,8 @@ def recent_mpecs(cache, days):
     rows = list(csv.DictReader(io.StringIO(open(path, encoding="utf-8").read().lstrip("﻿")), delimiter="\t"))
     latest = max(r["Issued"] for r in rows)[:10]
     since = (dt.date.fromisoformat(latest) - dt.timedelta(days=days)).isoformat()
-    keep = [r for r in rows if r["Issued"][:10] > since and r["Category"] != "Daily" and bo.MPC_MPEC.match(r["URL"])]
+    keep = [r for r in rows if r["Issued"][:10] > since and r["Category"] != "Daily"
+            and bo.MPEC_ID.match(r["MPEC"]) and bo.MPC_MPEC.match(r["URL"])]
     return since, keep
 
 

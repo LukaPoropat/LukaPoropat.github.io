@@ -12,6 +12,7 @@ import io
 import json
 import os
 import re
+import sys
 import urllib.request
 
 from PIL import Image
@@ -46,26 +47,34 @@ def main():
             break
         page += 1
 
-    gallery = []
+    gallery, used = [], set()
     for img in images:
         thumbs = {t["alias"]: t["url"] for t in img.get("thumbnails", [])}
-        name = slug(img["title"])
+        key = re.sub(r"[^A-Za-z0-9]", "", str(img.get("hash") or ""))
+        name = slug(img["title"]) or "image"
+        if name in used:  # two images with the same title (or none) must not share one file
+            name = f"{name}-{key.lower()[:8]}"
+        used.add(name)
         path = os.path.join(out_dir, name + ".jpg")
-        if not os.path.exists(path):
-            pic = Image.open(io.BytesIO(get(thumbs["hd"]))).convert("RGB")
-            pic.save(path, "JPEG", quality=88, optimize=True, progressive=True)
-            small = pic.copy()
-            small.thumbnail((640, 640 * 3))
-            small.save(os.path.join(out_dir, name + "-thumb.jpg"), "JPEG", quality=82, optimize=True, progressive=True)
-            print("saved", name)
-        w, h = Image.open(path).size
+        try:
+            if not os.path.exists(path):
+                pic = Image.open(io.BytesIO(get(thumbs["hd"]))).convert("RGB")
+                pic.save(path, "JPEG", quality=88, optimize=True, progressive=True)
+                small = pic.copy()
+                small.thumbnail((640, 640 * 3))
+                small.save(os.path.join(out_dir, name + "-thumb.jpg"), "JPEG", quality=82, optimize=True, progressive=True)
+                print("saved", name)
+            w, h = Image.open(path).size
+        except Exception as exc:  # noqa: BLE001 - one bad image shouldn't stop the whole gallery update
+            print(f"  skipped {img.get('title')!r}: {exc}", file=sys.stderr)
+            continue
         gallery.append({
             "title": img["title"],
             "date": (img.get("published") or img.get("uploaded") or "")[:10],
             "src": f"assets/images/gallery/{name}.jpg",
             "thumb": f"assets/images/gallery/{name}-thumb.jpg",
             "w": w, "h": h,
-            "url": f"https://www.astrobin.com/{img['hash']}/",
+            "url": f"https://www.astrobin.com/{key}/",
         })
     with open(os.path.join(ROOT, "data", "gallery.json"), "w", encoding="utf-8") as f:
         json.dump(gallery, f, indent=1, ensure_ascii=False)

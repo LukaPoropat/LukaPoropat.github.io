@@ -10,7 +10,12 @@
 	var current = 0;
 	var months = HR ? ['siječanj', 'veljača', 'ožujak', 'travanj', 'svibanj', 'lipanj', 'srpanj', 'kolovoz', 'rujan', 'listopad', 'studeni', 'prosinac']
 		: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-	function nice(d) { var p = d.split('-'); return months[+p[1] - 1] + ' ' + p[0] + (HR ? '.' : ''); }
+	function nice(d) {
+		if (!/^\d{4}-\d\d/.test(d || '')) return '';  // an image without a date shows none (not "undefined")
+		var p = d.split('-'); return months[+p[1] - 1] + ' ' + p[0] + (HR ? '.' : '');
+	}
+	// links read from the data file are only used if they are https://
+	var safeUrl = function (u) { return /^https:\/\//.test(u || '') ? u : 'https://app.astrobin.com/u/AstroLux'; };
 
 	function show(i) {
 		current = (i + items.length) % items.length;
@@ -19,7 +24,7 @@
 		img.alt = it.title;
 		box.querySelector('.lb-title').textContent = it.title;
 		box.querySelector('.lb-date').textContent = nice(it.date);
-		box.querySelector('.lb-link').href = it.url;
+		box.querySelector('.lb-link').href = safeUrl(it.url);
 		if (!box.open) box.showModal();
 	}
 	box.addEventListener('click', function (e) {
@@ -32,7 +37,7 @@
 		if (e.key === 'ArrowLeft') show(current - 1);
 	});
 
-	fetch(ROOT + 'data/gallery.json').then(function (r) { return r.json(); }).then(function (list) {
+	fetch(ROOT + 'data/gallery.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (list) {
 		items = list;
 		list.forEach(function (it, i) {
 			var b = document.createElement('button');

@@ -140,6 +140,8 @@ def people_table(text, header):
 
 
 def station_people(code, cache_dir):
+    if not re.match(r"^[0-9A-Z]{3}$", code):  # the codes come from MPEC Watch's table and become file names
+        raise ValueError(f"not an observatory code: {code!r}")
     path = os.path.join(cache_dir, f"tail_{code}.json")
     if os.path.exists(path) and time.time() - os.path.getmtime(path) < 6 * 86400:
         return json.load(open(path, encoding="utf-8"))
