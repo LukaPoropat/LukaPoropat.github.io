@@ -258,7 +258,8 @@ figure { margin: 0; }
 .data-table tr.is-me td { background: var(--highlight); font-weight: 600; }
 .data-table a { color: var(--link); }
 /* rank movement over the last month: green up, red down, grey unchanged */
-.data-table td.move { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.data-table td.move { white-space: nowrap; font-variant-numeric: tabular-nums;
+	position: relative; }  /* its hidden screen-reader text is positioned absolutely: keep it inside the scrolling box, or the 200-row list stretches the page far below the footer */
 .data-table.no-move .move, .data-table.no-move .move-h { display: none; }
 .mv { font-weight: 600; font-size: .8rem; }
 .mv-up { color: var(--up); }
