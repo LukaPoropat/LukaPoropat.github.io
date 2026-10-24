@@ -2,9 +2,11 @@
 """
 Build data/observations.json: every object observed by one person from one MPC station.
 
-  1. MPEC Watch lists every Minor Planet Electronic Circular (MPEC) that contains
-     observations from the station (default L01, Visnjan Observatory, Tican).
-  2. Each MPEC is fetched from the Minor Planet Center (cached on disk) and kept if the
+  1. Two lists name the Minor Planet Electronic Circulars (MPECs) to check: MPEC Watch lists every
+     MPEC with observations from the station (default L01, Visnjan Observatory, Tican), and Jost
+     Jahn's MPEC statistics (mpec.jostjahn.de) list the person's own circulars. MPEC Watch misses
+     some circulars and lists new ones later; Jost Jahn's list fills those gaps.
+  2. Each MPEC is fetched from the Minor Planet Center (cached on disk) and kept only if the
      person appears as observer or measurer for that station in "Observer details".
   3. The station's 80-column observation lines in those MPECs give the objects.
   4. Current orbits come from JPL's Small-Body Database API (falling back to nothing,
@@ -32,6 +34,8 @@ import urllib.request
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 MPECWATCH = "https://sbnmpc.astro.umd.edu/mpecwatch/byStation/station_{}.html"
+JAHN = "https://mpec.jostjahn.de/person-data/{}.js"
+MPC_MPEC = re.compile(r"^https://(www\.)?minorplanetcenter\.net/mpec/K\d\d/K\d\d[0-9A-Za-z]+\.html$")
 SBDB = "https://ssd-api.jpl.nasa.gov/sbdb.api"
 UA = {"User-Agent": "luka-poropat-website-stats/1.0 (personal site data build)"}
 B62 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
@@ -78,6 +82,38 @@ def mpec_list(station, cache):
             "type": html.unescape(re.sub(r"<.*?>", "", tds[5])).strip(),
         })
     return out
+
+
+# ---------------------------------------------------------------- Jost Jahn's list
+def jahn_list(person, station, cache):
+    """The person's circulars from Jost Jahn's MPEC statistics (observer and measurer pages).
+
+    MPEC Watch's station list misses some circulars (50 of Luka's at L01 in October 2026), so these
+    fill the gaps. Each one is still read from the Minor Planet Center before it counts. If the list
+    can't be read, the run carries on with MPEC Watch alone."""
+    out = {}
+    for role in ("obs", "mea"):
+        path = os.path.join(cache, f"jahn_{person}-{role}.js")
+        try:
+            if not os.path.exists(path) or time.time() - os.path.getmtime(path) > 12 * 3600:
+                try:
+                    raw = fetch(JAHN.format(f"{person}-{role}"), retries=2, timeout=120)
+                    with open(path, "w", encoding="utf-8") as f:
+                        f.write(raw)
+                except Exception:  # noqa: BLE001 - keep using the last copy, if there is one
+                    if not os.path.exists(path):
+                        raise
+            raw = open(path, encoding="utf-8").read()
+            rows = json.loads(raw[raw.index("=") + 1:].strip().rstrip(";"))["data"]
+        except Exception as exc:  # noqa: BLE001 - someone else's site: never let it break the build
+            print(f"  Jost Jahn's {role} list not read ({exc}); using MPEC Watch only", file=sys.stderr)
+            continue
+        for row in rows:
+            mpec, url, title, stations, date = row[0], row[1], row[2], row[4], row[6]
+            if station in stations and re.match(r"^\d{4}-[A-Z]\d+$", mpec) and MPC_MPEC.match(url):
+                out[mpec] = {"id": mpec, "title": title, "url": url, "date": date,
+                             "discovery": None, "first_followup": None, "type": "", "src": "jahn"}
+    return list(out.values())
 
 
 # ---------------------------------------------------------------- MPEC parsing
@@ -190,6 +226,30 @@ def observed_objects(text, station):
     return found
 
 
+def followup_flags(text, station):
+    """(first follow-up, discovery) for `station`, read from an MPEC's observation lines, for circulars
+    MPEC Watch doesn't list. As in MPEC Watch, the discovery is the line marked '*', and the first
+    follow-up is the earliest later observation by a station that hadn't already seen the object
+    (this rule reproduces MPEC Watch's flag on all 1,125 L01 circulars crediting Luka, October 2026)."""
+    tracks = {}
+    for line in text.split("\n"):
+        m = re.match(r"(\d{4}) (\d\d) (\d\d\.\d+)", line[15:32]) if len(line) >= 80 else None
+        if m:
+            when = (int(m.group(1)), int(m.group(2)), float(m.group(3)))
+            tracks.setdefault(line[0:12], []).append((when, line[77:80], line[12] == "*"))
+    first = disc = False
+    for obs in tracks.values():
+        found = [o for o in obs if o[2]]
+        if not found:
+            continue
+        t0, st0, _ = min(found)
+        disc = disc or st0 == station
+        seen = {o[1] for o in obs if o[0] <= t0} | {st0}  # discoverer, precoveries, same-night detections
+        later = sorted(o for o in obs if o[0] > t0 and o[1] not in seen)
+        first = first or (bool(later) and later[0][1] == station)
+    return first, disc
+
+
 def title_designation(title):
     t = re.sub(r"^COMET\s+", "", title.strip())
     t = re.sub(r"\s+\(.*\)$", "", t) if t.startswith(("C/", "P/", "A/", "I/")) else t
@@ -261,11 +321,26 @@ def category(rec, title_type):
     return {"APO": "apollo", "ATE": "aten", "AMO": "amor", "IEO": "atira"}.get(rec["cls"], "other")
 
 
+def mpec_type(rec, title):
+    """MPEC Watch's object-type code, worked out from the orbit for circulars MPEC Watch doesn't list."""
+    if "COMET" in title.upper() or (rec and (rec["kind"] or "").startswith("c")):
+        return "Comet"
+    if not rec or rec["H"] is None:
+        return ""
+    if rec["pha"]:
+        return "PHAl18" if rec["H"] < 18 else "PHAg18"
+    if rec["neo"]:
+        return "NEAl18" if rec["H"] < 18 else "NEA (H>22)" if rec["H"] > 22 else "NEA (18>H>22)"
+    return ""
+
+
 # ---------------------------------------------------------------- main
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--station", default="L01")
     ap.add_argument("--surname", default="Poropat", help="surname as printed in MPEC observer details")
+    ap.add_argument("--jahn", default="lporopat",
+                    help="person key on mpec.jostjahn.de (page lporopat-obs.html); '' for MPEC Watch only")
     ap.add_argument("--cache", default=os.path.join(os.path.dirname(__file__), ".cache"))
     ap.add_argument("--workers", type=int, default=3, help="parallel MPEC downloads (be gentle)")
     ap.add_argument("--refresh-orbits", action="store_true")
@@ -279,18 +354,32 @@ def main():
     index = json.load(open(index_path, encoding="utf-8")) if os.path.exists(index_path) else {}
 
     mpecs = mpec_list(args.station, args.cache)
-    todo = [m for m in mpecs if m["id"] not in index and "DAILY ORBIT UPDATE" not in m["title"]]
+    listed = {m["id"]: m for m in mpecs}
+    extra = [m for m in (jahn_list(args.jahn, args.station, args.cache) if args.jahn else []) if m["id"] not in listed]
+    # a circular first found through Jost Jahn's list takes MPEC Watch's flags once MPEC Watch lists it too
+    for mid, rec in index.items():
+        if rec.get("src") == "jahn" and mid in listed:
+            m = listed[mid]
+            rec.update({"ty": m["type"], "ff": m["first_followup"], "disc": m["discovery"]})
+            del rec["src"]
+    todo = [m for m in mpecs + extra if m["id"] not in index and "DAILY ORBIT UPDATE" not in m["title"].upper()]
     if args.limit:
         todo = todo[: args.limit]
-    print(f"{len(mpecs)} MPECs with {args.station} observations, {len(todo)} new to check")
+    print(f"{len(mpecs)} MPECs with {args.station} observations on MPEC Watch, {len(extra)} more in "
+          f"Jost Jahn's list, {len(todo)} new to check")
 
     def work(m):
         text = mpec_text(m["id"], m["url"], args.cache)
         entry = station_entry(text, args.station)
         is_obs, is_mea = roles(entry, args.surname)
+        if m.get("src") == "jahn":  # no MPEC Watch flags for this one: read them from the observation lines
+            ff, disc = followup_flags(text, args.station)
+            m = dict(m, first_followup=ff, discovery=disc, type="Comet" if "COMET" in m["title"].upper() else "")
         rec = {"t": m["title"], "d": m["date"][:10], "ty": m["type"], "ff": m["first_followup"],
                "disc": m["discovery"], "u": m["url"], "me": bool(entry and args.surname in entry),
                "obs": is_obs, "mea": is_mea}
+        if m.get("src"):
+            rec["src"] = m["src"]
         if not rec["me"]:
             return m["id"], {"me": False}  # remembered so it is never fetched again
         rec["objects"] = observed_objects(text, args.station)
@@ -351,9 +440,10 @@ def main():
         if still:
             print("  still no orbit (next run tries again): " + ", ".join(still), file=sys.stderr)
 
+    orbits = {des: orbit_record(data) for des, data in orbit_data.items()}
     rows = {}  # keyed by JPL's designation, so renamed objects (A/2022 T1 -> C/2022 T1) merge
     for des, obj in sorted(objects.items(), key=lambda kv: kv[1]["first"]):
-        orb = orbit_record(orbit_data[des])
+        orb = orbits[des]
         key = (orb or {}).get("full") or des
         if key in rows:
             row = rows[key]
@@ -388,13 +478,21 @@ def main():
         "mpecs_by_year": dict(sorted(by_year.items())),
         "objects_by_category": by_cat,
         "station_mpecs_checked": len(index),
+        "mpecs_only_in_jahn": sum(1 for r in mine.values() if r.get("src") == "jahn"),
     }
+
+    def type_of(rec):  # circulars only Jost Jahn's list has: MPEC Watch's type code from the orbit
+        if rec["ty"]:
+            return rec["ty"]
+        return mpec_type(orbits.get(next(iter(rec.get("objects", {})), None)), rec["t"])
+
     result = {
         "generated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "station": args.station,
         "observer": args.surname,
         "summary": summary,
-        "mpecs": [{"id": k, **{x: v[x] for x in ("t", "d", "ty", "ff", "obs", "mea", "u")}}
+        "mpecs": [{"id": k, "t": v["t"], "d": v["d"], "ty": type_of(v), "ff": v["ff"], "obs": v["obs"],
+                   "mea": v["mea"], "u": v["u"]}
                   for k, v in sorted(mine.items(), key=lambda kv: kv[1]["d"], reverse=True)],
         "objects": out_objects,
     }

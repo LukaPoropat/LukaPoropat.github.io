@@ -39,19 +39,22 @@ python tools/fetch_astrobin.py              # AstroBin images                 ->
 ```
 
 - `build_observations.py` reads the list of Višnjan (L01) circulars from
-  [MPEC Watch](https://sbnmpc.astro.umd.edu/mpecwatch/byStation/station_L01.html), downloads each MPEC
-  from the Minor Planet Center once (cached in `tools/.cache/`), keeps those whose observer details
-  name me, extracts the objects from the L01 observation lines and fetches their orbits from the
-  [JPL Small-Body Database API](https://ssd-api.jpl.nasa.gov/doc/sbdb.html).
+  [MPEC Watch](https://sbnmpc.astro.umd.edu/mpecwatch/byStation/station_L01.html) and the list of my
+  circulars from [Jost Jahn's MPEC statistics](https://mpec.jostjahn.de/) (MPEC Watch misses some, and
+  lists new ones later), downloads each MPEC from the Minor Planet Center once (cached in `tools/.cache/`),
+  keeps those whose observer details name me, extracts the objects from the L01 observation lines and
+  fetches their orbits from the [JPL Small-Body Database API](https://ssd-api.jpl.nasa.gov/doc/sbdb.html).
+  Circulars only Jost Jahn lists get their "first follow-up" flag and object type worked out from the
+  MPEC itself, the way MPEC Watch does. If his list can't be read, the run uses MPEC Watch alone.
   `data/mpec_index.json` remembers every circular already checked, so later runs are quick.
   Orbits are cached as well and re-fetched from JPL once they are a month old.
 - `observer_rank.py` sums MPEC Watch's per-observatory "Individual Observer" tables over all
   observatories with at least 150 MPECs and ranks every individual. If MPEC Watch can't be read
   completely, it leaves the previous `data/rank.json` untouched.
 
-The workflow in `.github/workflows/update-data.yml` runs all three every Monday (05:17 UTC), commits
-the new data and publishes the site, so the statistics, the 3D map and the rank stay current on their
-own. It also publishes the site after every push to `main`, and you can start it by hand from the
+The workflow in `.github/workflows/update-data.yml` looks for new MPECs every day (05:17 UTC) and also
+runs the rank and gallery scripts on Mondays; when anything changed it commits the new data and publishes
+the site, so the statistics, the 3D map and the rank stay current on their own. It also publishes the site after every push to `main`, and you can start it by hand from the
 *Actions* tab (*Update data and publish → Run workflow*).
 
 ## Languages
@@ -94,5 +97,5 @@ the browser to re-check every file on each load, so a normal reload always shows
 3. Leave *Settings → Actions → General → Workflow permissions* at the default (*Read*): the workflow
    asks for exactly what each job needs (only its final commit step can write).
 4. Push this folder to the `main` branch. The push publishes the site at
-   `https://<your-username>.github.io`; from then on it refreshes itself every Monday.
+   `https://<your-username>.github.io`; from then on it refreshes itself every day.
    (If you pushed before step 2, re-run the workflow from the *Actions* tab.)

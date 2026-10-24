@@ -1,6 +1,7 @@
-# Publishes the site to GitHub Pages on every push to main. Every Monday it first refreshes the
-# observation map, statistics, world rank and gallery (only new MPECs are fetched; data/mpec_index.json
-# remembers the ones already checked), commits the new data and then publishes.
+# Publishes the site to GitHub Pages on every push to main. Every day it first looks for new MPECs
+# (observation map and statistics; only new MPECs are fetched, data/mpec_index.json remembers the ones
+# already checked), on Mondays it also refreshes the world rank and the gallery; when anything changed
+# it commits the new data and publishes.
 # Needs Settings -> Pages -> Build and deployment -> Source: "GitHub Actions".
 name: Update data and publish
 
@@ -8,7 +9,8 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: "17 5 * * 1"
+    - cron: "17 5 * * 1"      # Mondays: new MPECs, world rank and gallery
+    - cron: "17 5 * * 0,2-6"  # other days: new MPECs only
   workflow_dispatch:
 
 permissions:
@@ -25,6 +27,8 @@ jobs:
     timeout-minutes: 120
     permissions:
       contents: write  # to commit the refreshed data
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -45,31 +49,36 @@ jobs:
         run: python tools/build_observations.py --workers 2
 
       - name: World rank
+        if: github.event.schedule != '17 5 * * 0,2-6'  # weekly: it reads ~400 MPEC Watch pages
         run: python tools/observer_rank.py --name L.Poropat --station L01
         continue-on-error: true  # keeps last week's rank if MPEC Watch can't be read
 
       - name: AstroBin gallery
+        if: github.event.schedule != '17 5 * * 0,2-6'
         run: |
           pip install --quiet pillow
           python tools/fetch_astrobin.py --user-id 93381
         continue-on-error: true
 
       - name: Commit changes
+        id: commit
         env:
           TOKEN: ${{ github.token }}  # only this step can push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data assets/images/gallery
-          git diff --cached --quiet && exit 0
+          if git diff --cached --quiet; then echo "changed=false" >> "$GITHUB_OUTPUT"; exit 0; fi
           git commit -m "Update observation data"
           remote="https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git pull --rebase "$remote" "$GITHUB_REF_NAME"
           git push "$remote" "HEAD:$GITHUB_REF_NAME"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
 
   deploy:
     needs: update
-    if: ${{ !cancelled() && !failure() }}  # also runs when "update" was skipped (pushes)
+    # also runs when "update" was skipped (pushes); a scheduled run that found nothing new publishes nothing
+    if: ${{ !cancelled() && !failure() && (github.event_name != 'schedule' || needs.update.outputs.changed == 'true') }}
     runs-on: ubuntu-latest
     permissions:
       contents: read

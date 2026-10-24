@@ -15,7 +15,7 @@
 	};
 
 	var T = HR ? {
-		au: 'AJ', mpecWatch: 'MPEC Watcha', year: 'Godina', klass: 'Razred', colMpecs: 'Broj MPEC-ova', colObjects: 'Broj objekata', toDate: 'do sada',
+		au: 'AJ', mpecWatch: 'MPEC Watcha', jahn: 'MPEC statistike Josta Jahna', year: 'Godina', klass: 'Razred', colMpecs: 'Broj MPEC-ova', colObjects: 'Broj objekata', toDate: 'do sada',
 		mpecs: ['MPEC', 'MPEC-a', 'MPEC-ova'], objects: ['objekt', 'objekta', 'objekata'],
 		asTable: 'Prikaži kao tablicu', asChart: 'Prikaži kao grafikon',
 		topWorld: 'Prikaži svjetskih top 25', aroundMe: 'Prikaži opažače oko mene',
@@ -32,7 +32,7 @@
 		fBig: 'Najveći objekt', fFar: 'Najudaljeniji perihel', observed: function (c, d) { return c + ', opažen ' + d + '.'; },
 		fFirst: 'Prvi objekt', fFirstNote: 'Prvi objekt u MPEC-u u kojem sam naveden.',
 		asteroid: 'Asteroid', object: 'Objekt', interstellar: 'Međuzvjezdani komet', comet: 'Komet',
-		note: ['Podaci: MPEC-ovi Centra za mala tijela Sunčeva sustava IAU-a (popis cirkulara za L01 s ', '), putanje iz ',
+		note: ['Podaci: MPEC-ovi Centra za mala tijela Sunčeva sustava IAU-a (popis cirkulara za L01 s ', ' i iz ', '), putanje iz ',
 			'JPL-ove baze malih tijela', '. Generirano ', ' skriptom ', '.'],
 		firstBadge: '1.', firstTitle: 'Višnjan je prvi potvrdio ovaj objekt',
 		count: function (n) { return fmt(n) + ' ' + plural(n, ['objekt', 'objekta', 'objekata']); }, prev: '‹ Prethodna', next: 'Sljedeća ›',
@@ -43,7 +43,7 @@
 			JFC: 'Komet Jupiterove obitelji', HTC: 'Komet Halleyjeva tipa', ETc: 'Komet Enckeova tipa', CTc: 'Komet Chironova tipa',
 			COM: 'Dugoperiodični komet', PAR: 'Parabolični komet', HYP: 'Hiperbolični komet' }
 	} : {
-		au: 'AU', mpecWatch: 'MPEC Watch', year: 'Year', klass: 'Class', colMpecs: 'MPECs', colObjects: 'Objects', toDate: 'to date',
+		au: 'AU', mpecWatch: 'MPEC Watch', jahn: 'Jost Jahn\'s MPEC statistics', year: 'Year', klass: 'Class', colMpecs: 'MPECs', colObjects: 'Objects', toDate: 'to date',
 		mpecs: ['MPEC', 'MPECs'], objects: ['object', 'objects'],
 		asTable: 'Show as table', asChart: 'Show as chart',
 		topWorld: 'Show world top 25', aroundMe: 'Show observers around me',
@@ -60,7 +60,7 @@
 		fBig: 'Largest object', fFar: 'Most distant perihelion', observed: function (c, d) { return c + ', observed ' + d + '.'; },
 		fFirst: 'First object', fFirstNote: 'The first object in an MPEC crediting me.',
 		asteroid: 'Asteroid', object: 'Object', interstellar: 'Interstellar comet', comet: 'Comet',
-		note: ['Data: IAU Minor Planet Center MPECs (list of L01 circulars from ', '), orbits from the ',
+		note: ['Data: IAU Minor Planet Center MPECs (list of L01 circulars from ', ' and ', '), orbits from the ',
 			'JPL Small-Body Database', '. Generated ', ' by ', '.'],
 		firstBadge: '1st', firstTitle: 'Višnjan was the first station to follow it up',
 		count: function (n) { return fmt(n) + ' ' + plural(n, ['object', 'objects']); }, prev: '‹ Prev', next: 'Next ›',
@@ -337,8 +337,9 @@
 		var note = document.getElementById('data-note'), N = T.note;
 		note.append(N[0],
 			el('a', { href: 'https://sbnmpc.astro.umd.edu/mpecwatch/byStation/station_L01.html', target: '_blank', rel: 'noopener' }, T.mpecWatch),
-			N[1], el('a', { href: 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html', target: '_blank', rel: 'noopener' }, N[2]),
-			N[3] + String(data.generated).slice(0, 10) + N[4], el('a', { href: ROOT + 'tools/build_observations.py' }, 'tools/build_observations.py'), N[5]);
+			N[1], el('a', { href: 'https://mpec.jostjahn.de/', target: '_blank', rel: 'noopener' }, T.jahn),
+			N[2], el('a', { href: 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html', target: '_blank', rel: 'noopener' }, N[3]),
+			N[4] + String(data.generated).slice(0, 10) + N[5], el('a', { href: ROOT + 'tools/build_observations.py' }, 'tools/build_observations.py'), N[6]);
 
 		objectTable(objs);
 	}
