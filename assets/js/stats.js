@@ -33,7 +33,7 @@
 		fFirst: 'Prvi objekt', fFirstNote: 'Prvi objekt u MPEC-u u kojem sam naveden.',
 		asteroid: 'Asteroid', object: 'Objekt', interstellar: 'Međuzvjezdani komet', comet: 'Komet',
 		note: ['Podaci: MPEC-ovi Centra za mala tijela Sunčeva sustava IAU-a (popis cirkulara za L01 s ', ' i iz ', '), putanje iz ',
-			'JPL-ove baze malih tijela', '. Generirano ', ' skriptom ', '.'],
+			'JPL-ove baze malih tijela', '. Generirano ', '.'],
 		firstBadge: '1.', firstTitle: 'Višnjan je prvi potvrdio ovaj objekt',
 		count: function (n) { return fmt(n) + ' ' + plural(n, ['objekt', 'objekta', 'objekata']); }, prev: '‹ Prethodna', next: 'Sljedeća ›',
 		page: function (a, b) { return 'Stranica ' + a + ' od ' + b; },
@@ -61,7 +61,7 @@
 		fFirst: 'First object', fFirstNote: 'The first object in an MPEC crediting me.',
 		asteroid: 'Asteroid', object: 'Object', interstellar: 'Interstellar comet', comet: 'Comet',
 		note: ['Data: IAU Minor Planet Center MPECs (list of L01 circulars from ', ' and ', '), orbits from the ',
-			'JPL Small-Body Database', '. Generated ', ' by ', '.'],
+			'JPL Small-Body Database', '. Generated ', '.'],
 		firstBadge: '1st', firstTitle: 'Višnjan was the first station to follow it up',
 		count: function (n) { return fmt(n) + ' ' + plural(n, ['object', 'objects']); }, prev: '‹ Prev', next: 'Next ›',
 		page: function (a, b) { return 'Page ' + a + ' of ' + b; },
@@ -339,7 +339,7 @@
 			el('a', { href: 'https://sbnmpc.astro.umd.edu/mpecwatch/byStation/station_L01.html', target: '_blank', rel: 'noopener' }, T.mpecWatch),
 			N[1], el('a', { href: 'https://mpec.jostjahn.de/', target: '_blank', rel: 'noopener' }, T.jahn),
 			N[2], el('a', { href: 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html', target: '_blank', rel: 'noopener' }, N[3]),
-			N[4] + String(data.generated).slice(0, 10) + N[5], el('a', { href: ROOT + 'tools/build_observations.py' }, 'tools/build_observations.py'), N[6]);
+			N[4] + String(data.generated).slice(0, 10) + N[5]);
 
 		objectTable(objs);
 	}
