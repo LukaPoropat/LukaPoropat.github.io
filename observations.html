@@ -57,13 +57,13 @@
 			<div class="rank-hero viz-root">
 				<div class="rank-card">
 					<div class="kpi-label">Individual observer rank, all-time</div>
-					<div class="rank-figure">#<span data-bind="rank.observer.rank">112</span></div>
+					<div class="rank-figure">#<span data-bind="rank.observer.rank">111</span></div>
 					<div class="rank-caption">
-						of <strong data-bind="rank.observer.of">6,009</strong> individual observers credited in MPECs since 1993,
-						with <strong data-bind="rank.observer.count">1,125</strong> circulars: the top <strong><span data-bind="rank.observer.top">2</span>%</strong>.
+						of <strong data-bind="rank.observer.of">8,501</strong> individual observers credited in MPECs since 1993,
+						with <strong data-bind="rank.observer.count">1,175</strong> circulars as an observer: the top <strong><span data-bind="rank.observer.top">2</span>%</strong>.
 					</div>
-					<div class="rank-meter" aria-hidden="true"><span id="rank-marker" style="left:1.8%"></span></div>
-					<div class="rank-meter-labels" aria-hidden="true"><span>#1</span><span>#<span data-bind="rank.observer.of">6,009</span></span></div>
+					<div class="rank-meter" aria-hidden="true"><span id="rank-marker" style="left:1.3%"></span></div>
+					<div class="rank-meter-labels" aria-hidden="true"><span>#1</span><span>#<span data-bind="rank.observer.of">8,501</span></span></div>
 				</div>
 				<div>
 					<div class="kpi-label" style="font-family:var(--sans)">Višnjan Observatory (L01), discovery follow-up circulars in <span data-bind="rank.fu.year" data-raw>2025</span></div>
@@ -95,14 +95,14 @@
 				</div>
 				<div class="col-12 col-lg-5">
 					<p class="source-note" style="font-size:.9rem; line-height:1.45rem">
-						<strong>How this is computed.</strong> <a href="https://sbnmpc.astro.umd.edu/mpecwatch/" target="_blank" rel="noopener">MPEC Watch</a>
-						(Q. Ye &amp; T. Hibbitts, UMD/SBN) parses every MPEC and counts, for each observatory code, how many circulars
-						name each person as an observer. I sum those counts over all
-						<span data-bind="rank.stations_scanned">391</span> observatories with at least
-						<span data-bind="rank.min_station_mpecs">150</span> MPECs and rank every individual (ties share a rank; survey
-						"teams" and unknown observers are excluded). Višnjan's placing counts follow-up MPECs per observatory in
+						<strong>How this is computed.</strong> <a href="https://mpec.jostjahn.de/" target="_blank" rel="noopener">Jost Jahn's MPEC statistics</a>
+						read every MPEC the Minor Planet Center has published and count, for each person, the circulars that
+						name them as an observer. I rank every individual by that count (ties share a rank; survey teams,
+						collaborations and unknown observers are excluded). The main stations next to each name come from
+						<a href="https://sbnmpc.astro.umd.edu/mpecwatch/" target="_blank" rel="noopener">MPEC Watch</a>
+						(Q. Ye &amp; T. Hibbitts, UMD/SBN), and Višnjan's placing counts follow-up MPECs per observatory in
 						MPEC Watch's table for the last complete year.
-						Updated <span id="rank-date">2026-10-20</span>; the script is in
+						Updated <span id="rank-date">2026-10-24</span>; the script is in
 						<a href="tools/observer_rank.py"><code>tools/observer_rank.py</code></a>.
 					</p>
 				</div>

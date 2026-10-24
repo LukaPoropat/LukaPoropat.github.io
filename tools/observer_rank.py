@@ -1,38 +1,40 @@
 #!/usr/bin/env python3
 """
-Compute an individual observer's world rank from MPEC Watch.
+Compute an individual observer's world rank (Jost Jahn's MPEC statistics) and the
+observatory's placings (MPEC Watch).
 
-MPEC Watch (https://sbnmpc.astro.umd.edu/mpecwatch/, Q. Ye & T. Hibbitts) parses
-every Minor Planet Electronic Circular and tallies, per observatory code, how many
-MPECs credit each individual observer.  This script:
+Jost Jahn's MPEC statistics (https://mpec.jostjahn.de/) read every Minor Planet Electronic
+Circular the Minor Planet Center has published and count, for each person, the circulars that
+name them as observer or measurer. This script:
 
-  1. reads the observatory table (obs.html) to get every station's MPEC total,
-  2. downloads only the tail of each sufficiently active station page (HTTP Range),
-     where the "Individual Observer" / "Individual Measurer" tables live,
-  3. sums each person's MPEC credits over all stations and ranks everyone,
-  4. writes data/rank.json for the website.
-
-An individual can never have more MPECs at a station than the station itself, so
-stations below --min-mpecs cannot change the ranking of anyone above
-(--min-mpecs x number of stations they observe from).
+  1. reads that people table and ranks every individual by circulars as observer
+     (survey teams, collaborations and unknown observers are left out),
+  2. reads MPEC Watch (https://sbnmpc.astro.umd.edu/mpecwatch/, Q. Ye & T. Hibbitts) for the
+     observatory's placings, and the tail of each sufficiently active station page (HTTP Range)
+     for the stations each ranked person observes from,
+  3. writes data/rank.json for the website.
 
 Usage:
     python tools/observer_rank.py --name L.Poropat --station L01
 """
 import argparse
 import concurrent.futures as cf
+import csv
 import datetime as dt
 import html
+import io
 import json
 import os
 import re
 import sys
 import time
+import unicodedata
 import urllib.request
 
 BASE = "https://sbnmpc.astro.umd.edu/mpecwatch/"
+JAHN_PEOPLE = "https://mpec.jostjahn.de/MPECS-STAT-PEOPLE-MPECS.tsv"
 UA = {"User-Agent": "luka-poropat-website-stats/1.0 (personal site; contact via site)"}
-NOT_PEOPLE = re.compile(r"unknown|collaboration|team|survey|project|staff|observers|students", re.I)
+NOT_PEOPLE = re.compile(r"\b(unknown|collaboration|team|survey|project|staff|observers|students|queue|service)\b", re.I)
 
 
 def fetch(url, byte_range=None, retries=4):
@@ -54,6 +56,40 @@ def cells(row):
     return [html.unescape(re.sub(r"<.*?>", "", c)).strip() for c in re.findall(r"<td[^>]*>(.*?)</td>", row, re.S)]
 
 
+def key(name):
+    """'K. Korlević' and MPEC Watch's 'K.Korlevic' -> 'kkorlevic'."""
+    plain = unicodedata.normalize("NFKD", name).encode("ascii", "ignore").decode()
+    return re.sub(r"[^a-z]", "", plain.lower())
+
+
+# ---------------------------------------------------------------- Jost Jahn: people
+def jahn_people(cache_dir):
+    path = os.path.join(cache_dir, "jahn_people.tsv")
+    if not os.path.exists(path) or time.time() - os.path.getmtime(path) > 86400:
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(fetch(JAHN_PEOPLE))
+    rows = csv.DictReader(io.StringIO(open(path, encoding="utf-8").read().lstrip("﻿")), delimiter="\t")
+    out = []
+    for r in rows:
+        name = (r.get("Person") or "").strip()
+        if name and not NOT_PEOPLE.search(name):
+            out.append({"name": name, "obs": int(r.get("Observer MPECs") or 0), "mea": int(r.get("Measurer MPECs") or 0)})
+    if len(out) < 1000:  # a cut-off or changed table would give a wrong rank
+        raise ValueError(f"only {len(out)} people in Jost Jahn's table")
+    return out
+
+
+def rank_people(people, role):
+    ordered = sorted(((p["name"], p[role]) for p in people if p[role] > 0), key=lambda kv: (-kv[1], kv[0]))
+    ranks, prev, rank = {}, None, 0
+    for pos, (name, n) in enumerate(ordered, start=1):
+        if n != prev:
+            rank, prev = pos, n
+        ranks[name] = rank
+    return ordered, ranks
+
+
+# ---------------------------------------------------------------- MPEC Watch: stations
 def station_table(cache_dir):
     path = os.path.join(cache_dir, "obs.html")
     if not os.path.exists(path) or time.time() - os.path.getmtime(path) > 86400:
@@ -108,34 +144,26 @@ def station_people(code, cache_dir):
     return result
 
 
-def rank_people(per_station, key):
-    totals, where = {}, {}
+def stations_by_person(per_station, role):
+    """key(name) -> station codes, most MPECs first (from MPEC Watch's per-station tables)."""
+    where = {}
     for code, tables in per_station.items():
-        for name, n in tables[key].items():
-            if NOT_PEOPLE.search(name):
-                continue
-            totals[name] = totals.get(name, 0) + n
-            where.setdefault(name, []).append([code, n])
-    ordered = sorted(totals.items(), key=lambda kv: (-kv[1], kv[0]))
-    ranks, prev, rank = {}, None, 0
-    for pos, (name, n) in enumerate(ordered, start=1):
-        if n != prev:
-            rank, prev = pos, n
-        ranks[name] = rank
-    return ordered, ranks, where
+        for name, n in tables[role].items():
+            where.setdefault(key(name), []).append((n, code))
+    return {k: [c for _, c in sorted(v, reverse=True)] for k, v in where.items()}
 
 
 def station_ranks(stations, code):
     keys = {"MPECs": "MPECs", "F/U": "Follow-up", "1st F/U": "First follow-up",
             "NEA FU": "NEA follow-up", "PHA FU": "PHA follow-up", "Comet FU": "Comet follow-up"}
     out = []
-    for key, label in keys.items():
-        active = [s for s in stations if s[key] > 0]
-        ordered = sorted(active, key=lambda s: -s[key])
+    for key_, label in keys.items():
+        active = [s for s in stations if s[key_] > 0]
+        ordered = sorted(active, key=lambda s: -s[key_])
         for pos, s in enumerate(ordered, start=1):
             if s["Code"] == code:
-                better = sum(1 for o in ordered if o[key] > s[key])
-                out.append({"metric": label, "rank": better + 1, "of": len(active), "count": s[key]})
+                better = sum(1 for o in ordered if o[key_] > s[key_])
+                out.append({"metric": label, "rank": better + 1, "of": len(active), "count": s[key_]})
                 break
     return out
 
@@ -204,18 +232,24 @@ def recent_station_ranks(code, cache_dir):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--name", default="L.Poropat", help="name as written by MPEC Watch, e.g. L.Poropat")
+    ap.add_argument("--person", default="L. Poropat", help="name as written in Jost Jahn's people table")
     ap.add_argument("--station", default="L01")
-    ap.add_argument("--min-mpecs", type=int, default=150, help="ignore stations with fewer MPECs")
+    ap.add_argument("--min-mpecs", type=int, default=150, help="read observers only at stations with this many MPECs")
     ap.add_argument("--cache", default=os.path.join(os.path.dirname(__file__), ".cache", "rank"))
     ap.add_argument("--out", default=os.path.join(os.path.dirname(__file__), "..", "data", "rank.json"))
     ap.add_argument("--workers", type=int, default=4)
     args = ap.parse_args()
     os.makedirs(args.cache, exist_ok=True)
 
+    try:
+        people = jahn_people(args.cache)
+    except Exception as exc:  # noqa: BLE001
+        sys.exit(f"Jost Jahn's people table could not be read ({exc}); {args.out} left unchanged")
+    print(f"{len(people)} individuals in Jost Jahn's MPEC statistics")
+
     stations = station_table(args.cache)
     active = [s for s in stations if s["MPECs"] >= args.min_mpecs]
     print(f"{len(stations)} stations, {len(active)} with >= {args.min_mpecs} MPECs")
-
     per_station = {}
     with cf.ThreadPoolExecutor(args.workers) as pool:
         futures = {pool.submit(station_people, s["Code"], args.cache): s["Code"] for s in active}
@@ -227,33 +261,38 @@ def main():
                 print(f"  failed {code}: {exc}", file=sys.stderr)
             if k % 25 == 0:
                 print(f"  {k}/{len(active)} stations")
-    if len(per_station) < 0.95 * len(active):  # a partial scan would give a wrong rank
-        sys.exit(f"only {len(per_station)} of {len(active)} stations could be read; {args.out} left unchanged")
+    if len(per_station) < 0.95 * len(active):  # only the "main stations" column depends on this scan
+        print(f"  only {len(per_station)} of {len(active)} stations read; some observatories may be missing",
+              file=sys.stderr)
 
     result = {
         "generated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "source": "MPEC Watch (sbnmpc.astro.umd.edu/mpecwatch), Minor Planet Center MPECs",
-        "name": args.name,
+        "source": "Jost Jahn's MPEC statistics (mpec.jostjahn.de) for the personal rank; MPEC Watch "
+                  "(sbnmpc.astro.umd.edu/mpecwatch) for observatory placings and stations",
+        "name": args.person,
         "stations_scanned": len(per_station),
         "min_station_mpecs": args.min_mpecs,
     }
-    for key, label in (("observers", "observer"), ("measurers", "measurer")):
-        ordered, ranks, where = rank_people(per_station, key)
-        me = args.name
+    for role, label, mw_role in (("obs", "observer", "observers"), ("mea", "measurer", "measurers")):
+        ordered, ranks = rank_people(people, role)
+        me = args.person
         if me not in ranks:
             result[label] = None
             continue
+        where = stations_by_person(per_station, mw_role)
         pos = next(i for i, (n, _) in enumerate(ordered) if n == me)
+
+        def row(n, c):
+            return {"rank": ranks[n], "name": n, "count": c, "stations": where.get(key(n), [])[:3]}
+
         result[label] = {
             "rank": ranks[me],
             "of": len(ordered),
             "count": dict(ordered)[me],
             "percentile": round(100 * (1 - (ranks[me] - 1) / len(ordered)), 2),
-            "stations": sorted(where[me], key=lambda x: -x[1]),
-            "top": [{"rank": ranks[n], "name": n, "count": c, "stations": [w[0] for w in sorted(where[n], key=lambda x: -x[1])[:3]]}
-                    for n, c in ordered[:25]],
-            "neighbours": [{"rank": ranks[n], "name": n, "count": c, "stations": [w[0] for w in sorted(where[n], key=lambda x: -x[1])[:3]]}
-                           for n, c in ordered[max(0, pos - 5): pos + 6]],
+            "stations": where.get(key(me), []),
+            "top": [row(n, c) for n, c in ordered[:25]],
+            "neighbours": [row(n, c) for n, c in ordered[max(0, pos - 5): pos + 6]],
         }
     result["station"] = {"code": args.station,
                          "name": next((s["Observatory"] for s in stations if s["Code"] == args.station), ""),
@@ -269,13 +308,12 @@ def main():
         print("  yearly follow-up rank unavailable:", exc, file=sys.stderr)
 
     if not result.get("observer"):
-        sys.exit(f"{args.name} not found in MPEC Watch's observer tables; {args.out} left unchanged")
+        sys.exit(f"{args.person} not found in Jost Jahn's people table; {args.out} left unchanged")
     os.makedirs(os.path.dirname(os.path.abspath(args.out)), exist_ok=True)
     with open(args.out, "w", encoding="utf-8") as f:
         json.dump(result, f, indent=1, ensure_ascii=False)
-    obs = result.get("observer")
-    if obs:
-        print(f"{args.name}: observer rank #{obs['rank']} of {obs['of']} ({obs['count']} MPECs)")
+    obs = result["observer"]
+    print(f"{args.person}: observer rank #{obs['rank']} of {obs['of']} ({obs['count']} MPECs)")
     print("wrote", os.path.abspath(args.out))
 
 
