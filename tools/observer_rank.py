@@ -12,9 +12,12 @@ name them as observer or measurer. This script:
   2. reads MPEC Watch (https://sbnmpc.astro.umd.edu/mpecwatch/, Q. Ye & T. Hibbitts) for the
      observatory's placings, and the tail of each sufficiently active station page (HTTP Range)
      for the stations each ranked person observes from,
-  3. writes data/rank.json for the website, and keeps a snapshot of the top of the observer
+  3. writes data/rank.json for the website, and keeps a weekly snapshot of the top of the observer
      ranking in data/rank_history.json, so the page can show who moved up or down over the last
      month and the last three months (compared with the newest snapshot at least 4 / 12 weeks old).
+
+Runs daily. Everything it reads is cached: the people table and MPEC Watch's lists for 12 hours, the
+~400 station pages behind the "main stations" column for 6 days, so those are read about once a week.
 
 Usage:
     python tools/observer_rank.py --name L.Poropat --station L01
@@ -39,6 +42,7 @@ UA = {"User-Agent": "luka-poropat-website-stats/1.0 (personal site; contact via 
 NOT_PEOPLE = re.compile(r"\b(unknown|collaboration|team|survey|project|staff|observers|students|queue|service)\b", re.I)
 TOP = 200            # observers listed in the world table
 SNAPSHOT_KEEP = 400  # observers kept in each snapshot (enough to rank the top 200 months ago)
+FRESH = 12 * 3600    # the people table and MPEC Watch's lists are re-read on every daily run (start times drift by hours)
 PERIODS = (("month", 28), ("quarter", 84))  # compare with the newest snapshot at least this many days old
 
 
@@ -70,7 +74,7 @@ def key(name):
 # ---------------------------------------------------------------- Jost Jahn: people
 def jahn_people(cache_dir):
     path = os.path.join(cache_dir, "jahn_people.tsv")
-    if not os.path.exists(path) or time.time() - os.path.getmtime(path) > 86400:
+    if not os.path.exists(path) or time.time() - os.path.getmtime(path) > FRESH:
         with open(path, "w", encoding="utf-8") as f:
             f.write(fetch(JAHN_PEOPLE))
     rows = csv.DictReader(io.StringIO(open(path, encoding="utf-8").read().lstrip("﻿")), delimiter="\t")
@@ -107,7 +111,7 @@ def snapshot_counts(counts):
 # ---------------------------------------------------------------- MPEC Watch: stations
 def station_table(cache_dir):
     path = os.path.join(cache_dir, "obs.html")
-    if not os.path.exists(path) or time.time() - os.path.getmtime(path) > 86400:
+    if not os.path.exists(path) or time.time() - os.path.getmtime(path) > FRESH:
         with open(path, "w", encoding="utf-8") as f:
             f.write(fetch(BASE + "obs.html"))
     text = open(path, encoding="utf-8").read()
@@ -225,7 +229,7 @@ def followup_year_rank(code, year, cache_dir):
 def recent_station_ranks(code, cache_dir):
     """Station placings in MPEC Watch's home-page top-10 tables (last year / 5 years / all time)."""
     path = os.path.join(cache_dir, "index.html")
-    if not os.path.exists(path) or time.time() - os.path.getmtime(path) > 86400:
+    if not os.path.exists(path) or time.time() - os.path.getmtime(path) > FRESH:
         with open(path, "w", encoding="utf-8") as f:
             f.write(fetch(BASE + "index.html"))
     text = open(path, encoding="utf-8").read()
@@ -330,7 +334,9 @@ def main():
             result[label]["compare"] = [{"period": period, "date": bases[period],
                                          "reconstructed": bool(history[bases[period]].get("reconstructed"))}
                                         for period, _ in PERIODS if period in bases]
-        if role == "obs":
+        # one snapshot a week (a later run on the same day replaces that day's), so daily runs don't bloat the file
+        recent = [d for d in history if d > (today - dt.timedelta(days=7)).isoformat()]
+        if role == "obs" and (not recent or recent == [today.isoformat()]):
             history[today.isoformat()] = {"counts": snapshot_counts(dict(ordered))}
     result["station"] = {"code": args.station,
                          "name": next((s["Observatory"] for s in stations if s["Code"] == args.station), ""),

@@ -14,7 +14,7 @@ Build data/observations.json: every object observed by one person from one MPC s
 
 Results per MPEC are remembered in data/mpec_index.json, so re-runs only fetch new
 circulars.  Daily Orbit Update MPECs carry no observer credits and are skipped.
-Orbits are cached too and re-fetched from JPL once they are a month old.
+Orbits are cached too and re-fetched from JPL once a day, so the map follows JPL's latest solutions.
 
 Usage:
     python tools/build_observations.py                 # incremental update
@@ -261,7 +261,8 @@ def title_designation(title):
 
 
 # ---------------------------------------------------------------- JPL SBDB
-ORBIT_MAX_AGE = 30 * 86400  # re-fetch cached orbits monthly: young orbits improve and objects get numbered
+ORBIT_MAX_AGE = 12 * 3600  # re-fetch every orbit on each daily run (a second run the same day reuses them):
+                           # young orbits improve, objects get numbered, MOIDs and sizes are revised
 
 
 def sbdb(des, cache, refresh=False):
@@ -345,7 +346,7 @@ def main():
     ap.add_argument("--jahn", default="lporopat",
                     help="person key on mpec.jostjahn.de (page lporopat-obs.html); '' for MPEC Watch only")
     ap.add_argument("--cache", default=os.path.join(os.path.dirname(__file__), ".cache"))
-    ap.add_argument("--workers", type=int, default=3, help="parallel MPEC downloads (be gentle)")
+    ap.add_argument("--workers", type=int, default=3, help="parallel downloads from the MPC and JPL (be gentle)")
     ap.add_argument("--refresh-orbits", action="store_true")
     ap.add_argument("--reparse", action="store_true", help="re-extract objects from cached MPECs (after parser fixes)")
     ap.add_argument("--limit", type=int, default=0, help="debug: only process N MPECs")
@@ -427,11 +428,13 @@ def main():
     print(f"{len(mine)} MPECs credit {args.surname}; {len(objects)} distinct objects")
 
     # orbits from JPL; lookups that fail (busy server, rate limit) get a second try after a pause
+    order = sorted(objects, key=lambda d: objects[d]["first"])
     orbit_data = {}
-    for k, des in enumerate(sorted(objects, key=lambda d: objects[d]["first"]), start=1):
-        orbit_data[des] = sbdb(des, args.cache, args.refresh_orbits)
-        if k % 100 == 0:
-            print(f"  orbits {k}/{len(objects)}")
+    with cf.ThreadPoolExecutor(args.workers) as pool:
+        for k, (des, data) in enumerate(zip(order, pool.map(lambda d: sbdb(d, args.cache, args.refresh_orbits), order)), start=1):
+            orbit_data[des] = data
+            if k % 100 == 0:
+                print(f"  orbits {k}/{len(objects)}")
     failed = [des for des, data in orbit_data.items() if "error" in data]
     if failed:
         print(f"  {len(failed)} orbit lookups failed; trying them again in 60 s")

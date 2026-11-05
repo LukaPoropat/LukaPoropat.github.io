@@ -1,7 +1,7 @@
 # Publishes the site to GitHub Pages on every push to main. Every day it first looks for new MPECs
-# (observation map and statistics; only new MPECs are fetched, data/mpec_index.json remembers the ones
-# already checked), on Mondays it also refreshes the world rank and the gallery; when anything changed
-# it commits the new data and publishes.
+# (only new ones are fetched, data/mpec_index.json remembers the ones already checked), re-reads every
+# object's orbit from JPL (the 3D map and the statistics) and refreshes the world rank; on Mondays it
+# also refreshes the gallery. When anything changed it commits the new data and publishes.
 # Needs Settings -> Pages -> Build and deployment -> Source: "GitHub Actions".
 name: Update data and publish
 
@@ -9,8 +9,8 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: "17 5 * * 1"      # Mondays: new MPECs, world rank and gallery
-    - cron: "17 5 * * 0,2-6"  # other days: new MPECs only
+    - cron: "17 5 * * 1"      # Mondays: new MPECs, orbits, world rank and gallery
+    - cron: "17 5 * * 0,2-6"  # other days: new MPECs, orbits and world rank
   workflow_dispatch:
 
 permissions:
@@ -29,6 +29,8 @@ jobs:
       contents: write  # to commit the refreshed data
     outputs:
       changed: ${{ steps.commit.outputs.changed }}
+    env:
+      PYTHONUNBUFFERED: "1"  # progress lines in the log as they happen
     steps:
       - uses: actions/checkout@v4
         with:
@@ -49,8 +51,7 @@ jobs:
         run: python tools/build_observations.py --workers 2
 
       - name: World rank
-        if: github.event.schedule != '17 5 * * 0,2-6'  # weekly: it reads ~400 MPEC Watch pages
-        run: python tools/observer_rank.py --name L.Poropat --station L01
+        run: python tools/observer_rank.py --name L.Poropat --station L01  # the ~400 station pages are re-read weekly
         continue-on-error: true  # keeps last week's rank if MPEC Watch can't be read
 
       - name: AstroBin gallery

@@ -314,8 +314,9 @@ figure { margin: 0; }
 .orrery canvas { display: block; width: 100%; height: 100%; touch-action: none; }
 .orrery .label-layer { position: absolute; inset: 0; pointer-events: none; }
 .orrery .canvas-host { position: absolute; inset: 0; }
-.orrery .planet-label { position: absolute; left: 0; top: 0; font-size: 11px; letter-spacing: .06em; color: #c9d1dc; text-transform: uppercase; text-shadow: 0 0 4px #000; white-space: nowrap; will-change: transform; }
+.orrery .planet-label { position: absolute; left: 0; top: 0; font-size: 11px; font-weight: 500; letter-spacing: .06em; color: #dde3ec; text-transform: uppercase; text-shadow: 0 0 2px #000, 0 0 5px #000, 0 0 10px rgba(0,0,0,.85); white-space: nowrap; will-change: transform; }  /* dark halo: readable over the bright orbit haze */
 .orrery .planet-label.earth { color: #fff; font-weight: 600; }
+.orrery .planet-label .km { text-transform: none; letter-spacing: 0; font-variant-numeric: tabular-nums; opacity: .8; }  /* the Moon's distance */
 .orrery .hud { position: absolute; z-index: 2; }
 .orrery .hud-top { top: 14px; left: 14px; right: 14px; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; pointer-events: none; }
 .orrery .hud-top > * { pointer-events: auto; }
