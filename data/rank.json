@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-06T13:09:51Z",
+ "generated": "2026-11-07T11:56:20Z",
  "source": "Jost Jahn's MPEC statistics (mpec.jostjahn.de) for the personal rank; MPEC Watch (sbnmpc.astro.umd.edu/mpecwatch) for observatory placings and stations",
  "name": "L. Poropat",
  "stations_scanned": 393,
@@ -18,7 +18,7 @@
    {
     "rank": 1,
     "name": "A. Schultz",
-    "count": 22148,
+    "count": 22149,
     "stations": [
      "F51",
      "F52"
@@ -45,7 +45,7 @@
    {
     "rank": 3,
     "name": "T. Lowe",
-    "count": 17802,
+    "count": 17803,
     "stations": [
      "F51",
      "F52"
@@ -71,7 +71,7 @@
    {
     "rank": 5,
     "name": "I. Smith",
-    "count": 10845,
+    "count": 10846,
     "stations": [
      "F51",
      "F52",
@@ -512,7 +512,7 @@
    {
     "rank": 38,
     "name": "T. H. Bressi",
-    "count": 3339,
+    "count": 3343,
     "stations": [
      "291",
      "691",
@@ -774,7 +774,7 @@
    {
     "rank": 58,
     "name": "R. A. Mastaler",
-    "count": 2241,
+    "count": 2245,
     "stations": [
      "291",
      "V00",
@@ -816,7 +816,7 @@
    {
     "rank": 61,
     "name": "J. K. Hogan",
-    "count": 2080,
+    "count": 2082,
     "stations": [
      "G96",
      "I52",
@@ -1011,7 +1011,7 @@
    {
     "rank": 76,
     "name": "V. F. Carvajal",
-    "count": 1665,
+    "count": 1666,
     "stations": [
      "I52",
      "G96",
@@ -2854,7 +2854,7 @@
    {
     "rank": 1,
     "name": "S. M. Larson",
-    "count": 29540,
+    "count": 29545,
     "stations": [
      "G96",
      "I52",
@@ -2864,7 +2864,7 @@
    {
     "rank": 2,
     "name": "R. A. Kowalski",
-    "count": 29163,
+    "count": 29168,
     "stations": [
      "G96",
      "I52",
@@ -2874,7 +2874,7 @@
    {
     "rank": 3,
     "name": "A. D. Grauer",
-    "count": 28855,
+    "count": 28857,
     "stations": [
      "G96",
      "I52",
@@ -2884,7 +2884,7 @@
    {
     "rank": 4,
     "name": "A. R. Gibbs",
-    "count": 28782,
+    "count": 28787,
     "stations": [
      "G96",
      "I52",
@@ -2894,7 +2894,7 @@
    {
     "rank": 5,
     "name": "F. C. Shelly",
-    "count": 24147,
+    "count": 24152,
     "stations": [
      "I52",
      "G96",
@@ -2904,7 +2904,7 @@
    {
     "rank": 6,
     "name": "D. C. Fuls",
-    "count": 21949,
+    "count": 21954,
     "stations": [
      "I52",
      "G96",
@@ -2914,7 +2914,7 @@
    {
     "rank": 7,
     "name": "G. J. Leonard",
-    "count": 21371,
+    "count": 21376,
     "stations": [
      "I52",
      "G96",
@@ -2924,7 +2924,7 @@
    {
     "rank": 8,
     "name": "R. L. Seaman",
-    "count": 21366,
+    "count": 21371,
     "stations": [
      "I52",
      "G96",
@@ -2934,7 +2934,7 @@
    {
     "rank": 9,
     "name": "R. Wainscoat",
-    "count": 20697,
+    "count": 20698,
     "stations": [
      "F51",
      "F52",
@@ -2944,7 +2944,7 @@
    {
     "rank": 10,
     "name": "M. Huber",
-    "count": 20500,
+    "count": 20501,
     "stations": [
      "F51",
      "F52",
@@ -2954,7 +2954,7 @@
    {
     "rank": 11,
     "name": "R. Weryk",
-    "count": 20355,
+    "count": 20356,
     "stations": [
      "F51",
      "F52",
@@ -2974,7 +2974,7 @@
    {
     "rank": 13,
     "name": "H. Groeller",
-    "count": 18065,
+    "count": 18070,
     "stations": [
      "I52",
      "G96",
@@ -2984,7 +2984,7 @@
    {
     "rank": 14,
     "name": "E. Magnier",
-    "count": 17994,
+    "count": 17995,
     "stations": [
      "F51",
      "F52"
@@ -2993,7 +2993,7 @@
    {
     "rank": 15,
     "name": "K. Chambers",
-    "count": 17993,
+    "count": 17994,
     "stations": [
      "F51",
      "F52",
@@ -3003,7 +3003,7 @@
    {
     "rank": 16,
     "name": "D. Rankin",
-    "count": 17496,
+    "count": 17501,
     "stations": [
      "I52",
      "G96",
@@ -3013,7 +3013,7 @@
    {
     "rank": 17,
     "name": "Y. Ramanjooloo",
-    "count": 16391,
+    "count": 16392,
     "stations": [
      "F51",
      "F52",
@@ -3023,7 +3023,7 @@
    {
     "rank": 18,
     "name": "K. W. Wierzchos",
-    "count": 15941,
+    "count": 15946,
     "stations": [
      "I52",
      "G96",
@@ -3042,7 +3042,7 @@
    {
     "rank": 20,
     "name": "J. Fairlamb",
-    "count": 13738,
+    "count": 13739,
     "stations": [
      "F51",
      "F52",
@@ -3052,7 +3052,7 @@
    {
     "rank": 21,
     "name": "C.-C. Lin",
-    "count": 13183,
+    "count": 13184,
     "stations": [
      "F51",
      "F52"
@@ -3061,7 +3061,7 @@
    {
     "rank": 22,
     "name": "T. de Boer",
-    "count": 12877,
+    "count": 12878,
     "stations": [
      "F51",
      "F52"
@@ -3208,25 +3208,25 @@
     "metric": "MPECs",
     "rank": 10,
     "of": 1933,
-    "count": 8052
+    "count": 8061
    },
    {
     "metric": "Follow-up",
     "rank": 3,
     "of": 996,
-    "count": 7480
+    "count": 7488
    },
    {
     "metric": "First follow-up",
     "rank": 9,
     "of": 512,
-    "count": 1193
+    "count": 1196
    },
    {
     "metric": "NEA follow-up",
     "rank": 3,
     "of": 750,
-    "count": 6781
+    "count": 6789
    },
    {
     "metric": "PHA follow-up",
@@ -3246,43 +3246,43 @@
     "category": "Top MPEC Contributors",
     "window": "Last 5 years",
     "rank": 7,
-    "count": 3726
+    "count": 3729
    },
    {
     "category": "Top MPEC Contributors",
     "window": "All time",
     "rank": 10,
-    "count": 8052
+    "count": 8061
    },
    {
     "category": "Top MPEC-ed Follow-up Observatories",
     "window": "Last 1 year",
     "rank": 6,
-    "count": 555
+    "count": 563
    },
    {
     "category": "Top MPEC-ed Follow-up Observatories",
     "window": "Last 5 years",
     "rank": 3,
-    "count": 3520
+    "count": 3522
    },
    {
     "category": "Top MPEC-ed Follow-up Observatories",
     "window": "All time",
     "rank": 3,
-    "count": 7480
+    "count": 7488
    },
    {
     "category": "Top MPEC-ed First Follow-up Observatories",
     "window": "Last 5 years",
     "rank": 7,
-    "count": 468
+    "count": 471
    },
    {
     "category": "Top MPEC-ed First Follow-up Observatories",
     "window": "All time",
     "rank": 9,
-    "count": 1193
+    "count": 1196
    }
   ],
   "followup_year": {
