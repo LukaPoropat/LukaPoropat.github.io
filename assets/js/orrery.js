@@ -920,7 +920,7 @@ export async function mountOrrery(root, dataUrl = ROOT + 'data/observations.json
 		else if (e.key === '+' || e.key === '=') sph.radius = Math.max(controls.minDistance, sph.radius * 0.85);
 		else if (e.key === '-' || e.key === '_') sph.radius = Math.min(controls.maxDistance, sph.radius / 0.85);
 		else if (e.key === ' ') setPlay(!state.playing);
-		else if (e.key === 'Escape') select(-1);
+		else if (e.key === 'Escape') { if (focus) { setView('inner'); return e.preventDefault(); } select(-1); }  // out of a close-up first
 		else return;
 		e.preventDefault();
 		camera.position.copy(controls.target).add(off.setFromSpherical(sph));
