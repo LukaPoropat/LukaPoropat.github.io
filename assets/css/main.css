@@ -445,8 +445,6 @@ html:not([data-theme="light"]):not([data-theme="logbook"]) .theme-toggle, html:n
 	/* observations: a taller 3D map */
 	.orrery { height: min(82vh, 1100px); }
 	/* publications: comet and PHA circulars in two columns */
-	#highlights-list { columns: 2; column-gap: 3rem; }
-	#highlights-list > * { break-inside: avoid; margin-top: 0; }
 	/* FAQ: title and introduction on the left, the questions on the right */
 	.container:has(> .faq) { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); grid-template-rows: auto 1fr; column-gap: 5rem; align-items: start; }
 	.container:has(> .faq) > .faq { grid-column: 2; grid-row: 1 / span 2; }

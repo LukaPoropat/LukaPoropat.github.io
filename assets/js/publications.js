@@ -1,4 +1,4 @@
-// Publications page: highlight list (comets and PHAs) and the searchable MPEC table.
+// Publications page: the searchable MPEC table.
 // Text follows <html lang> (English or Croatian); data paths follow data-root.
 (function () {
 	'use strict';
@@ -11,25 +11,17 @@
 		return a === 1 && b !== 11 ? forms[0] : a >= 2 && a <= 4 && (b < 12 || b > 14) ? forms[1] : forms[2];
 	};
 	var T = HR ? {
-		months: ['siječnja', 'veljače', 'ožujka', 'travnja', 'svibnja', 'lipnja', 'srpnja', 'kolovoza', 'rujna', 'listopada', 'studenoga', 'prosinca'],
-		date: function (y, m, d) { return d + '. ' + m + ' ' + y + '.'; },
-		circular: 'MPEC cirkular Centra za mala tijela Sunčeva sustava',
 		kFirst: 'Prvi u potvrdi', kFirstSub: 'cirkulari u kojima je Višnjan prvi potvrdio objekt',
 		kMpecs: 'MPEC-ovi u kojima sam naveden',
-		badgeLong: 'prva potvrda', badge: '1.', badgeTitle: 'Višnjan je prvi potvrdio ovaj objekt',
-		more: function (n) { return 'Još ' + n + ' u potpunom popisu ispod.'; }, none: 'Još nema.',
+		badge: '1.', badgeTitle: 'Višnjan je prvi potvrdio ovaj objekt',
 		count: function (n) { return fmt(n) + ' ' + plural(n, ['cirkular', 'cirkulara', 'cirkulara']); }, prev: '‹ Prethodna', next: 'Sljedeća ›',
 		page: function (a, b) { return 'Stranica ' + a + ' od ' + b; }, comet: 'Komet ',
 		TYPES: { 'NEA (H>22)': 'NEA, mali (H > 22)', 'NEA (18>H>22)': 'NEA, srednji (H 18–22)', 'NEAl18': 'NEA, veliki (H < 18)',
 			'PHAg18': 'PHA (H > 18)', 'PHAl18': 'PHA, veliki (H < 18)', 'Unusual': 'Neobična putanja', 'Comet': 'Komet', '': 'Ostalo' }
 	} : {
-		months: ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.'],
-		date: function (y, m, d) { return y + ' ' + m + ' ' + d; },
-		circular: 'Minor Planet Electronic Circular',
 		kFirst: 'First to follow up', kFirstSub: 'circulars where Višnjan confirmed the object first',
 		kMpecs: 'MPECs crediting me',
-		badgeLong: '1st follow-up', badge: '1st', badgeTitle: 'Višnjan was the first station to follow it up',
-		more: function (n) { return n + ' more in the complete list below.'; }, none: 'None yet.',
+		badge: '1st', badgeTitle: 'Višnjan was the first station to follow it up',
 		count: function (n) { return fmt(n) + ' ' + plural(n, ['circular', 'circulars']); }, prev: '‹ Prev', next: 'Next ›',
 		page: function (a, b) { return 'Page ' + a + ' of ' + b; }, comet: 'Comet ',
 		TYPES: { 'NEA (H>22)': 'NEA, small (H > 22)', 'NEA (18>H>22)': 'NEA, medium (H 18–22)', 'NEAl18': 'NEA, large (H < 18)',
@@ -37,7 +29,6 @@
 	};
 	var fmt = function (n) { return Number(n).toLocaleString(HR ? 'hr-HR' : 'en-US'); };
 	var safeUrl = function (u) { return /^https:\/\//.test(u || '') ? u : 'https://www.minorplanetcenter.net/mpec/RecentMPECs.html'; };
-	var niceDate = function (d) { var p = d.split('-'); return T.date(p[0], T.months[+p[1] - 1], +p[2]); };
 	function el(tag, attrs, text) {
 		var e = document.createElement(tag);
 		if (attrs) Object.keys(attrs).forEach(function (k) { e.setAttribute(k, attrs[k]); });
@@ -66,25 +57,6 @@
 		var host = document.getElementById('pub-kpis');
 		kpi(host, T.kFirst, fmt(S.first_followups), T.kFirstSub);
 		kpi(host, T.kMpecs, fmt(S.mpecs), (S.first_mpec || '').slice(0, 4) + '–' + (S.last_mpec || '').slice(0, 4));
-
-		// highlights: comets and PHAs, newest first, one entry per circular
-		var hl = document.getElementById('highlights-list');
-		var cats = {};
-		data.objects.forEach(function (o) { o.mpecs.forEach(function (id) { cats[id] = cats[id] || o.cat; }); });
-		var interstellar = function (m) { return /\b\dI\//.test(m.t); };
-		var picks = mpecs.filter(function (m) { return m.ty === 'Comet' || /^PHA/.test(m.ty) || cats[m.id] === 'pha'; });
-		picks.sort(function (a, b) { return interstellar(b) - interstellar(a); });  // interstellar first, then newest
-		picks.slice(0, 40).forEach(function (m) {
-			var p = el('p', { class: 'ds-ref' });
-			var a = el('a', { href: safeUrl(m.u), target: '_blank', rel: 'noopener' });
-			var icon = el('i', { class: interstellar(m) ? 'fa-solid fa-star' : m.ty === 'Comet' ? 'fa-solid fa-meteor' : 'fa-solid fa-triangle-exclamation', 'aria-hidden': 'true' });
-			a.append(icon, el('strong', null, 'MPEC ' + m.id), document.createTextNode(': ' + prettyTitle(m.t) + '. ' + T.circular + ', ' + niceDate(m.d) + (HR ? '' : '.')));
-			p.appendChild(a);
-			if (m.ff) { p.append(' '); p.appendChild(el('span', { class: 'badge-ff', title: T.badgeTitle }, T.badgeLong)); }
-			hl.appendChild(p);
-		});
-		if (picks.length > 40) hl.appendChild(el('p', { class: 'source-note' }, T.more(picks.length - 40)));
-		if (!picks.length) hl.appendChild(el('p', null, T.none));
 
 		// table
 		var yearSel = document.getElementById('pub-year'), typeSel = document.getElementById('pub-type');
