@@ -26,6 +26,7 @@ const L = HR ? {
 	interstellar: 'Međuzvjezdani komet', firstObs: 'prvi put opažen', firstSeen: 'Prvi put opažen ',
 	pause: 'Pauza', play: 'Pokreni', noData: 'Podaci o opažanjima nisu se mogli učitati.',
 	noWebgl: 'WebGL nije dostupan u ovom pregledniku.',
+	touchHint: 'Povucite za rotaciju, raširite prste za zumiranje. Stranicu pomičete povlačenjem donjeg ruba.', more: 'Više kontrola',
 	aria: (n) => `3D karta Sunčevog sustava: putanje asteroida i kometa promatranih i mjerenih sa Zvjezdarnice Višnjan (ukupno ${n}).`,
 	hazard: ' · potencijalno opasan', m1: 'Ukupna mag. M1', H: 'Aps. magnituda H', diam: 'Promjer', measured: 'izmjereno',
 	a: 'Velika poluos', q: 'Perihel q', e: 'Ekscentricitet', i: 'Inklinacija', P: 'Ophodno vrijeme', yr: 'god.',
@@ -45,6 +46,7 @@ const L = HR ? {
 	interstellar: 'Interstellar comet', firstObs: 'first observed', firstSeen: 'First seen ',
 	pause: 'Pause', play: 'Play', noData: 'Could not load the observation data.',
 	noWebgl: 'WebGL is not available in this browser.',
+	touchHint: 'Drag to rotate, pinch to zoom. Swipe the bottom edge to scroll the page.', more: 'More controls',
 	aria: (n) => `3D map of the Solar System showing the orbits of ${n} asteroids and comets observed from Višnjan Observatory.`,
 	hazard: ' · potentially hazardous', m1: 'Total mag. M1', H: 'Abs. magnitude H', diam: 'Diameter', measured: 'measured',
 	a: 'Semi-major axis', q: 'Perihelion q', e: 'Eccentricity', i: 'Inclination', P: 'Period', yr: 'yr',
@@ -539,20 +541,44 @@ export async function mountOrrery(root, dataUrl = ROOT + 'data/observations.json
 	const invalidate = () => { dirty = true; };
 	controls.addEventListener('change', invalidate);
 	// Don't hijack page scrolling: the wheel zooms only after the map was clicked
-	// (until the pointer leaves) or with Ctrl/Cmd held. One-finger vertical swipes scroll the page.
+	// (until the pointer leaves) or with Ctrl/Cmd held.
+	// Touch screens: the map fills the whole screen (see main.css). While it is only partly on screen, swipes over it
+	// scroll the page, the page settles with the map filling the screen when a scroll ends near it, and a tap on it
+	// brings it there. Once it fills the screen every gesture on it moves the map (drag rotates, pinch zooms); a swipe
+	// that starts on the strip along its bottom edge, or on the controls, scrolls the page.
 	renderer.domElement.style.touchAction = 'pan-y';
-	let engaged = false;
+	let engaged = false, touchMode = false, firstTap = false, hinted = false;
 	const hint = $('.zoom-hint');
+	if (hint) hint.dataset.wheel = hint.textContent;
 	let hintTimer = 0;
-	canvasHost.addEventListener('pointerdown', () => { engaged = true; }, true);
+	const flash = (text, ms = 1600) => {
+		if (!hint) return;
+		if (text) hint.textContent = text;
+		hint.classList.add('show');
+		clearTimeout(hintTimer);
+		hintTimer = setTimeout(() => hint.classList.remove('show'), ms);
+	};
+	const coarse = matchMedia('(pointer: coarse)');
+	const edge = document.createElement('div');
+	edge.className = 'swipe-edge'; edge.setAttribute('aria-hidden', 'true');
+	root.appendChild(edge);
+	function setTouchMode(on) {
+		if (on === touchMode) return;
+		touchMode = on;
+		renderer.domElement.style.touchAction = on ? 'none' : 'pan-y';
+		document.documentElement.classList.toggle('map-full', on);
+		if (on && !hinted) { hinted = true; flash(L.touchHint, 3200); }
+	}
+	new IntersectionObserver((entries) => setTouchMode(coarse.matches && entries[0].intersectionRatio > 0.96),
+		{ threshold: [0, 0.25, 0.5, 0.75, 0.9, 0.96, 0.97, 0.98, 0.99, 1] }).observe(root);
+	canvasHost.addEventListener('pointerdown', (e) => {
+		engaged = true;
+		firstTap = e.pointerType === 'touch' && !touchMode;  // a tap on a map that isn't filling the screen only brings it there
+	}, true);
 	canvasHost.addEventListener('pointerleave', () => { engaged = false; });
 	canvasHost.addEventListener('wheel', (e) => {
 		controls.enableZoom = engaged || e.ctrlKey || e.metaKey;
-		if (!controls.enableZoom && hint) {
-			hint.classList.add('show');
-			clearTimeout(hintTimer);
-			hintTimer = setTimeout(() => hint.classList.remove('show'), 1400);
-		}
+		if (!controls.enableZoom) flash(hint && hint.dataset.wheel);
 	}, { capture: true, passive: true });
 
 	const state = { jd: jdNow(), playing: !matchMedia('(prefers-reduced-motion: reduce)').matches, speed: 7,
@@ -905,6 +931,15 @@ export async function mountOrrery(root, dataUrl = ROOT + 'data/observations.json
 		invalidate();
 	}
 	root.querySelectorAll('[data-view]').forEach((b) => b.addEventListener('click', () => setView(b.dataset.view)));
+	// Phones: speed, view buttons and the check boxes fold away behind one button, to keep the map clear.
+	{
+		const bar = $('.hud-bottom'), more = document.createElement('button');
+		[$('select.speed'), $('[data-view]').parentElement, ...bar.querySelectorAll(':scope > label')].forEach((x) => x.classList.add('hud-more'));
+		more.type = 'button'; more.className = 'more-toggle'; more.setAttribute('aria-expanded', 'false'); more.setAttribute('aria-label', L.more);
+		more.innerHTML = '<i class="fa-solid fa-sliders" aria-hidden="true"></i>';
+		more.addEventListener('click', () => more.setAttribute('aria-expanded', String(bar.classList.toggle('expanded'))));
+		bar.insertBefore(more, $('input.time'));
+	}
 	setView('inner');
 
 	// --- keyboard: arrows rotate, +/- zoom, space plays/pauses (when the map has focus)
@@ -1026,6 +1061,11 @@ export async function mountOrrery(root, dataUrl = ROOT + 'data/observations.json
 	});
 	renderer.domElement.addEventListener('pointerleave', () => { tip.style.display = 'none'; if (state.selected < 0) highlight(-1); state.hover = -1; });
 	renderer.domElement.addEventListener('click', (e) => {
+		if (firstTap) {
+			firstTap = false;
+			root.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+			return;
+		}
 		if (downAt && Math.hypot(e.clientX - downAt[0], e.clientY - downAt[1]) > 5) return; // it was a drag
 		const { k, x, y } = nearestMarker(e.clientX, e.clientY), b = bodyAt(x, y);
 		if (b) flyTo(b); else select(k);

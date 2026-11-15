@@ -356,6 +356,7 @@ figure { margin: 0; }
 	background: rgba(8,11,17,.88); border: 1px solid rgba(255,255,255,.18); border-radius: 10px; padding: .6rem 1rem;
 	font-size: .85rem; color: #e9edf3; opacity: 0; transition: opacity .25s; }
 .orrery .zoom-hint.show { opacity: 1; }
+.orrery .more-toggle, .orrery .swipe-edge { display: none; }
 .orrery-caption { font-family: var(--sans); font-size: .85rem; color: var(--ink-2); margin-top: .6rem; }
 
 /* 8. Gallery ---------------------------------------------------------------- */
@@ -469,8 +470,36 @@ html:not([data-theme="light"]):not([data-theme="logbook"]) .theme-toggle, html:n
 	.orrery { height: 78vh; min-height: 480px; border-radius: 0; margin: 0 -12px; }
 	.orrery input[type=search] { width: 150px; }
 	.orrery .panel { left: 10px; right: 10px; width: auto; top: auto; bottom: 120px; max-height: 45%; }
+	/* phones: one scrolling row of type chips, year and search side by side, the rarer controls folded away */
+	.orrery .hud-top { top: 8px; left: 8px; right: 8px; gap: .35rem; }
+	.orrery .hud-top .chips { flex-wrap: nowrap !important; overflow-x: auto; scrollbar-width: none; width: 100%; padding-bottom: 2px; }
+	.orrery .hud-top .chips::-webkit-scrollbar { display: none; }
+	.orrery .chip { flex: none; padding: .26rem .6rem; font-size: .74rem; gap: .35rem; }
+	.orrery .hud-top select.year, .orrery .hud-top input[type=search] { flex: 1 1 0; min-width: 0; width: auto; font-size: .74rem; padding: .26rem .65rem; }
+	.orrery .hud-bottom { left: 8px; right: 8px; bottom: 8px; gap: .45rem; padding: .4rem .55rem; }
+	.orrery .hud-bottom .hud-more { display: none !important; }
+	.orrery .hud-bottom.expanded .hud-more { display: inline-flex !important; flex-wrap: wrap; gap: .4rem; }
+	.orrery .hud-bottom .date { min-width: 0; font-size: .9rem; }
+	.orrery .hud-bottom input[type=range] { flex: 1 1 100%; order: 5; }
+	.orrery .hud-bottom .more-toggle { display: inline-block; margin-left: auto; }
+	.orrery .hud-bottom .more-toggle[aria-expanded="true"] { background: rgba(255,255,255,.14); }
+	.orrery .hud-bottom > span:last-child { display: none; }  /* "N shown" */
+	.orrery .panel { bottom: 96px; }
 	.rank-figure { font-size: 3.4rem; line-height: 4rem; }
 	.photo-pair { gap: 1rem; }
+}
+/* Touch phones and tablets: the 3D map fills the whole screen. When a scroll ends near it the page settles with the
+   map filling the screen; a swipe on the strip along its bottom edge (or on the controls) scrolls the page on. */
+@media (pointer: coarse) and (max-width: 991px) {
+	html:has(.orrery) { scroll-snap-type: y proximity; scroll-padding-top: 0; }
+	.orrery { height: 100vh; height: 100dvh; min-height: 0; border-radius: 0; scroll-snap-align: start; }
+	.orrery .swipe-edge { display: flex; position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; height: 30px; touch-action: pan-y;
+		justify-content: center; align-items: center; background: linear-gradient(rgba(7,9,13,0), rgba(7,9,13,.6)); }
+	.orrery .swipe-edge::before { content: ''; width: 48px; height: 5px; border-radius: 3px; background: rgba(255,255,255,.55); }
+	.orrery .hud-bottom { bottom: 34px; }
+	.orrery .panel { bottom: 124px; }
+	.orrery .zoom-hint { width: min(80%, 320px); text-align: center; }
+	.map-full .theme-toggle, .map-full .lang-toggle { opacity: 0; pointer-events: none; }  /* off the map while it fills the screen */
 }
 @media (prefers-reduced-motion: reduce) {
 	*, *::before, *::after { animation: none !important; transition: none !important; }
