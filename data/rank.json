@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-17T14:43:56Z",
+ "generated": "2026-11-18T14:20:51Z",
  "source": "Jost Jahn's MPEC statistics (mpec.jostjahn.de) for the personal rank; MPEC Watch (sbnmpc.astro.umd.edu/mpecwatch) for observatory placings and stations",
  "name": "L. Poropat",
  "stations_scanned": 394,
@@ -18,7 +18,7 @@
    {
     "rank": 1,
     "name": "A. Schultz",
-    "count": 22203,
+    "count": 22217,
     "stations": [
      "F51",
      "F52"
@@ -31,7 +31,7 @@
    {
     "rank": 2,
     "name": "R. Holmes",
-    "count": 18667,
+    "count": 18678,
     "stations": [
      "H21",
      "807",
@@ -45,7 +45,7 @@
    {
     "rank": 3,
     "name": "T. Lowe",
-    "count": 17857,
+    "count": 17871,
     "stations": [
      "F51",
      "F52"
@@ -58,7 +58,7 @@
    {
     "rank": 4,
     "name": "J. Bulger",
-    "count": 11724,
+    "count": 11725,
     "stations": [
      "F51",
      "F52"
@@ -71,7 +71,7 @@
    {
     "rank": 5,
     "name": "I. Smith",
-    "count": 10900,
+    "count": 10914,
     "stations": [
      "F51",
      "F52",
@@ -85,7 +85,7 @@
    {
     "rank": 6,
     "name": "M. Willman",
-    "count": 10800,
+    "count": 10801,
     "stations": [
      "F51",
      "F52"
@@ -98,7 +98,7 @@
    {
     "rank": 7,
     "name": "W. H. Ryan",
-    "count": 7937,
+    "count": 7947,
     "stations": [
      "H01",
      "807",
@@ -126,7 +126,7 @@
    {
     "rank": 9,
     "name": "T. Linder",
-    "count": 7798,
+    "count": 7799,
     "stations": [
      "807",
      "H21",
@@ -154,7 +154,7 @@
    {
     "rank": 11,
     "name": "G. J. Leonard",
-    "count": 6900,
+    "count": 6901,
     "stations": [
      "G96",
      "I52",
@@ -182,7 +182,7 @@
    {
     "rank": 13,
     "name": "R. A. Kowalski",
-    "count": 6757,
+    "count": 6758,
     "stations": [
      "I52",
      "G96",
@@ -196,7 +196,7 @@
    {
     "rank": 14,
     "name": "E. V. Ryan",
-    "count": 6487,
+    "count": 6497,
     "stations": [
      "H01",
      "H01"
@@ -222,7 +222,7 @@
    {
     "rank": 16,
     "name": "G. Hug",
-    "count": 6323,
+    "count": 6328,
     "stations": [
      "H36",
      "734"
@@ -235,7 +235,7 @@
    {
     "rank": 17,
     "name": "L. Buzzi",
-    "count": 6183,
+    "count": 6184,
     "stations": [
      "204",
      "M21",
@@ -249,7 +249,7 @@
    {
     "rank": 18,
     "name": "B. Stecklum",
-    "count": 5498,
+    "count": 5501,
     "stations": [
      "033",
      "K19"
@@ -262,7 +262,7 @@
    {
     "rank": 19,
     "name": "T. Goggia",
-    "count": 5173,
+    "count": 5174,
     "stations": [
      "F51",
      "F52",
@@ -289,7 +289,7 @@
    {
     "rank": 21,
     "name": "H. Groeller",
-    "count": 4623,
+    "count": 4624,
     "stations": [
      "I52",
      "G96",
@@ -303,7 +303,7 @@
    {
     "rank": 22,
     "name": "N. Primak",
-    "count": 4329,
+    "count": 4330,
     "stations": [
      "F51",
      "F52"
@@ -316,7 +316,7 @@
    {
     "rank": 23,
     "name": "D. Rankin",
-    "count": 4286,
+    "count": 4287,
     "stations": [
      "I52",
      "G96",
@@ -344,7 +344,7 @@
    {
     "rank": 25,
     "name": "F. Ludwig",
-    "count": 4075,
+    "count": 4078,
     "stations": [
      "033"
     ],
@@ -408,6 +408,19 @@
    },
    {
     "rank": 30,
+    "name": "E. Pettarin",
+    "count": 3770,
+    "stations": [
+     "595",
+     "L01"
+    ],
+    "prev": {
+     "month": 32,
+     "quarter": 33
+    }
+   },
+   {
+    "rank": 31,
     "name": "M. Blythe",
     "count": 3769,
     "stations": [
@@ -418,19 +431,6 @@
     "prev": {
      "month": 30,
      "quarter": 30
-    }
-   },
-   {
-    "rank": 31,
-    "name": "E. Pettarin",
-    "count": 3768,
-    "stations": [
-     "595",
-     "L01"
-    ],
-    "prev": {
-     "month": 32,
-     "quarter": 33
     }
    },
    {
@@ -448,7 +448,7 @@
    {
     "rank": 33,
     "name": "S. Melnikov",
-    "count": 3701,
+    "count": 3704,
     "stations": [
      "033"
     ],
@@ -488,7 +488,7 @@
    {
     "rank": 36,
     "name": "C. Hoegner",
-    "count": 3482,
+    "count": 3485,
     "stations": [
      "033"
     ],
@@ -512,7 +512,7 @@
    {
     "rank": 38,
     "name": "T. H. Bressi",
-    "count": 3357,
+    "count": 3358,
     "stations": [
      "291",
      "691",
@@ -538,7 +538,7 @@
    {
     "rank": 40,
     "name": "B. Gibson",
-    "count": 3205,
+    "count": 3206,
     "stations": [
      "F51",
      "F52"
@@ -551,7 +551,7 @@
    {
     "rank": 41,
     "name": "P. Dupouy",
-    "count": 3138,
+    "count": 3140,
     "stations": [
      "958"
     ],
@@ -575,7 +575,7 @@
    {
     "rank": 43,
     "name": "A. R. Gibbs",
-    "count": 2836,
+    "count": 2837,
     "stations": [
      "G96",
      "I52",
@@ -627,7 +627,7 @@
    {
     "rank": 47,
     "name": "J. Tonry",
-    "count": 2614,
+    "count": 2616,
     "stations": [
      "T08",
      "T05",
@@ -641,7 +641,7 @@
    {
     "rank": 47,
     "name": "L. Denneau",
-    "count": 2614,
+    "count": 2616,
     "stations": [
      "T08",
      "T05",
@@ -668,7 +668,7 @@
    {
     "rank": 50,
     "name": "H. Weiland",
-    "count": 2586,
+    "count": 2587,
     "stations": [
      "T08",
      "T05",
@@ -694,7 +694,7 @@
    {
     "rank": 52,
     "name": "G. Galli",
-    "count": 2431,
+    "count": 2432,
     "stations": [
      "203",
      "M21",
@@ -707,20 +707,8 @@
    },
    {
     "rank": 53,
-    "name": "R. Huber",
-    "count": 2390,
-    "stations": [
-     "704"
-    ],
-    "prev": {
-     "month": 53,
-     "quarter": 52
-    }
-   },
-   {
-    "rank": 54,
     "name": "M. Micheli",
-    "count": 2388,
+    "count": 2393,
     "stations": [
      "Z84",
      "J04",
@@ -729,6 +717,18 @@
     "prev": {
      "month": 54,
      "quarter": 54
+    }
+   },
+   {
+    "rank": 54,
+    "name": "R. Huber",
+    "count": 2390,
+    "stations": [
+     "704"
+    ],
+    "prev": {
+     "month": 53,
+     "quarter": 52
     }
    },
    {
@@ -774,7 +774,7 @@
    {
     "rank": 58,
     "name": "A. Boattini",
-    "count": 2261,
+    "count": 2262,
     "stations": [
      "G96",
      "703",
@@ -830,7 +830,7 @@
    {
     "rank": 62,
     "name": "Y. Ikari",
-    "count": 2029,
+    "count": 2032,
     "stations": [
      "900"
     ],
@@ -855,7 +855,7 @@
    {
     "rank": 64,
     "name": "K. Sárneczky",
-    "count": 1988,
+    "count": 1991,
     "stations": [
      "K88",
      "461",
@@ -934,7 +934,7 @@
    {
     "rank": 70,
     "name": "M. Hartmann",
-    "count": 1778,
+    "count": 1781,
     "stations": [
      "033"
     ],
@@ -1025,7 +1025,7 @@
    {
     "rank": 77,
     "name": "L. Hudin",
-    "count": 1670,
+    "count": 1671,
     "stations": [
      "L04",
      "L04",
@@ -1120,7 +1120,7 @@
    {
     "rank": 84,
     "name": "L. Hutton",
-    "count": 1478,
+    "count": 1479,
     "stations": [
      "807"
     ],
@@ -1338,7 +1338,7 @@
    {
     "rank": 100,
     "name": "F. Ursache",
-    "count": 1269,
+    "count": 1277,
     "stations": [
      "M45",
      "950"
@@ -1377,7 +1377,7 @@
    {
     "rank": 103,
     "name": "L. Conversi",
-    "count": 1237,
+    "count": 1242,
     "stations": [
      "Z84",
      "J04",
@@ -1445,7 +1445,7 @@
    {
     "rank": 108,
     "name": "D. Cromer",
-    "count": 1211,
+    "count": 1215,
     "stations": [
      "734"
     ],
@@ -1499,7 +1499,7 @@
    {
     "rank": 112,
     "name": "A. Serrano",
-    "count": 1178,
+    "count": 1179,
     "stations": [
      "G96",
      "I52",
@@ -1513,7 +1513,7 @@
    {
     "rank": 113,
     "name": "D. Goodin",
-    "count": 1173,
+    "count": 1177,
     "stations": [
      "734"
     ],
@@ -1549,7 +1549,7 @@
    {
     "rank": 116,
     "name": "F. Ocaña",
-    "count": 1132,
+    "count": 1137,
     "stations": [
      "Z84",
      "J04",
@@ -1702,7 +1702,7 @@
    {
     "rank": 127,
     "name": "R. Valentine",
-    "count": 995,
+    "count": 999,
     "stations": [
      "734"
     ],
@@ -1792,9 +1792,9 @@
     }
    },
    {
-    "rank": 134,
+    "rank": 133,
     "name": "R. Kresken",
-    "count": 939,
+    "count": 944,
     "stations": [
      "Z84",
      "J04",
@@ -1875,7 +1875,7 @@
    {
     "rank": 140,
     "name": "C. Gerhard",
-    "count": 872,
+    "count": 873,
     "stations": [
      "K74",
      "C95"
@@ -1993,6 +1993,19 @@
    },
    {
     "rank": 149,
+    "name": "H. Watanabe",
+    "count": 833,
+    "stations": [
+     "Q06",
+     "247"
+    ],
+    "prev": {
+     "month": 161,
+     "quarter": 163
+    }
+   },
+   {
+    "rank": 150,
     "name": "W. Vollmann",
     "count": 832,
     "stations": [
@@ -2003,19 +2016,6 @@
     "prev": {
      "month": 149,
      "quarter": 147
-    }
-   },
-   {
-    "rank": 150,
-    "name": "H. Watanabe",
-    "count": 829,
-    "stations": [
-     "Q06",
-     "247"
-    ],
-    "prev": {
-     "month": 161,
-     "quarter": 163
     }
    },
    {
@@ -2111,7 +2111,7 @@
    {
     "rank": 158,
     "name": "A. Aletti",
-    "count": 788,
+    "count": 789,
     "stations": [
      "M21",
      "204",
@@ -2349,6 +2349,19 @@
    },
    {
     "rank": 176,
+    "name": "Y. Ramanjooloo",
+    "count": 653,
+    "stations": [
+     "T12",
+     "568"
+    ],
+    "prev": {
+     "month": 187,
+     "quarter": 187
+    }
+   },
+   {
+    "rank": 177,
     "name": "Z. Moravec",
     "count": 652,
     "stations": [
@@ -2362,9 +2375,9 @@
     }
    },
    {
-    "rank": 177,
+    "rank": 178,
     "name": "F. Bellini",
-    "count": 650,
+    "count": 651,
     "stations": [
      "M21",
      "204"
@@ -2372,19 +2385,6 @@
     "prev": {
      "month": 186,
      "quarter": 206
-    }
-   },
-   {
-    "rank": 178,
-    "name": "Y. Ramanjooloo",
-    "count": 647,
-    "stations": [
-     "T12",
-     "568"
-    ],
-    "prev": {
-     "month": 187,
-     "quarter": 187
     }
    },
    {
@@ -2698,7 +2698,7 @@
    {
     "rank": 100,
     "name": "F. Ursache",
-    "count": 1269,
+    "count": 1277,
     "stations": [
      "M45",
      "950"
@@ -2737,7 +2737,7 @@
    {
     "rank": 103,
     "name": "L. Conversi",
-    "count": 1237,
+    "count": 1242,
     "stations": [
      "Z84",
      "J04",
@@ -2805,7 +2805,7 @@
    {
     "rank": 108,
     "name": "D. Cromer",
-    "count": 1211,
+    "count": 1215,
     "stations": [
      "734"
     ],
@@ -2844,7 +2844,7 @@
  },
  "measurer": {
   "rank": 290,
-  "of": 3901,
+  "of": 3902,
   "count": 98,
   "percentile": 92.59,
   "stations": [
@@ -2854,7 +2854,7 @@
    {
     "rank": 1,
     "name": "S. M. Larson",
-    "count": 29687,
+    "count": 29691,
     "stations": [
      "G96",
      "I52",
@@ -2864,7 +2864,7 @@
    {
     "rank": 2,
     "name": "R. A. Kowalski",
-    "count": 29310,
+    "count": 29314,
     "stations": [
      "G96",
      "I52",
@@ -2874,7 +2874,7 @@
    {
     "rank": 3,
     "name": "A. D. Grauer",
-    "count": 28985,
+    "count": 28988,
     "stations": [
      "G96",
      "I52",
@@ -2884,7 +2884,7 @@
    {
     "rank": 4,
     "name": "A. R. Gibbs",
-    "count": 28929,
+    "count": 28933,
     "stations": [
      "G96",
      "I52",
@@ -2894,7 +2894,7 @@
    {
     "rank": 5,
     "name": "F. C. Shelly",
-    "count": 24297,
+    "count": 24304,
     "stations": [
      "I52",
      "G96",
@@ -2904,7 +2904,7 @@
    {
     "rank": 6,
     "name": "D. C. Fuls",
-    "count": 22096,
+    "count": 22099,
     "stations": [
      "I52",
      "G96",
@@ -2914,7 +2914,7 @@
    {
     "rank": 7,
     "name": "G. J. Leonard",
-    "count": 21518,
+    "count": 21521,
     "stations": [
      "I52",
      "G96",
@@ -2924,7 +2924,7 @@
    {
     "rank": 8,
     "name": "R. L. Seaman",
-    "count": 21513,
+    "count": 21516,
     "stations": [
      "I52",
      "G96",
@@ -2934,7 +2934,7 @@
    {
     "rank": 9,
     "name": "R. Wainscoat",
-    "count": 20752,
+    "count": 20768,
     "stations": [
      "F51",
      "F52",
@@ -2944,7 +2944,7 @@
    {
     "rank": 10,
     "name": "M. Huber",
-    "count": 20555,
+    "count": 20569,
     "stations": [
      "F51",
      "F52",
@@ -2954,7 +2954,7 @@
    {
     "rank": 11,
     "name": "R. Weryk",
-    "count": 20410,
+    "count": 20426,
     "stations": [
      "F51",
      "F52",
@@ -2974,7 +2974,7 @@
    {
     "rank": 13,
     "name": "H. Groeller",
-    "count": 18212,
+    "count": 18215,
     "stations": [
      "I52",
      "G96",
@@ -2984,7 +2984,7 @@
    {
     "rank": 14,
     "name": "E. Magnier",
-    "count": 18049,
+    "count": 18063,
     "stations": [
      "F51",
      "F52"
@@ -2993,7 +2993,7 @@
    {
     "rank": 15,
     "name": "K. Chambers",
-    "count": 18048,
+    "count": 18062,
     "stations": [
      "F51",
      "F52",
@@ -3003,7 +3003,7 @@
    {
     "rank": 16,
     "name": "D. Rankin",
-    "count": 17647,
+    "count": 17654,
     "stations": [
      "I52",
      "G96",
@@ -3013,7 +3013,7 @@
    {
     "rank": 17,
     "name": "Y. Ramanjooloo",
-    "count": 16446,
+    "count": 16462,
     "stations": [
      "F51",
      "F52",
@@ -3023,7 +3023,7 @@
    {
     "rank": 18,
     "name": "K. W. Wierzchos",
-    "count": 16088,
+    "count": 16091,
     "stations": [
      "I52",
      "G96",
@@ -3033,7 +3033,7 @@
    {
     "rank": 19,
     "name": "S. Chastel",
-    "count": 14448,
+    "count": 14450,
     "stations": [
      "F51",
      "F52"
@@ -3042,7 +3042,7 @@
    {
     "rank": 20,
     "name": "J. Fairlamb",
-    "count": 13793,
+    "count": 13809,
     "stations": [
      "F51",
      "F52",
@@ -3052,7 +3052,7 @@
    {
     "rank": 21,
     "name": "C.-C. Lin",
-    "count": 13238,
+    "count": 13252,
     "stations": [
      "F51",
      "F52"
@@ -3061,7 +3061,7 @@
    {
     "rank": 22,
     "name": "T. de Boer",
-    "count": 12932,
+    "count": 12946,
     "stations": [
      "F51",
      "F52"
@@ -3070,7 +3070,7 @@
    {
     "rank": 23,
     "name": "T. Linder",
-    "count": 11462,
+    "count": 11473,
     "stations": [
      "H21",
      "807",
@@ -3080,7 +3080,7 @@
    {
     "rank": 24,
     "name": "L. Denneau",
-    "count": 10884,
+    "count": 10887,
     "stations": [
      "F51",
      "T08",
@@ -3090,7 +3090,7 @@
    {
     "rank": 25,
     "name": "R. Holmes",
-    "count": 10459,
+    "count": 10470,
     "stations": [
      "H21",
      "807",
