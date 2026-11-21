@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-20T14:13:51Z",
+ "generated": "2026-11-21T13:38:56Z",
  "source": "Jost Jahn's MPEC statistics (mpec.jostjahn.de) for the personal rank; MPEC Watch (sbnmpc.astro.umd.edu/mpecwatch) for observatory placings and stations",
  "name": "L. Poropat",
  "stations_scanned": 394,
@@ -78,7 +78,7 @@
      "675"
     ],
     "prev": {
-     "month": 6,
+     "month": 5,
      "quarter": 6
     }
    },
@@ -91,7 +91,7 @@
      "F52"
     ],
     "prev": {
-     "month": 5,
+     "month": 6,
      "quarter": 5
     }
    },
@@ -202,7 +202,7 @@
      "H01"
     ],
     "prev": {
-     "month": 15,
+     "month": 14,
      "quarter": 14
     }
    },
@@ -215,7 +215,7 @@
      "F52"
     ],
     "prev": {
-     "month": 14,
+     "month": 15,
      "quarter": 15
     }
    },
@@ -363,7 +363,7 @@
      "B09"
     ],
     "prev": {
-     "month": 28,
+     "month": 26,
      "quarter": 28
     }
    },
@@ -377,7 +377,7 @@
      "I77"
     ],
     "prev": {
-     "month": 26,
+     "month": 27,
      "quarter": 26
     }
    },
@@ -390,7 +390,7 @@
      "F51"
     ],
     "prev": {
-     "month": 27,
+     "month": 28,
      "quarter": 27
     }
    },
@@ -415,7 +415,7 @@
      "L01"
     ],
     "prev": {
-     "month": 32,
+     "month": 31,
      "quarter": 33
     }
    },
@@ -441,7 +441,7 @@
      "704"
     ],
     "prev": {
-     "month": 31,
+     "month": 32,
      "quarter": 31
     }
    },
@@ -531,7 +531,7 @@
      "104"
     ],
     "prev": {
-     "month": 40,
+     "month": 39,
      "quarter": 40
     }
    },
@@ -544,7 +544,7 @@
      "F52"
     ],
     "prev": {
-     "month": 39,
+     "month": 40,
      "quarter": 39
     }
    },
@@ -595,7 +595,7 @@
      "T14"
     ],
     "prev": {
-     "month": 45,
+     "month": 44,
      "quarter": 45
     }
    },
@@ -608,7 +608,7 @@
      "F51"
     ],
     "prev": {
-     "month": 44,
+     "month": 45,
      "quarter": 44
     }
    },
@@ -991,7 +991,7 @@
      "V00"
     ],
     "prev": {
-     "month": 80,
+     "month": 79,
      "quarter": 81
     }
    },
@@ -1032,7 +1032,7 @@
      "950"
     ],
     "prev": {
-     "month": 79,
+     "month": 76,
      "quarter": 83
     }
    },
@@ -1046,7 +1046,7 @@
      "703"
     ],
     "prev": {
-     "month": 76,
+     "month": 77,
      "quarter": 76
     }
    },
@@ -1058,7 +1058,7 @@
      "349"
     ],
     "prev": {
-     "month": 77,
+     "month": 78,
      "quarter": 77
     }
    },
@@ -1072,7 +1072,7 @@
      "K93"
     ],
     "prev": {
-     "month": 78,
+     "month": 80,
      "quarter": 78
     }
    },
@@ -1125,7 +1125,7 @@
      "807"
     ],
     "prev": {
-     "month": 95,
+     "month": 94,
      "quarter": 97
     }
    },
@@ -1222,7 +1222,7 @@
      "G00"
     ],
     "prev": {
-     "month": 93,
+     "month": 90,
      "quarter": 94
     }
    },
@@ -1249,7 +1249,7 @@
      "695"
     ],
     "prev": {
-     "month": 90,
+     "month": 91,
      "quarter": 90
     }
    },
@@ -1263,7 +1263,7 @@
      "703"
     ],
     "prev": {
-     "month": 92,
+     "month": 93,
      "quarter": 92
     }
    },
@@ -1275,7 +1275,7 @@
      "673"
     ],
     "prev": {
-     "month": 94,
+     "month": 95,
      "quarter": 93
     }
    },
@@ -1331,7 +1331,7 @@
      "T09"
     ],
     "prev": {
-     "month": 98,
+     "month": 99,
      "quarter": 99
     }
    },
@@ -1344,7 +1344,7 @@
      "950"
     ],
     "prev": {
-     "month": 109,
+     "month": 102,
      "quarter": 115
     }
    },
@@ -1358,7 +1358,7 @@
      "108"
     ],
     "prev": {
-     "month": 101,
+     "month": 100,
      "quarter": 101
     }
    },
@@ -1370,7 +1370,7 @@
      "711"
     ],
     "prev": {
-     "month": 100,
+     "month": 101,
      "quarter": 100
     }
    },
@@ -1398,7 +1398,7 @@
      "204"
     ],
     "prev": {
-     "month": 114,
+     "month": 111,
      "quarter": 123
     }
    },
@@ -1411,7 +1411,7 @@
      "F52"
     ],
     "prev": {
-     "month": 102,
+     "month": 104,
      "quarter": 102
     }
    },
@@ -1425,7 +1425,7 @@
      "T05"
     ],
     "prev": {
-     "month": 105,
+     "month": 106,
      "quarter": 106
     }
    },
@@ -1450,7 +1450,7 @@
      "734"
     ],
     "prev": {
-     "month": 110,
+     "month": 109,
      "quarter": 110
     }
    },
@@ -1464,7 +1464,7 @@
      "673"
     ],
     "prev": {
-     "month": 106,
+     "month": 107,
      "quarter": 104
     }
    },
@@ -1478,7 +1478,7 @@
      "675"
     ],
     "prev": {
-     "month": 107,
+     "month": 108,
      "quarter": 105
     }
    },
@@ -1492,7 +1492,7 @@
      "568"
     ],
     "prev": {
-     "month": 108,
+     "month": 110,
      "quarter": 107
     }
    },
@@ -1506,7 +1506,7 @@
      "703"
     ],
     "prev": {
-     "month": 115,
+     "month": 113,
      "quarter": 116
     }
    },
@@ -1518,7 +1518,7 @@
      "734"
     ],
     "prev": {
-     "month": 113,
+     "month": 114,
      "quarter": 112
     }
    },
@@ -1530,7 +1530,7 @@
      "J04"
     ],
     "prev": {
-     "month": 111,
+     "month": 112,
      "quarter": 108
     }
    },
@@ -1542,7 +1542,7 @@
      "704"
     ],
     "prev": {
-     "month": 112,
+     "month": 115,
      "quarter": 111
     }
    },
@@ -1598,7 +1598,7 @@
      "H06"
     ],
     "prev": {
-     "month": 120,
+     "month": 119,
      "quarter": 120
     }
    },
@@ -1612,7 +1612,7 @@
      "B09"
     ],
     "prev": {
-     "month": 119,
+     "month": 120,
      "quarter": 117
     }
    },
@@ -1653,7 +1653,7 @@
      "675"
     ],
     "prev": {
-     "month": 124,
+     "month": 123,
      "quarter": 127
     }
    },
@@ -1667,7 +1667,7 @@
      "566"
     ],
     "prev": {
-     "month": 123,
+     "month": 124,
      "quarter": 122
     }
    },
@@ -1707,7 +1707,7 @@
      "734"
     ],
     "prev": {
-     "month": 130,
+     "month": 127,
      "quarter": 132
     }
    },
@@ -1719,7 +1719,7 @@
      "E23"
     ],
     "prev": {
-     "month": 127,
+     "month": 128,
      "quarter": 128
     }
    },
@@ -1733,7 +1733,7 @@
      "705"
     ],
     "prev": {
-     "month": 127,
+     "month": 129,
      "quarter": 126
     }
    },
@@ -1747,7 +1747,7 @@
      "G00"
     ],
     "prev": {
-     "month": 129,
+     "month": 130,
      "quarter": 129
     }
    },
@@ -1787,7 +1787,7 @@
      "511"
     ],
     "prev": {
-     "month": 134,
+     "month": 133,
      "quarter": 134
     }
    },
@@ -1815,7 +1815,7 @@
      "703"
     ],
     "prev": {
-     "month": 133,
+     "month": 134,
      "quarter": 133
     }
    },
@@ -1881,7 +1881,7 @@
      "C95"
     ],
     "prev": {
-     "month": 143,
+     "month": 141,
      "quarter": 148
     }
    },
@@ -1908,7 +1908,7 @@
      "Q62"
     ],
     "prev": {
-     "month": 141,
+     "month": 142,
      "quarter": 140
     }
    },
@@ -1921,7 +1921,7 @@
      "046"
     ],
     "prev": {
-     "month": 142,
+     "month": 143,
      "quarter": 141
     }
    },
@@ -1933,7 +1933,7 @@
      "658"
     ],
     "prev": {
-     "month": 148,
+     "month": 144,
      "quarter": 150
     }
    },
@@ -1945,7 +1945,7 @@
      "704"
     ],
     "prev": {
-     "month": 144,
+     "month": 145,
      "quarter": 143
     }
    },
@@ -1959,7 +1959,7 @@
      "P07"
     ],
     "prev": {
-     "month": 144,
+     "month": 145,
      "quarter": 143
     }
    },
@@ -1973,7 +1973,7 @@
      "P07"
     ],
     "prev": {
-     "month": 144,
+     "month": 145,
      "quarter": 143
     }
    },
@@ -1987,7 +1987,7 @@
      "P07"
     ],
     "prev": {
-     "month": 144,
+     "month": 145,
      "quarter": 143
     }
    },
@@ -2000,7 +2000,7 @@
      "247"
     ],
     "prev": {
-     "month": 161,
+     "month": 157,
      "quarter": 163
     }
    },
@@ -2092,7 +2092,7 @@
      "675"
     ],
     "prev": {
-     "month": 156,
+     "month": 155,
      "quarter": 156
     }
    },
@@ -2104,7 +2104,7 @@
      "118"
     ],
     "prev": {
-     "month": 155,
+     "month": 156,
      "quarter": 154
     }
    },
@@ -2118,7 +2118,7 @@
      "L01"
     ],
     "prev": {
-     "month": 159,
+     "month": 158,
      "quarter": 170
     }
    },
@@ -2132,7 +2132,7 @@
      "566"
     ],
     "prev": {
-     "month": 157,
+     "month": 159,
      "quarter": 155
     }
    },
@@ -2145,7 +2145,7 @@
      "204"
     ],
     "prev": {
-     "month": 158,
+     "month": 160,
      "quarter": 159
     }
    },
@@ -2158,7 +2158,7 @@
      "046"
     ],
     "prev": {
-     "month": 160,
+     "month": 161,
      "quarter": 158
     }
    },
@@ -2198,7 +2198,7 @@
      "W96"
     ],
     "prev": {
-     "month": 165,
+     "month": 164,
      "quarter": 166
     }
    },
@@ -2251,7 +2251,7 @@
      "J22"
     ],
     "prev": {
-     "month": 169,
+     "month": 168,
      "quarter": 168
     }
    },
@@ -2263,7 +2263,7 @@
      "654"
     ],
     "prev": {
-     "month": 168,
+     "month": 169,
      "quarter": 167
     }
    },
@@ -2316,7 +2316,7 @@
      "T14"
     ],
     "prev": {
-     "month": 172,
+     "month": 173,
      "quarter": 172
     }
    },
@@ -2329,7 +2329,7 @@
      "568"
     ],
     "prev": {
-     "month": 187,
+     "month": 177,
      "quarter": 187
     }
    },
@@ -2343,7 +2343,7 @@
      "W85"
     ],
     "prev": {
-     "month": 175,
+     "month": 174,
      "quarter": 175
     }
    },
@@ -2369,7 +2369,7 @@
      "204"
     ],
     "prev": {
-     "month": 186,
+     "month": 178,
      "quarter": 206
     }
    },
@@ -2397,7 +2397,7 @@
      "H06"
     ],
     "prev": {
-     "month": 180,
+     "month": 182,
      "quarter": 182
     }
    },
@@ -2410,7 +2410,7 @@
      "247"
     ],
     "prev": {
-     "month": 177,
+     "month": 178,
      "quarter": 177
     }
    },
@@ -2423,7 +2423,7 @@
      "247"
     ],
     "prev": {
-     "month": 177,
+     "month": 178,
      "quarter": 177
     }
    },
@@ -2437,7 +2437,7 @@
      "807"
     ],
     "prev": {
-     "month": 179,
+     "month": 181,
      "quarter": 179
     }
    },
@@ -2449,7 +2449,7 @@
      "F51"
     ],
     "prev": {
-     "month": 181,
+     "month": 183,
      "quarter": 180
     }
    },
@@ -2461,7 +2461,7 @@
      "360"
     ],
     "prev": {
-     "month": 181,
+     "month": 184,
      "quarter": 180
     }
    },
@@ -2475,7 +2475,7 @@
      "Q62"
     ],
     "prev": {
-     "month": 183,
+     "month": 185,
      "quarter": 182
     }
    },
@@ -2489,7 +2489,7 @@
      "P07"
     ],
     "prev": {
-     "month": 184,
+     "month": 186,
      "quarter": 184
     }
    },
@@ -2503,7 +2503,7 @@
      "W95"
     ],
     "prev": {
-     "month": 191,
+     "month": 189,
      "quarter": 200
     }
    },
@@ -2517,7 +2517,7 @@
      "H10"
     ],
     "prev": {
-     "month": 185,
+     "month": 187,
      "quarter": 185
     }
    },
@@ -2545,7 +2545,7 @@
      "958"
     ],
     "prev": {
-     "month": 189,
+     "month": 190,
      "quarter": 189
     }
    },
@@ -2569,7 +2569,7 @@
      "C23"
     ],
     "prev": {
-     "month": 193,
+     "month": 192,
      "quarter": 193
     }
    },
@@ -2583,7 +2583,7 @@
      "Q62"
     ],
     "prev": {
-     "month": 192,
+     "month": 193,
      "quarter": 193
     }
    },
@@ -2596,7 +2596,7 @@
      "B04"
     ],
     "prev": {
-     "month": 190,
+     "month": 191,
      "quarter": 188
     }
    },
@@ -2609,7 +2609,7 @@
      "587"
     ],
     "prev": {
-     "month": 194,
+     "month": 195,
      "quarter": 192
     }
    },
@@ -2623,7 +2623,7 @@
      "G37"
     ],
     "prev": {
-     "month": 199,
+     "month": 198,
      "quarter": 201
     }
    },
@@ -2691,7 +2691,7 @@
      "T09"
     ],
     "prev": {
-     "month": 98,
+     "month": 99,
      "quarter": 99
     }
    },
@@ -2704,7 +2704,7 @@
      "950"
     ],
     "prev": {
-     "month": 109,
+     "month": 102,
      "quarter": 115
     }
    },
@@ -2718,7 +2718,7 @@
      "108"
     ],
     "prev": {
-     "month": 101,
+     "month": 100,
      "quarter": 101
     }
    },
@@ -2730,7 +2730,7 @@
      "711"
     ],
     "prev": {
-     "month": 100,
+     "month": 101,
      "quarter": 100
     }
    },
@@ -2758,7 +2758,7 @@
      "204"
     ],
     "prev": {
-     "month": 114,
+     "month": 111,
      "quarter": 123
     }
    },
@@ -2771,7 +2771,7 @@
      "F52"
     ],
     "prev": {
-     "month": 102,
+     "month": 104,
      "quarter": 102
     }
    },
@@ -2785,7 +2785,7 @@
      "T05"
     ],
     "prev": {
-     "month": 105,
+     "month": 106,
      "quarter": 106
     }
    },
@@ -2810,7 +2810,7 @@
      "734"
     ],
     "prev": {
-     "month": 110,
+     "month": 109,
      "quarter": 110
     }
    },
@@ -2824,7 +2824,7 @@
      "673"
     ],
     "prev": {
-     "month": 106,
+     "month": 107,
      "quarter": 104
     }
    }
@@ -2832,8 +2832,8 @@
   "compare": [
    {
     "period": "month",
-    "date": "2026-09-24",
-    "reconstructed": true
+    "date": "2026-10-24",
+    "reconstructed": false
    },
    {
     "period": "quarter",
