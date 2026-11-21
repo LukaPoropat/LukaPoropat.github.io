@@ -87,7 +87,7 @@ jobs:
       id-token: write
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url || steps.first_try.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -109,5 +109,15 @@ jobs:
         with:
           path: ${{ runner.temp }}/site
 
+      # GitHub sometimes can't find the package it was just handed ("No artifacts named github-pages"):
+      # a second try half a minute later goes through.
+      - id: first_try
+        uses: actions/deploy-pages@v4
+        continue-on-error: true
+
+      - if: steps.first_try.outcome == 'failure'
+        run: sleep 30
+
       - id: deployment
+        if: steps.first_try.outcome == 'failure'
         uses: actions/deploy-pages@v4
