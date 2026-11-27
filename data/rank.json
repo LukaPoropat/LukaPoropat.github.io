@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-26T15:32:38Z",
+ "generated": "2026-11-27T15:19:32Z",
  "source": "Jost Jahn's MPEC statistics (mpec.jostjahn.de) for the personal rank; MPEC Watch (sbnmpc.astro.umd.edu/mpecwatch) for observatory placings and stations",
  "name": "L. Poropat",
  "stations_scanned": 394,
@@ -3207,7 +3207,7 @@
     "metric": "MPECs",
     "rank": 10,
     "of": 1937,
-    "count": 8073
+    "count": 8074
    },
    {
     "metric": "Follow-up",
@@ -3245,13 +3245,13 @@
     "category": "Top MPEC Contributors",
     "window": "Last 5 years",
     "rank": 7,
-    "count": 3693
+    "count": 3691
    },
    {
     "category": "Top MPEC Contributors",
     "window": "All time",
     "rank": 10,
-    "count": 8073
+    "count": 8074
    },
    {
     "category": "Top MPEC-ed Follow-up Observatories",
@@ -3263,7 +3263,7 @@
     "category": "Top MPEC-ed Follow-up Observatories",
     "window": "Last 5 years",
     "rank": 3,
-    "count": 3488
+    "count": 3485
    },
    {
     "category": "Top MPEC-ed Follow-up Observatories",
@@ -3275,7 +3275,7 @@
     "category": "Top MPEC-ed First Follow-up Observatories",
     "window": "Last 5 years",
     "rank": 7,
-    "count": 471
+    "count": 470
    },
    {
     "category": "Top MPEC-ed First Follow-up Observatories",
